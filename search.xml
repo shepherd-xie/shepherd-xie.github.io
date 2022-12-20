@@ -559,7 +559,8 @@
   <entry>
     <title>kms激活</title>
     <url>/2021/02/08/kms%E6%BF%80%E6%B4%BB/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>kms激活密钥</p>
+<a id="more"></a>
 <h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">slmgr /upk</span><br><span class="line">slmgr /ipk GVLK //Windows版本密钥</span><br><span class="line">slmgr /skms kms.server.ip:port //KMS服务器地址 默认端口1688</span><br><span class="line">slmgr /ato</span><br><span class="line">slmgr /dlv</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">slmgr /ckms  //清除系统KMS信息</span><br><span class="line">slmgr /rearm //重置计算机的授权状态</span><br></pre></td></tr></table></figure>
 <h3 id="Office-x86"><a href="#Office-x86" class="headerlink" title="Office x86"></a>Office x86</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd \Program Files (x86)\Microsoft Office\Office16</span><br><span class="line">cscript ospp.vbs /sethst:kms.server.ip:port</span><br><span class="line">cscript ospp.vbs /inpkey:xxxxx-xxxxx-xxxxx-xxxxx-xxxxx</span><br><span class="line">cscript ospp.vbs /act</span><br><span class="line">cscript ospp.vbs /dstatusall</span><br></pre></td></tr></table></figure>
@@ -989,6 +990,44 @@
 </li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Typora和图床</title>
+    <url>/2022/12/20/typora-and-image/</url>
+    <content><![CDATA[<h1 id="Typora的图床设置"><a href="#Typora的图床设置" class="headerlink" title="Typora的图床设置"></a>Typora的图床设置</h1><p>在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。</p>
+<a id="more"></a>
+<p>Typora 不用过多介绍，一个非常漂亮的 Markdown 编辑器，支持多种主题，总有一款适合你，使用这个编辑器的时候会觉得写 Markdown 会是一种享受。但是只要是工具就会有这样或那样的痛点，比如说自 1.0 版本之后的 Typora 终于进入了收费模式，这让很多白嫖党十分痛心（包括我），而且低于 1.0 版本的 Typora 会强制检测当前是否为付费版本，非付费版本会禁止用户使用。当然本文说的问题并不是这个，但是这并不妨碍我们吐槽一番。</p>
+<h2 id="Typora-图片上传服务"><a href="#Typora-图片上传服务" class="headerlink" title="Typora 图片上传服务"></a>Typora 图片上传服务</h2><p>Typora 十分贴心的提供了图片上传服务，并提供了默认客户端：</p>
+<ul>
+<li>MacOS：<ul>
+<li>iPic：免费</li>
+<li><strong>uPic：开源</strong>（推荐）</li>
+<li>Picsee：免费</li>
+<li>PicGo.app：开源，中文</li>
+<li>PicGo-Core（命令行）：开源</li>
+</ul>
+</li>
+<li>Windows<ul>
+<li>PicGo.app：开源，中文</li>
+<li><strong>PicGo-Core（命令行）：开源</strong>（本文介绍方式）</li>
+</ul>
+</li>
+</ul>
+<p>除了介绍的这些客户端之外，Typora 还支持自定义命令，你可以自己编写上传工具/脚本。</p>
+<h2 id="PicGo-Core"><a href="#PicGo-Core" class="headerlink" title="PicGo-Core"></a>PicGo-Core</h2><p><a href="https://picgo.github.io/PicGo-Core-Doc/" target="_blank" rel="noopener">PicGo-Core</a>是 PicGo 的核心组件，简单的说，你可以把它看做一个文件上传命令行工具，Typora 原生支持 PicGo-Core，可以在 <code>Typora - 偏好设置 - 图像 - 上传服务设置</code> 中下载它，然后使用 <code>打开配置文件</code> 选项配置图床参数，配置文件参数可以参考 <a href="https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html" target="_blank" rel="noopener">PicGo-Core配置文件</a>。</p>
+<h2 id="Chevereto"><a href="#Chevereto" class="headerlink" title="Chevereto"></a>Chevereto</h2><p><a href="https://chevereto.com/" target="_blank" rel="noopener">Chevereto</a> 是一个图床服务，可以部署在自己的服务器上，此次选择这个服务作为我们的在线图床。</p>
+<p>Chevereto 从 V4 版本之后进入付费使用阶段，所以我们此次使用的是还未收费的 <a href="https://github.com/rodber/chevereto-free" target="_blank" rel="noopener">Chevereto-Free</a> 虽然相对于最新版有许多功能不能使用，但是对于个人图床工具来说还是够用了。</p>
+<h2 id="PicGo-Core-上传-Chevereto-配置文件"><a href="#PicGo-Core-上传-Chevereto-配置文件" class="headerlink" title="PicGo-Core 上传 Chevereto 配置文件"></a>PicGo-Core 上传 Chevereto 配置文件</h2><p>PicGo-Core 并不原生支持 Chevereto，但是 PicGo-Core 拥有众多的插件，我们可以使用 <a href="https://github.com/yuki-xin/picgo-plugin-web-uploader" target="_blank" rel="noopener">picgo-plugin-web-uploader</a> 将图片上传至 Chevereto。</p>
+<p>配置文件实例：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"picgoPlugins"</span>: &#123;</span><br><span class="line">    <span class="attr">"picgo-plugin-web-uploader"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"picBed"</span>: &#123;</span><br><span class="line">    <span class="attr">"current"</span>: <span class="string">"web-uploader"</span>,</span><br><span class="line">    <span class="attr">"web-uploader"</span>: &#123;</span><br><span class="line">      <span class="attr">"customBody"</span>: <span class="string">"&#123;\"key\":\"[Chevereto Key：从 Chevereto 管理界面获取]\"&#125;"</span>,</span><br><span class="line">      <span class="attr">"customHeader"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"jsonPath"</span>: <span class="string">"image.url"</span>,</span><br><span class="line">      <span class="attr">"paramName"</span>: <span class="string">"source"</span>,</span><br><span class="line">      <span class="attr">"url"</span>: <span class="string">"http://[Chevereto 地址]/api/1/upload"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置好后可以点击 <code>验证图片上传选项</code> 来进行验证</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[PicGo INFO]: Before transform</span><br><span class="line">[PicGo INFO]: Transforming...</span><br><span class="line">[PicGo INFO]: Before upload</span><br><span class="line">[PicGo INFO]: Uploading...</span><br><span class="line">[PicGo SUCCESS]:</span><br><span class="line">https://chevereto/images/2022/12/20/typora-icon2.png</span><br><span class="line">https://chevereto/images/2022/12/20/typora-icon.png</span><br></pre></td></tr></table></figure>
+<p>如上输出则上传成功</p>
+]]></content>
+      <tags>
+        <tag>Typora</tag>
+        <tag>图床</tag>
+      </tags>
   </entry>
   <entry>
     <title>zsh-plugin</title>
