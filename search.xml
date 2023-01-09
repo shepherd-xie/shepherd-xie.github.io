@@ -3,7 +3,7 @@
   <entry>
     <title>Dropzone 图片上传插件</title>
     <url>/2018/11/13/Dropzone%20%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="Dropzone-图片上传插件"><a href="#Dropzone-图片上传插件" class="headerlink" title="Dropzone 图片上传插件"></a>Dropzone 图片上传插件</h1><h2 id="Dropzone-简介"><a href="#Dropzone-简介" class="headerlink" title="Dropzone 简介"></a>Dropzone 简介</h2><p>Dropzone 是一个开源的 JavaScript 库，提供文件的异步上传功能，并支持拖拽上传功能</p>
+    <content><![CDATA[<p>Dropzone 是一个开源的 JavaScript 库，提供文件的异步上传功能，并支持拖拽上传功能</p>
 <a id="more"></a>
 <h3 id="页面引用"><a href="#页面引用" class="headerlink" title="页面引用"></a>页面引用</h3><p>CSS 部分，其中 <code>basic.min.css</code> 提供了官网的炫酷上传效果</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/static/assets/plugins/dropzone/min/dropzone.min.css&quot; /&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/static/assets/plugins/dropzone/min/basic.min.css&quot; /&gt;</span><br></pre></td></tr></table></figure>
@@ -82,285 +82,12 @@
       </categories>
   </entry>
   <entry>
-    <title>Druid 介绍及配置</title>
-    <url>/2018/11/06/Druid%E4%BB%8B%E7%BB%8D%E5%8F%8A%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>Druid 介绍及配置</p>
-<a id="more"></a>
-<ol>
-<li><p>Druid是什么？<br> Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。</p>
-</li>
-<li><p>在哪里下载druid<br> 正式版本下载：<br> maven中央仓库: <a href="http://central.maven.org/maven2/com/alibaba/druid/" target="_blank" rel="noopener">http://central.maven.org/maven2/com/alibaba/druid/</a> </p>
-</li>
-<li><p>怎么获取Druid的源码<br> Druid是一个开源项目，源码托管在github上，源代码仓库地址是 <a href="https://github.com/alibaba/druid。同时每次Druid发布正式版本和快照的时候，都会把源码打包，你可以从上面的下载地址中找到相关版本的源码" target="_blank" rel="noopener">https://github.com/alibaba/druid。同时每次Druid发布正式版本和快照的时候，都会把源码打包，你可以从上面的下载地址中找到相关版本的源码</a></p>
-</li>
-<li><p>怎么配置maven<br> Druid 0.1.18 之后版本都发布到maven中央仓库中，所以你只需要在项目的pom.xml中加上dependency就可以了。例如：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;druid-version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>也可以选择 Maven仓库查找公共的仓库地址:<a href="http://www.mvnrepository.com/artifact/com.alibaba/druid" target="_blank" rel="noopener">http://www.mvnrepository.com/artifact/com.alibaba/druid</a></p>
-</li>
-<li><p>怎么打开Druid的监控统计功能<br> Druid的监控统计功能是通过filter-chain扩展实现，如果你要打开监控统计功能，配置StatFilter，具体看这里：<a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter</a></p>
-</li>
-<li><p>怎样使用Druid的内置监控页面<br> 内置监控页面是一个Servlet，具体配置看这里：<a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE</a></p>
-</li>
-<li><p>内置监控中的Web和Spring关联监控怎么配置？<br> Web关联监控配置<br> <a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_%E9%85%8D%E7%BD%AEWebStatFilter</a><br> Spring关联监控配置<br> <a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_Druid%E5%92%8CSpring%E5%85%B3%E8%81%94%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_Druid%E5%92%8CSpring%E5%85%B3%E8%81%94%E7%9B%91%E6%8E%A7%E9%85%8D%E7%BD%AE</a></p>
-</li>
-<li><p>怎么配置防御SQL注入攻击<br> Druid提供了WallFilter，它是基于SQL语义分析来实现防御SQL注入攻击的。具体配置看这里：<a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE-wallfilter" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE-wallfilter</a></p>
-</li>
-<li><p>Druid有没有参考配置<br> 不同的业务场景需求不同，你可以使用我们的参考配置，但建议你仔细阅读相关文档，了解清楚之后做定制配置。<a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE</a></p>
-</li>
-<li><p>我想日志记录JDBC执行的SQL，如何配置<br>Druid提供了Log4jFilter、CommonsLogFilter和Slf4jFilter，具体配置看这里<a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter</a></p>
-</li>
-<li><p>我的程序可能产生连接泄漏了，有什么办法？<br>Druid提供了多种监测连接泄漏的手段，具体看这里：<a href="https://github.com/alibaba/druid/wiki/%E8%BF%9E%E6%8E%A5%E6%B3%84%E6%BC%8F%E7%9B%91%E6%B5%8B" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E8%BF%9E%E6%8E%A5%E6%B3%84%E6%BC%8F%E7%9B%91%E6%B5%8B</a></p>
-</li>
-<li><p>在Druid中使用PSCache会有内存占用过大问题么？<br>连接Oracle数据库，打开PSCache，在其他的数据库连接池都会存在内存占用过多的问题，Druid是唯一解决这个问题的连接池。具体看这里：<a href="https://github.com/alibaba/druid/wiki/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8BPreparedStatementCache%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/Oracle%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8BPreparedStatementCache%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88</a></p>
-</li>
-<li><p>有没有和其他数据库连接池的对比？<br>各种数据库连接池对比<a href="https://github.com/alibaba/druid/wiki/%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%AF%B9%E6%AF%94" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%AF%B9%E6%AF%94</a></p>
-</li>
-<li><p>从其他连接池迁移要注意什么？<br>不同连接池的参数参照对比： <a href="http://code.alibabatech.com/wiki/pages/viewpage.action?pageId=6947005" target="_blank" rel="noopener">http://code.alibabatech.com/wiki/pages/viewpage.action?pageId=6947005</a><br>DBCP迁移 <a href="https://github.com/alibaba/druid/wiki/DBCP%E8%BF%81%E7%A7%BB" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/DBCP%E8%BF%81%E7%A7%BB</a></p>
-</li>
-<li><p>Druid中有没有类似Jboss DataSource中的ExceptionSorter<br>ExceptionSorter是JBoss DataSource中的优秀特性，Druid也有一样功能的ExceptionSorter，但不用手动配置，自动识别生效的。具体看这里：<a href="https://github.com/alibaba/druid/wiki/ExceptionSorter_cn" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/ExceptionSorter_cn</a></p>
-</li>
-<li><p>Druid中的maxIdle为什么是没用的？<br>maxIdle是Druid为了方便DBCP用户迁移而增加的，maxIdle是一个混乱的概念。连接池只应该有maxPoolSize和minPoolSize，druid只保留了maxActive和minIdle，分别相当于maxPoolSize和minPoolSize。</p>
-</li>
-<li><p>我的应用配置的是JNDI数据源，可以用DruidDataSource么？<br>DruidDataSource支持JNDI配置，具体看这里：<a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_JNDI_Tomcat" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_JNDI_Tomcat</a><br>具体实现的类是这个：com.alibaba.druid.pool.DruidDataSourceFactory，你可以阅读代码加深理解。</p>
-</li>
-<li><p>我的应用已使用DBCP，是代码中写死的，怎样更换为Druid？<br>可以的，Druid提供了一个中完全平滑迁移DBCP的办法。</p>
-</li>
-</ol>
-<p>1) 从<a href="http://repo1.maven.org/maven2/com/alibaba/druid/druid-wrapper/" target="_blank" rel="noopener">http://repo1.maven.org/maven2/com/alibaba/druid/druid-wrapper/</a> 下载druid-wrapper-xxx.jar<br>2) 加入druid-xxx.jar<br>3) 从你的WEB-INF/lib/中删除dbcp-xxx.jar<br>4) 按需要加上配置，比如JVM启动参数加上-Ddruid.filters=stat，动态配置druid的filters<br>这种用法，使得可以在一些非自己开发的应用中使用Druid，例如在sonar中部署druid，sonar是一个使用jruby开发的web应用，写死了DBCP，只能够通过这种方法来更换。</p>
-<ol start="19">
-<li><p>我想试用快照版本，怎么获取？<br>直接获取快照版本的地址是：<a href="http://code.alibabatech.com/mvn/snapshots/com/alibaba/druid/" target="_blank" rel="noopener">http://code.alibabatech.com/mvn/snapshots/com/alibaba/druid/</a> ，使用快照版本建议加入我们QQ群 92748305，遇到问题直接反馈给我们。</p>
-</li>
-<li><p>有一些SQL执行很慢，我希望日志记录下来，怎么设置？<br>在StatFilter配置中有慢SQL执行日志记录，看这里<a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter</a></p>
-</li>
-<li><p>我希望加密我的数据库密码怎么办？<br>运维和DBA都不希望把密码明文直接写在配置文件中，Druid提供了数据库秘密加密的功能。具体看这里：<a href="https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter</a></p>
-</li>
-<li><p>如何参与Druid的开发<br>Druid是一个通过github开源的项目，github的特性，使得你很容易参与其中。这里有详细说明<a href="https://github.com/alibaba/druid/wiki/%E5%A6%82%E4%BD%95%E5%8F%82%E4%B8%8E" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E5%A6%82%E4%BD%95%E5%8F%82%E4%B8%8E</a></p>
-</li>
-<li><p>Druid的发布周期是怎样？<br>Druid是一个活跃的项目，长期维护。每个月有一个发布窗口，除非遇到重大bug和非常紧急的需求，否则都是每个月最多发布一次。如果没有足够多的需求，发布窗口就不会被使用。</p>
-</li>
-<li><p>如果DruidDataSource在init的时候失败了，不再使用，是否需要close<br>是的，如果DruidDataSource不再使用，必须调用close来释放资源，释放的资源包括关闭Create和Destory线程。</p>
-</li>
-<li><p>DruidDataSource支持哪些数据库？<br>理论上说，支持所有有jdbc驱动的数据库。实际测试过的有</p>
-</li>
-</ol>
-<p>数据库    支持状态<br>mysql    支持，大规模使用<br>oracle    支持，大规模使用<br>sqlserver    支持<br>postgres    支持<br>db2    支持<br>h2    支持<br>derby    支持<br>sqlite    支持<br>sybase    支持</p>
-<ol start="26">
-<li><p>Oracle下jdbc executeBatch时，更新行数计算不正确<br>使用jdbc的executeBatch 方法，如果数据库为oracle，则无论是否成功更新到数据，返回值都是-2，而不是真正被sql更新到的记录数，这是Oracle JDBC Driver的问题，Druid不作特殊处理。</p>
-</li>
-<li><p>Druid如何自动根据URL自动识别DriverClass的<br>Druid是根据url前缀来识别DriverClass的，这样使得配置更方便简洁。</p>
-</li>
-</ol>
-<p>前缀    DriverCLass    描述信息<br>jdbc:odps    com.aliyun.odps.jdbc.OdpsDriver<br>jdbc:derby    org.apache.derby.jdbc.EmbeddedDriver<br>jdbc:mysql    com.mysql.jdbc.Driver<br>jdbc:oracle    oracle.jdbc.driver.OracleDriver<br>jdbc:microsoft    com.microsoft.jdbc.sqlserver.SQLServerDriver<br>jdbc:sybase:Tds    com.sybase.jdbc2.jdbc.SybDriver<br>jdbc:jtds    net.sourceforge.jtds.jdbc.Driver<br>jdbc:postgresql    org.postgresql.Driver<br>jdbc:fake    com.alibaba.druid.mock.MockDriver<br>jdbc:mock    com.alibaba.druid.mock.MockDriver<br>jdbc:hsqldb    org.hsqldb.jdbcDriver<br>jdbc:db2    COM.ibm.db2.jdbc.app.DB2Driver    DB2的JDBC Driver十分混乱，这个匹配不一定对<br>jdbc:sqlite    org.sqlite.JDBC<br>jdbc:ingres    com.ingres.jdbc.IngresDriver<br>jdbc:h2    org.h2.Driver<br>jdbc:mckoi    com.mckoi.JDBCDriver<br>jdbc:cloudscape    COM.cloudscape.core.JDBCDriver<br>jdbc:informix-sqli    com.informix.jdbc.IfxDriver<br>jdbc:timesten    com.timesten.jdbc.TimesTenDriver<br>jdbc:as400    com.ibm.as400.access.AS400JDBCDriver<br>jdbc:sapdb    com.sap.dbtech.jdbc.DriverSapDB<br>jdbc:JSQLConnect    com.jnetdirect.jsql.JSQLDriver<br>jdbc:JTurbo    com.newatlanta.jturbo.driver.Driver<br>jdbc:firebirdsql    org.firebirdsql.jdbc.FBDriver<br>jdbc:interbase    interbase.interclient.Driver<br>jdbc:pointbase    com.pointbase.jdbc.jdbcUniversalDriver<br>jdbc:edbc    ca.edbc.jdbc.EdbcDriver<br>jdbc:mimer:multi1    com.mimer.jdbc.Driver     </p>
-<ol start="28">
-<li><p>如何保存监控记录<br><a href="https://github.com/alibaba/druid/wiki/%E6%80%8E%E4%B9%88%E4%BF%9D%E5%AD%98Druid%E7%9A%84%E7%9B%91%E6%8E%A7%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E6%80%8E%E4%B9%88%E4%BF%9D%E5%AD%98Druid%E7%9A%84%E7%9B%91%E6%8E%A7%E8%AE%B0%E5%BD%95</a></p>
-</li>
-<li><p>我想Log输出SQL执行的信息怎么办？<br><a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_LogFilter</a></p>
-</li>
-<li><p>如何配置Druid内置的log实现<br><a href="https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AEdruid%E5%86%85%E7%BD%AE%E7%9A%84log%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener">https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AEdruid%E5%86%85%E7%BD%AE%E7%9A%84log%E5%AE%9E%E7%8E%B0</a></p>
-</li>
-</ol>
-<p>附：示例项目：<br><a href="https://github.com/windwant/spring-dubbo-service.git" target="_blank" rel="noopener">https://github.com/windwant/spring-dubbo-service.git</a><br><a href="https://github.com/windwant/spring-boot-service.git" target="_blank" rel="noopener">https://github.com/windwant/spring-boot-service.git</a></p>
-]]></content>
-      <categories>
-        <category>JDBC</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>JDK内置工具</title>
-    <url>/2018/10/25/JDK%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7/</url>
-    <content><![CDATA[<h2 id="JDK内置工具"><a href="#JDK内置工具" class="headerlink" title="JDK内置工具"></a><a href="https://blog.csdn.net/fenglibing/article/details/6411999" target="_blank" rel="noopener">JDK内置工具</a></h2><a id="more"></a>
-<ul>
-<li>javah命令(C Header and Stub File Generator)</li>
-<li>jps命令(Java Virtual Machine Process Status Tool)</li>
-<li>jstack命令(Java Stack Trace)</li>
-<li>jstat命令(Java Virtual Machine Statistics Monitoring Tool)</li>
-<li>jmap命令(Java Memory Map)</li>
-<li>jinfo命令(Java Configuration Info)</li>
-<li>jconsole命令(Java Monitoring and Management Console)</li>
-<li>jvisualvm命令(Java Virtual Machine Monitoring, Troubleshooting, and Profiling Tool)</li>
-<li>jhat命令(Java Heap Analyse Tool)</li>
-<li>Jdb命令(The Java Debugger)</li>
-<li>Jstatd命令(Java Statistics Monitoring Daemon)</li>
-</ul>
-<h3 id="javah命令"><a href="#javah命令" class="headerlink" title="javah命令"></a>javah命令</h3><p>javah是用于根据JAVA本地方法，生成对应的c语言头文件及相应的stub文件的命令，使用比较简单，使用示例可以查看这篇文章：<a href="https://blog.csdn.net/fenglibing/article/details/4300381" target="_blank" rel="noopener">JNI简单示例,包括C语言实现及调用</a></p>
-<h3 id="jps命令"><a href="#jps命令" class="headerlink" title="jps命令"></a>jps命令</h3><p>1、介绍</p>
-<p>用来查看基于HotSpot的JVM里面中，所有具有访问权限的Java进程的具体状态, 包括进程ID，进程启动的路径及启动参数等等，与unix上的ps类似，只不过jps是用来显示java进程，可以把jps理解为ps的一个子集。</p>
-<p>使用jps时，如果没有指定hostid，它只会显示本地环境中所有的Java进程；如果指定了hostid，它就会显示指定hostid上面的java进程，不过这需要远程服务上开启了jstatd服务，可以参看前面的jstatd章节来启动jstad服务。</p>
-<p>2、命令格式</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jps [ options ] [ hostid ]</span><br></pre></td></tr></table></figure>
-<p>3、常用参数说明</p>
-<ul>
-<li>-q 忽略输出的类名、Jar名以及传递给main方法的参数，只输出pid。</li>
-<li>-m 输出传递给main方法的参数，如果是内嵌的JVM则输出为null。</li>
-<li>-l 输出应用程序主类的完整包名，或者是应用程序JAR文件的完整路径。</li>
-<li>-v 输出传给JVM的参数。</li>
-<li>-V 输出通过标记的文件传递给JVM的参数（.hotspotrc文件，或者是通过参数-XX:Flags=<filename>指定的文件）。</filename></li>
-<li>-J 用于传递jvm选项到由javac调用的java加载器中，例如，“-J-Xms48m”将把启动内存设置为48M，使用-J选项可以非常方便的向基于Java的开发的底层虚拟机应用程序传递参数。</li>
-</ul>
-<p>4、服务器标识</p>
-<p>hostid指定了目标的服务器，它的语法如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[protocol:][[//]hostname][:port][/servername]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>protocol - 如果protocol及hostname都没有指定，那表示的是与当前环境相关的本地协议，如果指定了hostname却没有指定protocol，那么protocol的默认就是rmi。</li>
-<li>hostname - 服务器的IP或者名称，没有指定则表示本机。</li>
-<li>port - 远程rmi的端口，如果没有指定则默认为1099。</li>
-<li>Servername - 注册到RMI注册中心中的jstatd的名称。</li>
-</ul>
-<p>5、使用示例</p>
-<p>5.1、列出本地的Java进程</p>
-<p>不带任何参数<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fenglibin@libin:~$ jps</span><br><span class="line">11644 Main</span><br><span class="line">1947 </span><br><span class="line">12843 Jps</span><br></pre></td></tr></table></figure></p>
-<p>带-v参数<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fenglibin@libin:~$ jps -v</span><br><span class="line">11644 Main -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:43467 -Dfile.encoding=GBK</span><br><span class="line">1947  -Dosgi.requiredJavaVersion=1.5 -XX:MaxPermSize=256m -Xms40m -Xmx512m</span><br><span class="line">12858 Jps -Denv.class.path=/home/fenglibin/java6/lib/dt.jar:/home/fenglibin/java6/lib/tools.jar::/usr/bin/libtool:/usr/bin/autoconf:/usr/local/BerkeleyDB.4.8/lib -Dapplication.home=/home/fenglibin/java6 -Xms8m</span><br></pre></td></tr></table></figure></p>
-<p>带-l参数<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fenglibin@libin:~$ jps -l</span><br><span class="line">11644 com.alibaba.china.webww.core.Main</span><br><span class="line">12870 sun.tools.jps.Jps</span><br><span class="line">1947</span><br></pre></td></tr></table></figure></p>
-<p>5.2、列出远程的Java进程</p>
-<p>在jstatd章节，我们有通过：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rmiregistry 2020&amp;jstatd -J-Djava.security.policy=all.policy -p 2020 -n AlternateJstatdServerName</span><br></pre></td></tr></table></figure></p>
-<p>启动了名为AlternateJstatdServerName的jstatd服务，那么我们此时就可以通过该服务列出其有权限访问的Java进程。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fenglibin@libin:~$ jps 10.1.1.234:2020/AlternateJstatdServerName</span><br><span class="line">29556 Bootstrap</span><br><span class="line">28671 WSPreLauncher</span><br><span class="line">2602 RegistryImpl</span><br><span class="line">18272 Test</span><br><span class="line">2603 Jstatd</span><br></pre></td></tr></table></figure></p>
-<h3 id="jstack命令"><a href="#jstack命令" class="headerlink" title="jstack命令"></a>jstack命令</h3><p>1、介绍<br>jstack用于打印出给定的java进程ID或core file或远程调试服务的Java堆栈信息，如果是在64位机器上，需要指定选项”-J-d64”，Windows的jstack使用方式只支持以下的这种方式：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jstack [-l] pid</span><br></pre></td></tr></table></figure></p>
-<p>如果java程序崩溃生成core文件，jstack工具可以用来获得core文件的java stack和native stack的信息，从而可以轻松地知道java程序是如何崩溃和在程序何处发生问题。另外，jstack工具还可以附属到正在运行的java程序中，看到当时运行的java程序的java stack和native stack的信息, 如果现在运行的java程序呈现hung的状态，jstack是非常有用的。</p>
-<p>2、命令格式<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jstack [ option ] pid</span><br><span class="line">jstack [ option ] executable core</span><br><span class="line">jstack [ option ] [server-id@]remote-hostname-or-IP</span><br></pre></td></tr></table></figure></p>
-<p>3、常用参数说明<br>1)、options： </p>
-<ul>
-<li>executable Java executable from which the core dump was produced.(可能是产生core dump的java可执行程序)</li>
-<li>core 将被打印信息的core dump文件</li>
-<li>remote-hostname-or-IP 远程debug服务的主机名或ip</li>
-<li>server-id 唯一id,假如一台主机上多个远程debug服务 </li>
-</ul>
-<p>2）、基本参数：</p>
-<ul>
-<li>-F当’jstack [-l] pid’没有相应的时候强制打印栈信息</li>
-<li>-l长列表. 打印关于锁的附加信息,例如属于java.util.concurrent的ownable synchronizers列表.</li>
-<li>-m打印java和native c/c++框架的所有栈信息.</li>
-<li>-h | -help打印帮助信息</li>
-<li>pid 需要被打印配置信息的java进程id,可以用jps查询.</li>
-</ul>
-<h3 id="jstat命令"><a href="#jstat命令" class="headerlink" title="jstat命令"></a>jstat命令</h3><p>1、介绍<br>Jstat用于监控基于HotSpot的JVM，对其堆的使用情况进行实时的命令行的统计，使用jstat我们可以对指定的JVM做如下监控：</p>
-<ul>
-<li>类的加载及卸载情况</li>
-<li>查看新生代、老生代及持久代的容量及使用情况</li>
-<li>查看新生代、老生代及持久代的垃圾收集情况，包括垃圾回收的次数及垃圾回收所占用的时间</li>
-<li>查看新生代中Eden区及Survior区中容量及分配情况等</li>
-</ul>
-<p>jstat工具特别强大，它有众多的可选项，通过提供多种不同的监控维度，使我们可以从不同的维度来了解到当前JVM堆的使用情况。详细查看堆内各个部分的使用量，使用的时候必须加上待统计的Java进程号，可选的不同维度参数以及可选的统计频率参数。</p>
-<p>它主要是用来显示GC及PermGen相关的信息，如果对GC不怎么了解，先看这篇文章：<a href="http://blog.csdn.net/fenglibing/archive/2011/04/13/6321453.aspx，否则其中即使你会使用jstat这个命令，你也看不懂它的输出。" target="_blank" rel="noopener">http://blog.csdn.net/fenglibing/archive/2011/04/13/6321453.aspx，否则其中即使你会使用jstat这个命令，你也看不懂它的输出。</a></p>
-<p>2、语法<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jstat [ generalOption | outputOptions vmid [interval[s|ms] [count]] ]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>generalOption - 单个的常用的命令行选项，如-help, -options, 或 -version。</li>
-<li>outputOptions -一个或多个输出选项，由单个的statOption选项组成，可以和-t, -h, and -J等选项配合使用。</li>
-</ul>
-<p>statOption：<br>根据jstat统计的维度不同，可以使用如下表中的选项进行不同维度的统计，不同的操作系统支持的选项可能会不一样，可以通过-options选项，查看不同操作系统所支持选项，如：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Option</th>
-<th style="text-align:center">Displays…</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">class</td>
-<td style="text-align:center">用于查看类加载情况的统计</td>
-</tr>
-<tr>
-<td style="text-align:center">compiler</td>
-<td style="text-align:center">用于查看HotSpot中即时编译器编译情况的统计</td>
-</tr>
-<tr>
-<td style="text-align:center">gc</td>
-<td style="text-align:center">用于查看JVM中堆的垃圾收集情况的统计</td>
-</tr>
-<tr>
-<td style="text-align:center">gccapacity</td>
-<td style="text-align:center">用于查看新生代、老生代及持久代的存储容量情况</td>
-</tr>
-<tr>
-<td style="text-align:center">gccause</td>
-<td style="text-align:center">用于查看垃圾收集的统计情况（这个和-gcutil选项一样），如果有发生垃圾收集，它还会显示最后一次及当前正在发生垃圾收集的原因。</td>
-</tr>
-<tr>
-<td style="text-align:center">gcnew</td>
-<td style="text-align:center">用于查看新生代垃圾收集的情况</td>
-</tr>
-<tr>
-<td style="text-align:center">gcnewcapacity</td>
-<td style="text-align:center">用于查看新生代的存储容量情况</td>
-</tr>
-<tr>
-<td style="text-align:center">gcold</td>
-<td style="text-align:center">用于查看老生代及持久代发生GC的情况</td>
-</tr>
-<tr>
-<td style="text-align:center">gcoldcapacity</td>
-<td style="text-align:center">用于查看老生代的容量</td>
-</tr>
-<tr>
-<td style="text-align:center">gcpermcapacity</td>
-<td style="text-align:center">用于查看持久代的容量</td>
-</tr>
-<tr>
-<td style="text-align:center">gcutil</td>
-<td style="text-align:center">用于查看新生代、老生代及持代垃圾收集的情况</td>
-</tr>
-<tr>
-<td style="text-align:center">printcompilation</td>
-<td style="text-align:center">HotSpot编译方法的统计</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-  </entry>
-  <entry>
-    <title>JNI简单示例</title>
-    <url>/2018/09/04/JNI/</url>
-    <content><![CDATA[<h2 id="JNI简单示例"><a href="#JNI简单示例" class="headerlink" title="JNI简单示例"></a>JNI简单示例</h2><a id="more"></a>
-<p><strong>原贴地址<a href="https://blog.csdn.net/fenglibing/article/details/4300381" target="_blank" rel="noopener">JNI简单示例,包括C语言实现及调用</a></strong></p>
-<p><em>JNI（Java Native Interface）</em>是Java本地方法调用接口，从Java1.1开始，Java Native Interface(JNI)标准就成为java平台的一部分，它允许Java代码和其他语言写的代码进行交互。JNI一开始是为了本地已编译语言，尤其是C和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。</p>
-<p>Java中很多地方都使用到了JNI，如System.arrayCopy方法：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">arraycopy</span><span class="params">(Object array1, <span class="keyword">int</span> start1, Object array2, <span class="keyword">int</span> start2, <span class="keyword">int</span> length)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>那Java中为什么要使用JNI呢？这与Java产生的历史就有一定的关系了，Java刚开始被设计的时候就是为了跨平台，Java的字节码由JVM运行。Java跨平台是非常好的设计理念，这避免了因为换平台而不得不重新写一套代码的麻烦，可正是为了实现这样的特性，Java也失去了一些特性，如对操作系统底层的调用限制。JNI可以实现对操作系统底层的调用，JNI可以用来提高调用的速度，如我们上面提到的System.arrayCopy方法，它是直接和操作系统的内存进行交互，而省去了JVM和操作系统进行内存交换的步骤；JNI的另一个使用场景就是某些核心类库的实现可能需要跨包调用或者需要绕过其他Java安全性检查，如Java中的sun.misc.Unsaef实现。</p>
-<p>下面我们用两个实例来说明，如何创建自己的DLL，以及如何通过Java去调用这些DLL。</p>
-<p>示例一、不传参数的简单调用</p>
-<p>这个示例很简单，没有输入参数也没有输出参数，只是通过Java调用JNI方法，并把JNI中输出的一句话给显示出来。如果是涉及到输入输出参数的本地方法调用，相对就会麻烦一点，因为Java中的参数和DLL中的参数类型是不一样的，这时就需要一个中间转换间，如SWIG（Simplified Wrapper and Interface Generator）简单包装及接口生成器，这个后面会有介绍。</p>
-<p>1、Java的操作步骤</p>
-<p>1）、首先准备一个具有本地方法的Java文件JNITest，输入内容如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNITest</span> </span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 建立一个无返回参数的方法，该方法只在DLL方法内打印一条语句。 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2）、使用Javac编译该Java文件<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">javac test/JNITest.java</span><br></pre></td></tr></table></figure></p>
-<p>注：编译一定要在test包外操作，否则会报错。<br>3）、使用Javah生成头文件<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">javah test.JNITest</span><br></pre></td></tr></table></figure></p>
-<p>注：也是要在test包外操作<br>操作完成后，我们可以看到_头文件”test_JNITest.h”_，它的命令方式是以包名加类名的方式，其内容如下：<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* DO NOT EDIT THIS FILE - it is machine generated */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="comment">/* Header for class test_JNITest */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _Included_test_JNITest</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _Included_test_JNITest</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Class:     test_JNITest</span></span><br><span class="line"><span class="comment"> * Method:    test</span></span><br><span class="line"><span class="comment"> * Signature: ()I</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">JNIEXPORT jint JNICALL Java_test_JNITest_test</span><br><span class="line">  (JNIEnv *, jobject);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
-<p>正如文件头部所说，不要对这个生成文件进行任何的修改一样，然后通过C实现该方法即可：<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">JNIEXPORT jint JNICALL <span class="title">Java_test_JNITest_test</span> <span class="params">(JNIEnv *, jobject)</span></span>;</span><br></pre></td></tr></table></figure></p>
-<p>然后我们将实现后的C，编译成DLL，再将DLL放到操作系统的PATH中，如我是WINDOWS中，将其放到system32路径下即可，DLL的名称没有关系。<br>4）、执行测试结果</p>
-<p>建立一个测试类JNITestCaller<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNITestCaller</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		<span class="comment">// 在系统路径中（如system32）加载名为JNITest.dll文件</span></span><br><span class="line">		System.loadLibrary(<span class="string">"JNITest"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arg)</span> </span>&#123;</span><br><span class="line">		JNITest jniTest = <span class="keyword">new</span> JNITest();</span><br><span class="line">		jniTest.test();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过javac编译该Java类<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">javac test/JNITestCaller</span><br></pre></td></tr></table></figure></p>
-<p>然后执行它<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java test.JNITestCaller</span><br></pre></td></tr></table></figure></p>
-<p>如果控制台打印出<em>“=====888”字符串</em>，则表示通过JNI调用DLL成功且执行成功，如果不成功则检查步骤是否有遗漏。</p>
-<p>2、DLL编译的步骤</p>
-<p>1）、安装VC6， VS太大了，我等也不常用，这个可以了；</p>
-<p>2）、启动VC6，新建DLL工程，通过“File-&gt;New…-&gt;Dll工程”，名称就命名为JNITest吧，到时编译过后的DLL名称就是JNITest.dll，如果是其它的名称，在编译成DLL后需要改一下名称；</p>
-<p>3）、新建C++</p>
-<p>选中新建工程JNITest，然后点击菜单中的“File-&gt;New…-&gt;C++ Source File”，文件的名称可以任意，在其中输入如下代码：</p>
-<p>在其中输入如下如下代码：<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;test_JNITest.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="comment">/*这个方法名称一定要和头文件的一模一样，不过头文件中的参数只有类型，没有名称，需要加成如下参数*/</span></span><br><span class="line"><span class="function">JNIEXPORT <span class="keyword">void</span> JNICALL <span class="title">Java_test_JNITest_test</span><span class="params">(JNIEnv *jenv, jobject jobj)</span> </span>&#123;</span><br><span class="line">  <span class="comment">/*就打印这一条语句*/</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"=====888"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
-<p>4）、将%JAVA_HOME%/include/win32下面的jawt_md.h、jni_mh.h，以及%JAVA_HOME%/include/jni.h，这三个文件拷贝到%VS_HOME%/VC98/Include下面，生成的头文件test_JNITest.h也可以拷贝到那个目录，省去指定头文件的路径步骤；<br>5）、点击C++的编译按钮（或者CTRL+F7），不报错则通过，则点击生成DLL文件的按钮（或者F7），到%VS_HOME%/MyProject/JNITest目录，将JNITest.dll文件拷贝到system32目录就可以了。</p>
-<p>示例二、有输入输出参数的调用，需要借助工具SWIG（Simplified Wrapper and Interface Generator）</p>
-<p>Java中JNI的操作，最难的就是Java与Dll之间参数的传递与转换了，因为JAVA中的参数与C中的参数是不能够直接匹配的，如果我们手工去处理，还真的有点麻烦。这个时候我们可以通过SWIG这个工具来做参数的包装，它可以帮忙做传入传出参数之间的转换，我们现在上面的基础之上，将原来的void且不传参数的方法，改成传入两个字符串，返回的结果为这两个字符串的组合，如传入参数为”A”、”B”，则输出结果为”AB”，操作步骤如下：</p>
-<p>1、Java中的操作</p>
-<p>Java中需要将Native方法增加两个输入参数以及修改返回参数，这个Native方法的功能就是返回两个输入参数的拼接结果，如参数输入“A”和“B”，那要得到的结果是“AB”，修改后的包含Native方法的类的代码如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNITest</span> </span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 建立一个无返回参数的方法，该方法只在DLL方法内打印一条语句。 另外就是传参的处理要相对复杂点，后面介绍。</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">test</span><span class="params">(String a, String b)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line">    此时我们的测试代码也会有一点点小小的改变，增加传入参数以及获取返回结果，修改后的JNITestCaller代码如下：</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNITestCaller</span> </span>&#123;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		<span class="comment">// 在系统路径中（如system32）加载名为JNITest.dll文件</span></span><br><span class="line">		System.loadLibrary(<span class="string">"JNITest"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arg)</span> </span>&#123;</span><br><span class="line">		JNITest jniTest = <span class="keyword">new</span> JNITest();</span><br><span class="line">		String a = <span class="string">"A"</span>, b = <span class="string">"B"</span>;</span><br><span class="line">		String result = jniTest.test(a, b);</span><br><span class="line">		System.out.println(<span class="string">"The execute result is:"</span> + result);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果我们按照上面的操作，并可以在最后得到输出结果“AB”，那么就表示我们的操作成功了。</p>
-<p>2、DLL编译的步骤</p>
-<p>1）、首先是下载SWIG，要包括WIN的那个版本，这个版本才有SWIG.EXE这个文件；</p>
-<p>2）、然后设置SWIG当前路径到PATH中，因为执行SWIG命令的时候需要用到；</p>
-<p>3）、编写”.i”文件如“I.i”，这个文件里面定义要生成的C方法是什么，这个方法就是要实现的方法，具体怎么写就需要看看SWIG的示例与帮助文档了，里面还是挺丰富的；</p>
-<p>4）、执行命令“swig -java -c++ I.i”，会生成C语言包装、C++包装、两个JAVA文件，其中包括了声明本地native方法类，以及引用方法native方法的类，但是在实现类中没有实现MAIN方法以及通过System.loadLibary的方法加载DLL，这两个需要用户自己完成。</p>
-<p>注：用户需要自己通过C或者是C++实现在”.i”文件中声明的方法，才可以成功编译，因为C及C++的包装文件中会引用这个方法，我们不需要修改包装文件，直接在另外一个C或者是C++文件中实现那个文件即可。</p>
-<p>5）、调用和上面的一样，编译JAVA，执行JAVA，不过不用调用JAVAH生成H头文件了，因为由SWIG已经生成了对应的包装文件。</p>
-<p>这个没有给出示例，因为SWIG生成的包装文件比较大，它其中做了字符的转换，有了上面的基础，再通过SWIG去实现，应该没有多大难度。</p>
-<p>注：DLL的步骤，后面会补充完整。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Java8内存模型</title>
     <url>/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<h2 id="Java8内存模型"><a href="#Java8内存模型" class="headerlink" title="Java8内存模型"></a>Java8内存模型</h2><a id="more"></a>
-<p><img src="assets/java_runtime_data_areas.jpg" alt="Java8内存模型"></p>
-<p><img src="assets/Cookbook_JVMArguments_2_MemoryModel.png" alt="区域的内存大小"></p>
+    <content><![CDATA[<p>Java8内存模型</p>
+<p><img src="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg" alt="Java8内存模型"></p>
+<a id="more"></a>
+<p><img src="https://images.orkva.com/images/2023/01/09/Cookbook_JVMArguments_2_MemoryModel.png" alt="区域的内存大小"></p>
 <table>
 <thead>
 <tr>
@@ -434,20 +161,10 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Linux下磁盘常用命令</title>
-    <url>/2021/01/08/Linux%E4%B8%8B%E7%A3%81%E7%9B%98%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Linux下磁盘常用命令"><a href="#Linux下磁盘常用命令" class="headerlink" title="Linux下磁盘常用命令"></a>Linux下磁盘常用命令</h1><p>df 报告文件系统磁盘空间使用情况</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">df [OPTION]... [FILE]...</span><br></pre></td></tr></table></figure>
-<p>fdisk</p>
-]]></content>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SQL_NOTIN与IN中NULL值问题</title>
     <url>/2018/07/17/SQL_NOTIN%E4%B8%8EIN%E4%B8%ADNULL%E5%80%BC%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>To state it simply, why does query A return a result but B doesn’t?</p>
+    <content><![CDATA[<p>工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。</p>
+<p>To state it simply, why does query A return a result but B doesn’t?</p>
 <a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">A: select &apos;true&apos; where 3 in (1, 2, 3, null)</span><br><span class="line">B: select &apos;true&apos; where 3 not in (1, 2, null)</span><br></pre></td></tr></table></figure>
 <p>This was on SQL Server 2005. I also found that calling set ansi_nulls off causes B to return a result.</p>
@@ -559,7 +276,7 @@
   <entry>
     <title>kms激活</title>
     <url>/2021/02/08/kms%E6%BF%80%E6%B4%BB/</url>
-    <content><![CDATA[<p>kms激活密钥</p>
+    <content><![CDATA[<p>简单记录一下为虚拟机激活的kms密钥</p>
 <a id="more"></a>
 <h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">slmgr /upk</span><br><span class="line">slmgr /ipk GVLK //Windows版本密钥</span><br><span class="line">slmgr /skms kms.server.ip:port //KMS服务器地址 默认端口1688</span><br><span class="line">slmgr /ato</span><br><span class="line">slmgr /dlv</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">slmgr /ckms  //清除系统KMS信息</span><br><span class="line">slmgr /rearm //重置计算机的授权状态</span><br></pre></td></tr></table></figure>
@@ -860,86 +577,10 @@
 ]]></content>
   </entry>
   <entry>
-    <title>log4j配置参数描述</title>
-    <url>/2018/01/02/log4j%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E6%8F%8F%E8%BF%B0/</url>
-    <content><![CDATA[<p>log4j</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 可设置级别：TRACE→DEBUG→INFO→WARNING→ERROR→FATAL→OFF</span><br><span class="line"></span><br><span class="line"># 高级别level会屏蔽低级别level。</span><br><span class="line"></span><br><span class="line"># debug：显示debug、info、error</span><br><span class="line"></span><br><span class="line"># info：显示info、error</span><br><span class="line"></span><br><span class="line">#log4j.rootLogger=DEBUG,console,file  </span><br><span class="line">log4j.rootLogger=INFO,console  </span><br><span class="line">​    </span><br><span class="line">​    </span><br><span class="line">#输出到控制台     </span><br><span class="line">log4j.appender.console=org.apache.log4j.ConsoleAppender    </span><br><span class="line">#设置输出样式     </span><br><span class="line">log4j.appender.console.layout=org.apache.log4j.PatternLayout   </span><br><span class="line">#日志输出信息格式为  </span><br><span class="line">log4j.appender.console.layout.ConversionPattern=[%-d&#123;yyyy-MM-dd HH:mm:ss&#125;]-[%t-%5p]-[%C-%M(%L)]： %m%n   </span><br><span class="line"></span><br><span class="line">#输出到文件(这里默认为追加方式)     </span><br><span class="line">#log4j.appender.file=org.apache.log4j.FileAppender   </span><br><span class="line">#log4j.appender.file.File=F:/LinkinPark/logs/Log4J.log   </span><br><span class="line">#样式为TTCCLayout     </span><br><span class="line">#log4j.appender.file.layout=org.apache.log4j.TTCCLayout    </span><br><span class="line"></span><br><span class="line">#自定义样式     </span><br><span class="line">#%c 输出所属的类目，通常就是所在类的全名   </span><br><span class="line">#%C 输出Logger所在类的名称，通常就是所在类的全名   </span><br><span class="line">#%d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d&#123;yyy MMM dd HH:mm:ss , SSS&#125;，%d&#123;ABSOLUTE&#125;，%d&#123;DATE&#125;  </span><br><span class="line">#%F 输出所在类的类名称，只有类名。  </span><br><span class="line">#%l 输出语句所在的行数，包括类名+方法名+文件名+行数  </span><br><span class="line">#%L 输出语句所在的行数，只输出数字  </span><br><span class="line">#%m 输出代码中指定的讯息，如log(message)中的message  </span><br><span class="line">#%M 输出方法名  </span><br><span class="line">#%p 输出日志级别，即DEBUG，INFO，WARN，ERROR，FATAL  </span><br><span class="line">#%r 输出自应用启动到输出该log信息耗费的毫秒数  </span><br><span class="line">#%t 输出产生该日志事件的线程名  </span><br><span class="line">#%n 输出一个回车换行符，Windows平台为“/r/n”，Unix平台为“/n”  </span><br><span class="line">#%% 用来输出百分号“%”  </span><br><span class="line">#log4j.appender.Linkin.layout.ConversionPattern=%n[%l%d&#123;yy/MM/dd HH:mm:ss:SSS&#125;][%C-%M] %m    </span><br><span class="line">#log4j.appender.Linkin.layout.ConversionPattern=%-d&#123;yyyy-MM-dd HH:mm:ss&#125;[%C]-[%p] %m%n     </span><br><span class="line">#log4j.appender.Linkin.layout.ConversionPattern = %d&#123;ABSOLUTE&#125; %5p %t %c&#123;2&#125;:%L - %m%n  </span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">log4j.properties 使用</span><br><span class="line">一.参数意义说明</span><br><span class="line">输出级别的种类</span><br><span class="line">ERROR、WARN、INFO、DEBUG</span><br><span class="line">ERROR 为严重错误 主要是程序的错误</span><br><span class="line">WARN 为一般警告，比如session丢失</span><br><span class="line">INFO 为一般要显示的信息，比如登录登出</span><br><span class="line">DEBUG 为程序的调试信息</span><br><span class="line">配置日志信息输出目的地</span><br><span class="line">log4j.appender.appenderName = fully.qualified.name.of.appender.class</span><br><span class="line">1.org.apache.log4j.ConsoleAppender（控制台）</span><br><span class="line">2.org.apache.log4j.FileAppender（文件）</span><br><span class="line">3.org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）</span><br><span class="line">4.org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）</span><br><span class="line">5.org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</span><br><span class="line">配置日志信息的格式</span><br><span class="line">log4j.appender.appenderName.layout = fully.qualified.name.of.layout.class</span><br><span class="line">1.org.apache.log4j.HTMLLayout（以HTML表格形式布局），</span><br><span class="line">2.org.apache.log4j.PatternLayout（可以灵活地指定布局模式），</span><br><span class="line">3.org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），</span><br><span class="line">4.org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</span><br><span class="line">控制台选项</span><br><span class="line">Threshold=DEBUG:指定日志消息的输出最低层次。</span><br><span class="line">ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。</span><br><span class="line">Target=System.err：默认情况下是：System.out,指定输出控制台</span><br><span class="line">FileAppender 选项</span><br><span class="line">Threshold=DEBUF:指定日志消息的输出最低层次。</span><br><span class="line">ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。</span><br><span class="line">File=mylog.txt:指定消息输出到mylog.txt文件。</span><br><span class="line">Append=false:默认值是true,即将消息增加到指定文件中，false指将消息覆盖指定的文件内容。</span><br><span class="line">RollingFileAppender 选项</span><br><span class="line">Threshold=DEBUG:指定日志消息的输出最低层次。</span><br><span class="line">ImmediateFlush=true:默认值是true,意谓着所有的消息都会被立即输出。</span><br><span class="line">File=mylog.txt:指定消息输出到mylog.txt文件。</span><br><span class="line">Append=false:默认值是true,即将消息增加到指定文件中，false指将消息覆盖指定的文件内容。</span><br><span class="line">MaxFileSize=100KB: 后缀可以是KB, MB 或者是 GB. 在日志文件到达该大小时，将会自动滚动，即将原来的内容移到mylog.log.1文件。</span><br><span class="line">MaxBackupIndex=2:指定可以产生的滚动文件的最大数。</span><br><span class="line">log4j.appender.A1.layout.ConversionPattern=%-4r %-5p %d&#123;yyyy-MM-dd HH:mm:ssS&#125; %c %m%n</span><br><span class="line">日志信息格式中几个符号所代表的含义：</span><br><span class="line"> -X号: X信息输出时左对齐；</span><br><span class="line"> %p: 输出日志信息优先级，即DEBUG，INFO，WARN，ERROR，FATAL,</span><br><span class="line"> %d: 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d&#123;yyy MMM dd HH:mm:ss,SSS&#125;，输出类似：2002年10月18日 22：10：28，921</span><br><span class="line"> %r: 输出自应用启动到输出该log信息耗费的毫秒数</span><br><span class="line"> %c: 输出日志信息所属的类目，通常就是所在类的全名</span><br><span class="line"> %t: 输出产生该日志事件的线程名</span><br><span class="line"> %l: 输出日志事件的发生位置，相当于%C.%M(%F:%L)的组合,包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main (TestLog4.java:10)</span><br><span class="line"> %x: 输出和当前线程相关联的NDC(嵌套诊断环境),尤其用到像java servlets这样的多客户多线程的应用中。</span><br><span class="line"> %%: 输出一个&quot;%&quot;字符</span><br><span class="line"> %F: 输出日志消息产生时所在的文件名称</span><br><span class="line"> %L: 输出代码中的行号</span><br><span class="line"> %m: 输出代码中指定的消息,产生的日志具体信息</span><br><span class="line"> %n: 输出一个回车换行符，Windows平台为&quot;\r\n&quot;，Unix平台为&quot;\n&quot;输出日志信息换行</span><br><span class="line"> 可以在%与模式字符之间加上修饰符来控制其最小宽度、最大宽度、和文本的对齐方式。如：</span><br><span class="line"> 1)%20c：指定输出category的名称，最小的宽度是20，如果category的名称小于20的话，默认的情况下右对齐。</span><br><span class="line"> 2)%-20c:指定输出category的名称，最小的宽度是20，如果category的名称小于20的话，&quot;-&quot;号指定左对齐。</span><br><span class="line"> 3)%.30c:指定输出category的名称，最大的宽度是30，如果category的名称大于30的话，就会将左边多出的字符截掉，但小于30的话也不会有空格。</span><br><span class="line"> 4)%20.30c:如果category的名称小于20就补空格，并且右对齐，如果其名称长于30字符，就从左边较远输出的字符截掉。</span><br><span class="line">二.文件配置Sample1</span><br><span class="line">log4j.rootLogger=DEBUG,A1,R</span><br><span class="line">#log4j.rootLogger=INFO,A1,R</span><br><span class="line"># ConsoleAppender 输出</span><br><span class="line">log4j.appender.A1=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.A1.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.A1.layout.ConversionPattern=%-d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; [%c]-[%p] %m%n</span><br><span class="line"># File 输出 一天一个文件,输出路径可以定制,一般在根路径下</span><br><span class="line">log4j.appender.R=org.apache.log4j.DailyRollingFileAppender</span><br><span class="line">log4j.appender.R.File=blog_log.txt</span><br><span class="line">log4j.appender.R.MaxFileSize=500KB</span><br><span class="line">log4j.appender.R.MaxBackupIndex=10</span><br><span class="line">log4j.appender.R.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.R.layout.ConversionPattern=%d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; [%t] [%c] [%p] - %m%n</span><br><span class="line">文件配置Sample2</span><br><span class="line">下面给出的Log4J配置文件实现了输出到控制台，文件，回滚文件，发送日志邮件，输出到数据库日志表，自定义标签等全套功能。</span><br><span class="line">log4j.rootLogger=DEBUG,CONSOLE,A1,im </span><br><span class="line">#DEBUG,CONSOLE,FILE,ROLLING_FILE,MAIL,DATABASE</span><br><span class="line">log4j.addivity.org.apache=true</span><br><span class="line">################### </span><br><span class="line"># Console Appender </span><br><span class="line">################### </span><br><span class="line">log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender </span><br><span class="line">log4j.appender.Threshold=DEBUG </span><br><span class="line">log4j.appender.CONSOLE.Target=System.out </span><br><span class="line">log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout </span><br><span class="line">log4j.appender.CONSOLE.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n </span><br><span class="line">#log4j.appender.CONSOLE.layout.ConversionPattern=[start]%d&#123;DATE&#125;[DATE]%n%p[PRIORITY]%n%x[NDC]%n%t[THREAD] n%c[CATEGORY]%n%m[MESSAGE]%n%n</span><br><span class="line">##################### </span><br><span class="line"># File Appender </span><br><span class="line">##################### </span><br><span class="line">log4j.appender.FILE=org.apache.log4j.FileAppender </span><br><span class="line">log4j.appender.FILE.File=file.log </span><br><span class="line">log4j.appender.FILE.Append=false </span><br><span class="line">log4j.appender.FILE.layout=org.apache.log4j.PatternLayout </span><br><span class="line">log4j.appender.FILE.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n </span><br><span class="line"># Use this layout for LogFactor 5 analysis</span><br><span class="line">######################## </span><br><span class="line"># Rolling File </span><br><span class="line">######################## </span><br><span class="line">log4j.appender.ROLLING_FILE=org.apache.log4j.RollingFileAppender </span><br><span class="line">log4j.appender.ROLLING_FILE.Threshold=ERROR </span><br><span class="line">log4j.appender.ROLLING_FILE.File=rolling.log </span><br><span class="line">log4j.appender.ROLLING_FILE.Append=true </span><br><span class="line">log4j.appender.ROLLING_FILE.MaxFileSize=10KB </span><br><span class="line">log4j.appender.ROLLING_FILE.MaxBackupIndex=1 </span><br><span class="line">log4j.appender.ROLLING_FILE.layout=org.apache.log4j.PatternLayout </span><br><span class="line">log4j.appender.ROLLING_FILE.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n</span><br><span class="line">#################### </span><br><span class="line"># Socket Appender </span><br><span class="line">#################### </span><br><span class="line">log4j.appender.SOCKET=org.apache.log4j.RollingFileAppender </span><br><span class="line">log4j.appender.SOCKET.RemoteHost=localhost </span><br><span class="line">log4j.appender.SOCKET.Port=5001 </span><br><span class="line">log4j.appender.SOCKET.LocationInfo=true </span><br><span class="line"># Set up for Log Facter 5 </span><br><span class="line">log4j.appender.SOCKET.layout=org.apache.log4j.PatternLayout </span><br><span class="line">log4j.appender.SOCET.layout.ConversionPattern=[start]%d&#123;DATE&#125;[DATE]%n%p[PRIORITY]%n%x[NDC]%n%t[THREAD]%n%c[CATEGORY]%n%m[MESSAGE]%n%n</span><br><span class="line">######################## </span><br><span class="line"># Log Factor 5 Appender </span><br><span class="line">######################## </span><br><span class="line">log4j.appender.LF5_APPENDER=org.apache.log4j.lf5.LF5Appender </span><br><span class="line">log4j.appender.LF5_APPENDER.MaxNumberOfRecords=2000</span><br><span class="line">######################## </span><br><span class="line"># SMTP Appender </span><br><span class="line">####################### </span><br><span class="line">log4j.appender.MAIL=org.apache.log4j.net.SMTPAppender </span><br><span class="line">log4j.appender.MAIL.Threshold=FATAL </span><br><span class="line">log4j.appender.MAIL.BufferSize=10 </span><br><span class="line">log4j.appender.MAIL.From=chenyl@yeqiangwei.com</span><br><span class="line">log4j.appender.MAIL.SMTPHost=mail.hollycrm.com </span><br><span class="line">log4j.appender.MAIL.Subject=Log4J Message </span><br><span class="line">log4j.appender.MAIL.To=chenyl@yeqiangwei.com</span><br><span class="line">log4j.appender.MAIL.layout=org.apache.log4j.PatternLayout </span><br><span class="line">log4j.appender.MAIL.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n</span><br><span class="line">######################## </span><br><span class="line"># JDBC Appender </span><br><span class="line">####################### </span><br><span class="line">log4j.appender.DATABASE=org.apache.log4j.jdbc.JDBCAppender </span><br><span class="line">log4j.appender.DATABASE.URL=jdbc:mysql://localhost:3306/test </span><br><span class="line">log4j.appender.DATABASE.driver=com.mysql.jdbc.Driver </span><br><span class="line">log4j.appender.DATABASE.user=root </span><br><span class="line">log4j.appender.DATABASE.password= </span><br><span class="line">log4j.appender.DATABASE.sql=INSERT INTO LOG4J (Message) VALUES (&apos;[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n&apos;) </span><br><span class="line">log4j.appender.DATABASE.layout=org.apache.log4j.PatternLayout </span><br><span class="line">log4j.appender.DATABASE.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n</span><br><span class="line">log4j.appender.A1=org.apache.log4j.DailyRollingFileAppender </span><br><span class="line">log4j.appender.A1.File=SampleMessages.log4j </span><br><span class="line">log4j.appender.A1.DatePattern=yyyyMMdd-HH&apos;.log4j&apos; </span><br><span class="line">log4j.appender.A1.layout=org.apache.log4j.xml.XMLLayout</span><br><span class="line">################### </span><br><span class="line">#自定义Appender </span><br><span class="line">################### </span><br><span class="line">log4j.appender.im = net.cybercorlin.util.logger.appender.IMAppender</span><br><span class="line">log4j.appender.im.host = mail.cybercorlin.net </span><br><span class="line">log4j.appender.im.username = username </span><br><span class="line">log4j.appender.im.password = password </span><br><span class="line">log4j.appender.im.recipient = corlin@yeqiangwei.com</span><br><span class="line">log4j.appender.im.layout=org.apache.log4j.PatternLayout </span><br><span class="line">log4j.appender.im.layout.ConversionPattern =[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n</span><br><span class="line">三.高级使用</span><br><span class="line">实验目的：</span><br><span class="line"> 1.把FATAL级错误写入2000NT日志</span><br><span class="line"> 2. WARN，ERROR，FATAL级错误发送email通知管理员</span><br><span class="line"> 3.其他级别的错误直接在后台输出</span><br><span class="line">实验步骤：</span><br><span class="line"> 输出到2000NT日志</span><br><span class="line"> 1.把Log4j压缩包里的NTEventLogAppender.dll拷到WINNT\SYSTEM32目录下</span><br><span class="line"> 2.写配置文件log4j.properties</span><br><span class="line"># 在2000系统日志输出</span><br><span class="line"> log4j.logger.NTlog=FATAL, A8</span><br><span class="line"> # APPENDER A8</span><br><span class="line"> log4j.appender.A8=org.apache.log4j.nt.NTEventLogAppender</span><br><span class="line"> log4j.appender.A8.Source=JavaTest</span><br><span class="line"> log4j.appender.A8.layout=org.apache.log4j.PatternLayout</span><br><span class="line"> log4j.appender.A8.layout.ConversionPattern=%-4r %-5p [%t] %37c %3x - %m%n</span><br><span class="line">3.调用代码：</span><br><span class="line"> Logger logger2 = Logger.getLogger(&quot;NTlog&quot;); //要和配置文件中设置的名字相同</span><br><span class="line"> logger2.debug(&quot;debug!!!&quot;);</span><br><span class="line"> logger2.info(&quot;info!!!&quot;);</span><br><span class="line"> logger2.warn(&quot;warn!!!&quot;);</span><br><span class="line"> logger2.error(&quot;error!!!&quot;);</span><br><span class="line"> //只有这个错误才会写入2000日志</span><br><span class="line"> logger2.fatal(&quot;fatal!!!&quot;);</span><br><span class="line">发送email通知管理员：</span><br><span class="line"> 1. 首先下载JavaMail和JAF, </span><br><span class="line">    http://java.sun.com/j2ee/ja/javamail/index.html</span><br><span class="line">    http://java.sun.com/beans/glasgow/jaf.html</span><br><span class="line"> 在项目中引用mail.jar和activation.jar。</span><br><span class="line"> 2. 写配置文件</span><br><span class="line"> # 将日志发送到email</span><br><span class="line"> log4j.logger.MailLog=WARN,A5</span><br><span class="line"> #  APPENDER A5</span><br><span class="line"> log4j.appender.A5=org.apache.log4j.net.SMTPAppender</span><br><span class="line"> log4j.appender.A5.BufferSize=5</span><br><span class="line"> log4j.appender.A5.To=chunjie@yeqiangwei.com</span><br><span class="line"> log4j.appender.A5.From=error@yeqiangwei.com</span><br><span class="line"> log4j.appender.A5.Subject=ErrorLog</span><br><span class="line"> log4j.appender.A5.SMTPHost=smtp.263.net</span><br><span class="line"> log4j.appender.A5.layout=org.apache.log4j.PatternLayout</span><br><span class="line"> log4j.appender.A5.layout.ConversionPattern=%-4r %-5p [%t] %37c %3x - %m%n</span><br><span class="line"> 3.调用代码：</span><br><span class="line"> //把日志发送到mail</span><br><span class="line"> Logger logger3 = Logger.getLogger(&quot;MailLog&quot;);</span><br><span class="line"> logger3.warn(&quot;warn!!!&quot;);</span><br><span class="line"> logger3.error(&quot;error!!!&quot;);</span><br><span class="line"> logger3.fatal(&quot;fatal!!!&quot;);</span><br><span class="line">在后台输出所有类别的错误：</span><br><span class="line"> 1. 写配置文件</span><br><span class="line"> # 在后台输出</span><br><span class="line"> log4j.logger.console=DEBUG, A1</span><br><span class="line"> # APPENDER A1</span><br><span class="line"> log4j.appender.A1=org.apache.log4j.ConsoleAppender</span><br><span class="line"> log4j.appender.A1.layout=org.apache.log4j.PatternLayout</span><br><span class="line"> log4j.appender.A1.layout.ConversionPattern=%-4r %-5p [%t] %37c %3x - %m%n</span><br><span class="line"> 2．调用代码</span><br><span class="line"> Logger logger1 = Logger.getLogger(&quot;console&quot;);</span><br><span class="line"> logger1.debug(&quot;debug!!!&quot;);</span><br><span class="line"> logger1.info(&quot;info!!!&quot;);</span><br><span class="line"> logger1.warn(&quot;warn!!!&quot;);</span><br><span class="line"> logger1.error(&quot;error!!!&quot;);</span><br><span class="line"> logger1.fatal(&quot;fatal!!!&quot;);</span><br><span class="line">--------------------------------------------------------------------</span><br><span class="line"> 全部配置文件：log4j.properties</span><br><span class="line"> # 在后台输出</span><br><span class="line"> log4j.logger.console=DEBUG, A1</span><br><span class="line"> # APPENDER A1</span><br><span class="line"> log4j.appender.A1=org.apache.log4j.ConsoleAppender</span><br><span class="line"> log4j.appender.A1.layout=org.apache.log4j.PatternLayout</span><br><span class="line"> log4j.appender.A1.layout.ConversionPattern=%-4r %-5p [%t] %37c %3x - %m%n</span><br><span class="line"># 在2000系统日志输出</span><br><span class="line"> log4j.logger.NTlog=FATAL, A8</span><br><span class="line"> # APPENDER A8</span><br><span class="line"> log4j.appender.A8=org.apache.log4j.nt.NTEventLogAppender</span><br><span class="line"> log4j.appender.A8.Source=JavaTest</span><br><span class="line"> log4j.appender.A8.layout=org.apache.log4j.PatternLayout</span><br><span class="line"> log4j.appender.A8.layout.ConversionPattern=%-4r %-5p [%t] %37c %3x - %m%n</span><br><span class="line"># 将日志发送到email</span><br><span class="line"> log4j.logger.MailLog=WARN,A5</span><br><span class="line"> #  APPENDER A5</span><br><span class="line"> log4j.appender.A5=org.apache.log4j.net.SMTPAppender</span><br><span class="line"> log4j.appender.A5.BufferSize=5</span><br><span class="line"> log4j.appender.A5.To=chunjie@yeqiangwei.com</span><br><span class="line"> log4j.appender.A5.From=error@yeqiangwei.com</span><br><span class="line"> log4j.appender.A5.Subject=ErrorLog</span><br><span class="line"> log4j.appender.A5.SMTPHost=smtp.263.net</span><br><span class="line"> log4j.appender.A5.layout=org.apache.log4j.PatternLayout</span><br><span class="line"> log4j.appender.A5.layout.ConversionPattern=%-4r %-5p [%t] %37c %3x - %m%n</span><br><span class="line">全部代码：Log4jTest.java</span><br><span class="line"></span><br><span class="line">/* </span><br><span class="line">  * 创建日期 2003-11-13 </span><br><span class="line">    */ </span><br><span class="line"> package edu.bcu.Bean; </span><br><span class="line"> import org.apache.log4j.*; </span><br><span class="line"> //import org.apache.log4j.nt.*; </span><br><span class="line"> //import org.apache.log4j.net.*; </span><br><span class="line"> /** </span><br><span class="line">  * @author yanxu </span><br><span class="line">    */ </span><br><span class="line"> public class Log4jTest </span><br><span class="line"> &#123; </span><br><span class="line">    public static void main(String args[]) </span><br><span class="line">    &#123; </span><br><span class="line">      PropertyConfigurator.configure(&quot;log4j.properties&quot;); </span><br><span class="line">      //在后台输出 </span><br><span class="line">      Logger logger1 = Logger.getLogger(&quot;console&quot;); </span><br><span class="line">      logger1.debug(&quot;debug!!!&quot;); </span><br><span class="line">      logger1.info(&quot;info!!!&quot;); </span><br><span class="line">      logger1.warn(&quot;warn!!!&quot;); </span><br><span class="line">      logger1.error(&quot;error!!!&quot;); </span><br><span class="line">      logger1.fatal(&quot;fatal!!!&quot;);</span><br><span class="line">//在NT系统日志输出 </span><br><span class="line">      Logger logger2 = Logger.getLogger(&quot;NTlog&quot;); </span><br><span class="line">      //NTEventLogAppender nla = new NTEventLogAppender(); </span><br><span class="line">      logger2.debug(&quot;debug!!!&quot;); </span><br><span class="line">      logger2.info(&quot;info!!!&quot;); </span><br><span class="line">      logger2.warn(&quot;warn!!!&quot;); </span><br><span class="line">      logger2.error(&quot;error!!!&quot;); </span><br><span class="line">      //只有这个错误才会写入2000日志 </span><br><span class="line">      logger2.fatal(&quot;fatal!!!&quot;);</span><br><span class="line">//把日志发送到mail </span><br><span class="line">      Logger logger3 = Logger.getLogger(&quot;MailLog&quot;); </span><br><span class="line">      //SMTPAppender sa = new SMTPAppender(); </span><br><span class="line">      logger3.warn(&quot;warn!!!&quot;); </span><br><span class="line">      logger3.error(&quot;error!!!&quot;); </span><br><span class="line">      logger3.fatal(&quot;fatal!!!&quot;); </span><br><span class="line">    &#125; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>MyBatis</title>
-    <url>/2018/11/09/mybatis/</url>
-    <content><![CDATA[<h2 id="参考-MyBatis-3-User-Guide-Simplified-Chinese-pdf"><a href="#参考-MyBatis-3-User-Guide-Simplified-Chinese-pdf" class="headerlink" title="参考[MyBatis-3-User-Guide-Simplified-Chinese.pdf]"></a><a href="https://github.com/abel533/Mapper" target="_blank" rel="noopener">参考</a>[MyBatis-3-User-Guide-Simplified-Chinese.pdf]</h2><a id="more"></a>
-<h2 id="1-入门"><a href="#1-入门" class="headerlink" title="1. 入门"></a>1. 入门</h2><ul>
-<li>什么是MyBatis</li>
-<li>MyBatis基本配置：config, mapper</li>
-</ul>
-<h2 id="2-列名与参数不一致"><a href="#2-列名与参数不一致" class="headerlink" title="2. 列名与参数不一致"></a>2. 列名与参数不一致</h2><ul>
-<li>SQL方式：别名</li>
-<li>MyBatis方式：ResultMap<ul>
-<li>强制标签顺序</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-和-的区别"><a href="#3-和-的区别" class="headerlink" title="3. #和$的区别"></a>3. #和$的区别</h2><ul>
-<li><code>#</code> 预编译 自动转义 防止SQL注入 eg. name -&gt; ‘name’ 用于赋值 使用参数名取值 eg. #{name}</li>
-<li><code>$</code> 拼接字符串 用于传递表名，ORDER BY，GROUP BY 使用value或属性取值 eg. ${value}</li>
-</ul>
-<h2 id="4-多参传递"><a href="#4-多参传递" class="headerlink" title="4. 多参传递"></a>4. 多参传递</h2><ul>
-<li>索引 eg. #{0}</li>
-<li>注解 eg. @Param(value = “fieldName”)</li>
-<li>Map</li>
-</ul>
-<h2 id="5-获取数据库生成ID"><a href="#5-获取数据库生成ID" class="headerlink" title="5. 获取数据库生成ID"></a>5. 获取数据库生成ID</h2><ul>
-<li>Mapper配置 <code>&lt;insert useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;/&gt;</code></li>
-<li>Config配置 <code>&lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;true&quot;/&gt;</code></li>
-<li>数据库不支持自动生成类型 <code>&lt;selectKey keyProperty=&quot;id&quot; resultType=&quot;int&quot; order=&quot;AFTER&quot;/&gt;</code></li>
-</ul>
-<h2 id="6-动态SQL"><a href="#6-动态SQL" class="headerlink" title="6. 动态SQL"></a>6. 动态SQL</h2><ul>
-<li><code>&lt;if test=&quot;value != null and value != &#39;&#39;&quot;/&gt;</code></li>
-<li>choose when otherwise</li>
-<li>where set trim</li>
-<li>sql</li>
-</ul>
-<h2 id="7-MyBatis-Generator"><a href="#7-MyBatis-Generator" class="headerlink" title="7. MyBatis Generator"></a>7. <a href="http://www.mybatis.org/generator/" target="_blank" rel="noopener">MyBatis Generator</a></h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- generatorConfig.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">generatorConfiguration</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">"testTables"</span> <span class="attr">targetRuntime</span>=<span class="string">"MyBatis3"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--序列化model--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;plugin type="org.mybatis.generator.plugins.SerializablePlugin"/&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--是否去除自动生成的注释 true：是 false：否--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suppressAllComments"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--数据库连接信息--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">"com.mysql.jdbc.Driver"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">"jdbc:mysql://localhost:3306/world"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">"root"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">"toor"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;jdbcConnection driverClass="oracle.jdbc.OracleDriver" --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--connectionURL="jdbc:oracle:thin:@localhost:1521:DB_NAME" --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--userId="scott" --&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--password="tiger"/&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 </span></span><br><span class="line"><span class="comment">			NUMERIC 类型解析为java.math.BigDecimal --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"forceBigDecimals"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaTypeResolver</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:生成PO类的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"name.mybatis.pojo"</span></span></span><br><span class="line"><span class="tag">                            <span class="attr">targetProject</span>=<span class="string">".\src"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"trimStrings"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaModelGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetProject:mapper映射文件生成的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">"name.mybatis.pojo"</span></span></span><br><span class="line"><span class="tag">                         <span class="attr">targetProject</span>=<span class="string">".\src"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sqlMapGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- targetPackage：mapper接口生成的位置 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">"XMLMAPPER"</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetPackage</span>=<span class="string">"name.mybatis.mapper"</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetProject</span>=<span class="string">".\src"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"enableSubPackages"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">javaClientGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定数据库表 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">"city"</span> <span class="attr">domainObjectName</span>=<span class="string">"City"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">"country"</span> <span class="attr">domainObjectName</span>=<span class="string">"Country"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">"countrylanguage"</span> <span class="attr">domainObjectName</span>=<span class="string">"CountryLanguage"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer"&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;property name="useActualColumnNames" value="true"/&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;generatedKey column="ID" sqlStatement="DB2" identity="true"/&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;columnOverride column="DATE_FIELD" property="startDate"/&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;ignoreColumn column="FRED"/&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR"/&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;/table&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 有些表的字段需要指定java类型</span></span><br><span class="line"><span class="comment">         &lt;table schema="" tableName=""&gt;</span></span><br><span class="line"><span class="comment">            &lt;columnOverride column="" javaType="" /&gt;</span></span><br><span class="line"><span class="comment">        &lt;/table&gt; --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- pom.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configurationFile</span>&gt;</span>$&#123;basedir&#125;/src/main/resources/generatorConfig.xml<span class="tag">&lt;/<span class="name">configurationFile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">overwrite</span>&gt;</span>false<span class="tag">&lt;/<span class="name">overwrite</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">verbose</span>&gt;</span>true<span class="tag">&lt;/<span class="name">verbose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mysql.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="8-缓存"><a href="#8-缓存" class="headerlink" title="8. 缓存"></a>8. 缓存</h2><ul>
-<li>默认开启局部session缓存</li>
-<li>映射语句文件中的所有insert，update和delete语句会刷新缓存</li>
-<li>开启二级缓存（表级缓存）在mapper设置<code>&lt;cache/&gt;</code>实体必须实现Serializable</li>
-</ul>
-<h2 id="9-嵌套查询"><a href="#9-嵌套查询" class="headerlink" title="9. 嵌套查询"></a>9. 嵌套查询</h2><ul>
-<li>多级单表查询<ul>
-<li><code>&lt;association select=&quot;&quot;/&gt;</code></li>
-<li><code>&lt;collection select=&quot;&quot;/&gt;</code></li>
-</ul>
-</li>
-<li>关联查询</li>
-</ul>
-<h2 id="10-延迟加载"><a href="#10-延迟加载" class="headerlink" title="10. 延迟加载"></a>10. 延迟加载</h2><ul>
-<li>参考MyBatis配置<code>&lt;settings/&gt;</code></li>
-</ul>
-<h2 id="11-TK-MyBatis插件"><a href="#11-TK-MyBatis插件" class="headerlink" title="11. TK MyBatis插件"></a>11. <a href="https://github.com/abel533/Mapper" target="_blank" rel="noopener">TK MyBatis插件</a></h2><ul>
-<li><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mybatis-generator-core.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configurationFile</span>&gt;</span>$&#123;basedir&#125;/src/main/resources/generator/generatorConfig.xml<span class="tag">&lt;/<span class="name">configurationFile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">overwrite</span>&gt;</span>false<span class="tag">&lt;/<span class="name">overwrite</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">verbose</span>&gt;</span>true<span class="tag">&lt;/<span class="name">verbose</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mysql-connector-java.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>tk.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mapper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;mapper.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用 Configuration 方式进行配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"mybatisConfig"</span> <span class="attr">class</span>=<span class="string">"tk.mybatis.mapper.session.Configuration"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置通用 Mapper，有三种属性注入方式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperProperties"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span></span><br><span class="line">            notEmpty=true</span><br><span class="line">        <span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configuration"</span> <span class="attr">ref</span>=<span class="string">"mybatisConfig"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 不需要考虑下面这个，注意这里是 org 的 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperScannerConfigurer"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"basePackage"</span> <span class="attr">value</span>=<span class="string">"tk.mybatis.mapper.configuration"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactoryBeanName"</span> <span class="attr">value</span>=<span class="string">"sqlSessionFactory"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>最小侵入式配置</p>
-</li>
-<li><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MyMapper</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">T</span>&gt;, <span class="title">MySqlMapper</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">    <span class="comment">//FIXME 特别注意，该接口不能被扫描到，否则会出错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> top.shieh.my.shop.commons.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.IntrospectedColumn;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.IntrospectedTable;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.PluginAdapter;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.dom.java.Method;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.dom.java.TopLevelClass;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LombokPlugin</span> <span class="keyword">extends</span> <span class="title">PluginAdapter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> FullyQualifiedJavaType dataAnnotation = <span class="keyword">new</span> FullyQualifiedJavaType(<span class="string">"lombok.Data"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validate</span><span class="params">(List&lt;String&gt; warnings)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">modelBaseRecordClassGenerated</span><span class="params">(TopLevelClass topLevelClass, IntrospectedTable introspectedTable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.addDataAnnotation(topLevelClass);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">modelPrimaryKeyClassGenerated</span><span class="params">(TopLevelClass topLevelClass, IntrospectedTable introspectedTable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.addDataAnnotation(topLevelClass);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">modelRecordWithBLOBsClassGenerated</span><span class="params">(TopLevelClass topLevelClass, IntrospectedTable introspectedTable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.addDataAnnotation(topLevelClass);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">modelGetterMethodGenerated</span><span class="params">(Method method, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">modelSetterMethodGenerated</span><span class="params">(Method method, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addDataAnnotation</span><span class="params">(TopLevelClass topLevelClass)</span> </span>&#123;</span><br><span class="line">        topLevelClass.addImportedType(<span class="keyword">this</span>.dataAnnotation);</span><br><span class="line">        topLevelClass.addAnnotation(<span class="string">"@Data"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将 <code>org.mybatis.spring.mapper.MapperScannerConfigurer</code> 改为 <code>tk.mybatis.spring.mapper.MapperScannerConfigurer</code></p>
-</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>oh-my-zsh</title>
     <url>/2020/02/27/oh-my-zsh/</url>
     <content><![CDATA[<p><code>Oh My Zsh</code> 是一个令人愉悦的，开源的，社区驱动的框架，用于管理您的 <code>Zsh</code> 配置。它捆绑了成千上万的有用功能，助手，插件，主题以及一些让您大喊大叫的东西…</p>
+<p>毕竟一切向颜值看起，OMZ 的颜值绝对算得上能打的那一种。</p>
 <a id="more"></a>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get install -y zsh</span><br><span class="line">sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</span><br></pre></td></tr></table></figure>
 <p>配置文件保存在 <code>~/.zshrc</code></p>
@@ -947,54 +588,26 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Shiro</title>
-    <url>/2018/10/09/shiro/</url>
-    <content><![CDATA[<h2 id="参考Apache-Shiro-Reference-Documentation"><a href="#参考Apache-Shiro-Reference-Documentation" class="headerlink" title="参考Apache Shiro Reference Documentation"></a><em>参考</em><a href="https://shiro.apache.org/reference.html#apache-shiro-reference-documentation" target="_blank" rel="noopener">Apache Shiro Reference Documentation</a></h2><a id="more"></a>
-<h2 id="1-QuickStart"><a href="#1-QuickStart" class="headerlink" title="1. QuickStart"></a>1. QuickStart</h2><p>Apache Shiro是一个具有许多功能的综合应用程序安全框架。</p>
-<p><img src="https://shiro.apache.org/assets/images/ShiroFeatures.png" alt="img"></p>
-<p>Shiro针对Shiro开发团队所称的“应用程序安全的四大基石” - 身份验证，授权，会话管理和加密：</p>
-<ul>
-<li><strong>Authentication：</strong>有时也称为“登录”，这是证明用户是他们所说的人的行为。</li>
-<li><strong>Authorization：</strong>访问控制的过程，即确定“谁”可以访问“什么”。</li>
-<li><strong>Session Management：</strong>即使在非Web或EJB应用程序中，也可以管理特定于用户的会话。</li>
-<li><strong>Cryptography：</strong>使用加密算法保持数据安全，同时仍然易于使用。</li>
-</ul>
-<p>在不同的应用程序环境中还有其他功能可以支持和强化这些问题，尤其是：</p>
-<ul>
-<li>Web支持：Shiro的Web支持API可帮助轻松保护Web应用程序。</li>
-<li>缓存：缓存是Apache Shiro API中的第一层公民，可确保安全操作保持快速高效。</li>
-<li>并发：Apache Shiro支持具有并发功能的多线程应用程序。</li>
-<li>测试：存在测试支持以帮助您编写单元和集成测试，并确保您的代码按预期受到保护。</li>
-<li>“运行方式”：允许用户假定其他用户的身份（如果允许）的功能，有时在管理方案中很有用。</li>
-<li>“记住我”：记住用户在会话中的身份，这样他们只需要在强制要求时登录。</li>
-</ul>
-<h2 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h2>]]></content>
-  </entry>
-  <entry>
     <title>ssh免密登录</title>
     <url>/2020/03/25/ssh-login-without-password/</url>
     <content><![CDATA[<ul>
-<li><p>使用 <code>ssh-keygen</code> 生成密钥对</p>
-<p><code>ssh-keygen -o -t rsa -b 4096 -C &quot;email@example.com&quot;</code></p>
-</li>
-<li><p>使用 <code>ssh-copy-id</code> 将公钥发送至目标主机</p>
-</li>
+<li>使用 <code>ssh-keygen</code> 生成密钥对</li>
 </ul>
-<blockquote>
-<p> <code>ssh-copy-id -i ~/.ssh/id_rsa.pub user@host</code></p>
-</blockquote>
-<p>  <code>ssh-keygen -t ed25519 -C &quot;your_email@example.com&quot;</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> ssh-keygen -o -t rsa -b 4096 -C "your_email@example.com"</span><br><span class="line"><span class="meta">#</span> ed25519 加密算法运算速度更快</span><br><span class="line">ssh-keygen -t ed25519 -C "your_email@example.com"</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>使用 <code>ssh</code> 免密登录</p>
-<p><code>ssh user@host</code></p>
-</li>
+<li>使用 <code>ssh-copy-id</code> 将公钥发送至目标主机</li>
 </ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>ssh</code> 免密登录</li>
+</ul>
+<p><code>ssh user@host</code></p>
 ]]></content>
   </entry>
   <entry>
     <title>Typora和图床</title>
     <url>/2022/12/20/typora-and-image/</url>
-    <content><![CDATA[<h1 id="Typora的图床设置"><a href="#Typora的图床设置" class="headerlink" title="Typora的图床设置"></a>Typora的图床设置</h1><p>在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。</p>
+    <content><![CDATA[<p>在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。</p>
 <a id="more"></a>
 <p>Typora 不用过多介绍，一个非常漂亮的 Markdown 编辑器，支持多种主题，总有一款适合你，使用这个编辑器的时候会觉得写 Markdown 会是一种享受。但是只要是工具就会有这样或那样的痛点，比如说自 1.0 版本之后的 Typora 终于进入了收费模式，这让很多白嫖党十分痛心（包括我），而且低于 1.0 版本的 Typora 会强制检测当前是否为付费版本，非付费版本会禁止用户使用。当然本文说的问题并不是这个，但是这并不妨碍我们吐槽一番。</p>
 <h2 id="Typora-图片上传服务"><a href="#Typora-图片上传服务" class="headerlink" title="Typora 图片上传服务"></a>Typora 图片上传服务</h2><p>Typora 十分贴心的提供了图片上传服务，并提供了默认客户端：</p>
@@ -1039,27 +652,11 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</span><br><span class="line">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</span><br><span class="line">plugins=(其他的插件 zsh-autosuggestions zsh-syntax-highlighting)</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>前端框架</title>
-    <url>/2018/11/14/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<ul>
-<li><a href="http://funtl.com/2018/06/17/appose/jQuery-Validation/" target="_blank" rel="noopener">jQuery Validation 表单验证插件</a></li>
-<li><a href="http://funtl.com/2018/06/18/appose/jQuery-iCheck/" target="_blank" rel="noopener">jQuery iCheck 复选/单选美化插件</a></li>
-<li><a href="http://funtl.com/2018/06/21/appose/jQuery-Datatables/" target="_blank" rel="noopener">jQuery Datatables 表格插件</a></li>
-<li><a href="http://funtl.com/2018/06/25/appose/jQuery-TreeTable/" target="_blank" rel="noopener">jQuery TreeTable 树表格插件</a></li>
-<li><a href="http://funtl.com/2018/06/25/appose/jQuery-zTree/" target="_blank" rel="noopener">jQuery zTree 树形结构插件</a></li>
-<li><a href="http://funtl.com/2018/06/27/appose/Dropzone-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6/" target="_blank" rel="noopener">Dropzone 图片上传插件</a></li>
-<li><a href="http://funtl.com/2018/06/28/appose/wangEditor-%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/" target="_blank" rel="noopener">wangEditor 富文本编辑器</a></li>
-</ul>
-<p><strong>SiteMesh</strong>： 是一个Web页面布局、装饰以及与现有Web应用整合的框架。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>动态代理</title>
     <url>/2018/11/14/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><a id="more"></a>
-<hr>
-<p>所谓动态代理，即通过代理类：Proxy的代理，接口和实现类之间可以不直接发生联系，而可以在运行期（Runtime）实现动态关联。</p>
+    <content><![CDATA[<p>所谓动态代理，即通过代理类：Proxy的代理，接口和实现类之间可以不直接发生联系，而可以在运行期（Runtime）实现动态关联。</p>
 <p>java动态代理主要是使用 <code>java.lang.reflect</code> 包中的两个类。</p>
+<a id="more"></a>
 <p><strong>InvocationHandler类</strong></p>
 <ul>
 <li><code>public Object invoke(Object proxy, Method method, Object[] args) throws Throwable</code></li>
@@ -1089,8 +686,8 @@
   <entry>
     <title>单例设计模式优化</title>
     <url>/2018/07/10/%E5%8D%95%E4%BE%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<h2 id="单例设计模式优化"><a href="#单例设计模式优化" class="headerlink" title="单例设计模式优化"></a>单例设计模式优化</h2><a id="more"></a>
-<hr>
+    <content><![CDATA[<p>单例设计模式优化</p>
+<a id="more"></a>
 <ul>
 <li>使用同步保证线程安全synchronized</li>
 <li>使用volatile关键字<ul>
@@ -1103,145 +700,10 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单例模式</span></span><br><span class="line"><span class="comment"> * 1. 多线程访问的安全问题</span></span><br><span class="line"><span class="comment"> * 2. 加上volatile关键字保证变量的一致性</span></span><br><span class="line"><span class="comment"> * 3. 防止反射调用私有构造方法</span></span><br><span class="line"><span class="comment"> * 4. 让单例类可以被序列化</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton INSTANCE = <span class="keyword">null</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (INSTANCE != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Singleton that has been instantiated."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    INSTANCE = <span class="keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>字节码工具javap</title>
-    <url>/2018/10/25/%E5%AD%97%E8%8A%82%E7%A0%81%E5%B7%A5%E5%85%B7javap/</url>
-    <content><![CDATA[<h1 id="javap命令详解"><a href="#javap命令详解" class="headerlink" title="javap命令详解"></a><a href="https://blog.csdn.net/zhaozheng7758/article/details/8623526" target="_blank" rel="noopener">javap命令详解</a></h1><a id="more"></a>
-<p>javap是JDK自带的反汇编器，可以查看java编译器为我们生成的字节码。通过它，可以对照源代码和字节码，从而了解很多编译器内部的工作。可以在命令行窗口先用javap -help看下javap工具支持的选项：C:>javap -help </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">C:\&gt;javap -help</span><br><span class="line"></span><br><span class="line">Usage: javap &lt;options&gt; &lt;classes&gt;...</span><br><span class="line"></span><br><span class="line">where options include:</span><br><span class="line"></span><br><span class="line">   -c                      输出类中各方法的未解析的代码，即构成java字节码的指令</span><br><span class="line"></span><br><span class="line">   -classpath &lt;pathlist&gt;       指定javap用来查找类的路径。目录用：分隔</span><br><span class="line"></span><br><span class="line">   -extdirs &lt;dirs&gt;             覆盖搜索安装方式扩展的位置，扩展的缺省位置为jre/lib/ext</span><br><span class="line"></span><br><span class="line">   -help                    输出帮助信息</span><br><span class="line"></span><br><span class="line">   -J&lt;flag&gt;                  直接将flag传给运行时系统</span><br><span class="line"></span><br><span class="line">   -l                       输出行及局部变量表</span><br><span class="line"></span><br><span class="line">   -public                   只显示public类及成员</span><br><span class="line"></span><br><span class="line">   -protected                只显示protected和public类及成员。</span><br><span class="line"></span><br><span class="line">   -package                 只显示包、protected和public类及成员，，这是缺省设置</span><br><span class="line"></span><br><span class="line">   -private                  显示所有的类和成员</span><br><span class="line"></span><br><span class="line">   -s                        输出内部类型签名</span><br><span class="line"></span><br><span class="line">   -bootclasspath &lt;pathlist&gt;    指定加载自举类所用的路径，如jre/lib/rt.jar或i18n.jar</span><br><span class="line"></span><br><span class="line">   -verbose                 打印堆栈大小、各方法的locals及args参数，以及class文件的编译版本</span><br></pre></td></tr></table></figure>
-<p>平时一般用-c选项用得比较多，该命令用于列出每个方法所执行的JVM指令，并显示每个方法的字节码的实际作用。可以写个HelloWorld的程序来测试一下该命令。 </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">           System.out.println(<span class="string">"Hello World!"</span>);</span><br><span class="line">    </span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在将该java类编译生成HelloWorld.class文件后，即可通过javap进行具体的反编译分析。如：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span> javap -cHelloWorld</span><br><span class="line"></span><br><span class="line">Compiled from "HelloWorld.java"</span><br><span class="line"></span><br><span class="line">public class HelloWorld extends java.lang.Object&#123;</span><br><span class="line"></span><br><span class="line">public HelloWorld();</span><br><span class="line"></span><br><span class="line">  Code:</span><br><span class="line"></span><br><span class="line">   0:   aload_0</span><br><span class="line"></span><br><span class="line">   1:   invokespecial   #1; //Method java/lang/Object."&lt;init&gt;":()V</span><br><span class="line"></span><br><span class="line">   4:   return</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(java.lang.String[])</span></span>;</span><br><span class="line"></span><br><span class="line">  Code:</span><br><span class="line"></span><br><span class="line">   0:   getstatic       #2; //Field java/lang/System.out:Ljava/io/PrintStream;</span><br><span class="line"></span><br><span class="line">   3:   ldc     #3; //String Hello World!</span><br><span class="line"></span><br><span class="line">   5:   invokevirtual   #4; //Method java/io/PrintStream.println:(Ljava/lang/String;)V</span><br><span class="line"></span><br><span class="line">   <span class="number">8</span>:   <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>为了能够更清晰的了解javap反编译生成的字节码，下面来分析main方法中的指令,vcb用于转换Java语言中的代码行System.out.println(“HelloWorld!”);</p>
-<p><code>0:   getstatic       #2; //Fieldjava/lang/System.out:Ljava/io/PrintStream;</code></p>
-<p>最初始的整数表示方法中指令的偏移量，因此第一个指令是从0开始的。它表示的是从java.lang.system对象的out字段中检索PrintStream对象，getstatic指令即是将该静态域压缩并放到操作数栈中。按下来的指令则是引用一个地址，在当前情况下，指的是“#2;//Field java/lang/System.out:Ljava/io/PrintStream;”。在此你将会发现该域信息并没有直接嵌入进来。相反它是通过类似java类中的其它常量一样，该域信息被存储在一个共享池中。采用该常量池的方式能够减小字节码指令的长度。这也就是为什么指令中仅仅保存常量池的地址索引，而非所有的信息。在本示例中，域信息被存放在常量池中标识有#2的位置。</p>
-<p><code>3:   ldc    #3; //String Hello World!</code></p>
-<p>其实分析完第一条指令后，将非常容易的猜测到第二条指令的具体含义了。ldc(load constant)指令用于将HelloWorld！字符串压入至栈中。</p>
-<p><code>5:   invokevirtual   #4; //Method java/io/PrintStream.println:(Ljava/lang/String;)V</code></p>
-<p>该指令将调用println方法，它将从操作栈中弹出两个参数。千成别忘记了象println这样的实例方法其实是包含了两个参数的，一个是字符串，另一个是隐式的this索引。</p>
-<p>上面的minor version: 0和majorversion: 49就是编译Worke.class时使用的jdk编译版本号。</p>
-<p>但是它并不是我们所熟悉的jdk版本号（比如jdk1.5）。</p>
-<p>不过我们可以把从 JDK 1.1 到 JDK 1.7 编译器编译出的 class 的默认minor.major version 汇总下就知道对应关系了。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">JDK 编译器版本</th>
-<th style="text-align:center">target 参数</th>
-<th style="text-align:center">十六进制 minor.major</th>
-<th style="text-align:center">十进制 minor.major</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">jdk1.1.8</td>
-<td style="text-align:center">不能带 target 参数</td>
-<td style="text-align:center">00 03 00 2D</td>
-<td style="text-align:center">45.3</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.2.2</td>
-<td style="text-align:center">不带(默认为 -target 1.1)</td>
-<td style="text-align:center">00 03 00 2D</td>
-<td style="text-align:center">45.3</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.2.2</td>
-<td style="text-align:center">-target 1.2</td>
-<td style="text-align:center">00 00 00 2E</td>
-<td style="text-align:center">46.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.3.1_19</td>
-<td style="text-align:center">不带(默认为 -target 1.1)</td>
-<td style="text-align:center">00 03 00 2D</td>
-<td style="text-align:center">45.3</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.3.1_19</td>
-<td style="text-align:center">-target 1.3</td>
-<td style="text-align:center">00 00 00 2F</td>
-<td style="text-align:center">47.0</td>
-</tr>
-<tr>
-<td style="text-align:center">j2sdk1.4.2_10</td>
-<td style="text-align:center">不带(默认为 -target 1.2)</td>
-<td style="text-align:center">00 00 00 2E</td>
-<td style="text-align:center">46.0</td>
-</tr>
-<tr>
-<td style="text-align:center">j2sdk1.4.2_10</td>
-<td style="text-align:center">-target 1.4</td>
-<td style="text-align:center">00 00 00 30</td>
-<td style="text-align:center">48.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.5.0_11</td>
-<td style="text-align:center">不带(默认为 -target 1.5)</td>
-<td style="text-align:center">00 00 00 31</td>
-<td style="text-align:center">49.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.5.0_11</td>
-<td style="text-align:center">-target 1.4 -source 1.4</td>
-<td style="text-align:center">00 00 00 30</td>
-<td style="text-align:center">48.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.6.0_01</td>
-<td style="text-align:center">不带(默认为 -target 1.6)</td>
-<td style="text-align:center">00 00 00 32</td>
-<td style="text-align:center">50.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.6.0_01</td>
-<td style="text-align:center">-target 1.5</td>
-<td style="text-align:center">00 00 00 31</td>
-<td style="text-align:center">49.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.6.0_01</td>
-<td style="text-align:center">-target 1.4 -source 1.4</td>
-<td style="text-align:center">00 00 00 30</td>
-<td style="text-align:center">48.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.7.0</td>
-<td style="text-align:center">不带(默认为 -target 1.6)</td>
-<td style="text-align:center">00 00 00 32</td>
-<td style="text-align:center">50.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.7.0</td>
-<td style="text-align:center">-target 1.7</td>
-<td style="text-align:center">00 00 00 33</td>
-<td style="text-align:center">51.0</td>
-</tr>
-<tr>
-<td style="text-align:center">jdk1.7.0</td>
-<td style="text-align:center">-target 1.4 -source 1.4</td>
-<td style="text-align:center">00 00 00 30</td>
-<td style="text-align:center">48.0</td>
-</tr>
-<tr>
-<td style="text-align:center">Apache Harmony 5.0M3</td>
-<td style="text-align:center">不带(默认为 -target 1.2)</td>
-<td style="text-align:center">00 00 00 2E</td>
-<td style="text-align:center">46.0</td>
-</tr>
-<tr>
-<td style="text-align:center">Apache Harmony 5.0M3</td>
-<td style="text-align:center">-target 1.4</td>
-<td style="text-align:center">00 00 00 30</td>
-<td style="text-align:center">48.0</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-  </entry>
-  <entry>
     <title>常见的Content-Type</title>
     <url>/2018/11/13/%E5%B8%B8%E8%A7%81%E7%9A%84Content-Type/</url>
-    <content><![CDATA[<h1 id="常见的Content-Type属性"><a href="#常见的Content-Type属性" class="headerlink" title="常见的Content-Type属性"></a>常见的Content-Type属性</h1><a id="more"></a>
+    <content><![CDATA[<p>一些常见的Content-Type属性</p>
+<a id="more"></a>
 <h2 id="x-www-form-urlencoded"><a href="#x-www-form-urlencoded" class="headerlink" title="x-www-form-urlencoded"></a>x-www-form-urlencoded</h2><p>最常见的 <code>POST</code> 上传数据方式，浏览器原生表单如果不设置 <code>enctype</code> 就会以此种方式提交数据，需要上传的数据会以 <code>key=value</code> 的格式进行编码，随后进行 <code>url</code> 转码。</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">http://www.example.com</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded;charset=utf-8</span><br><span class="line"></span><br><span class="line">title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3</span><br></pre></td></tr></table></figure>
 <p>在使用 <code>Ajax</code> 提交数据是，也是使用这种方式。</p>
@@ -1254,27 +716,10 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Java线程生命周期</title>
-    <url>/2018/11/13/%E7%BA%BF%E7%A8%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
-    <content><![CDATA[<h1 id="Java线程生命周期"><a href="#Java线程生命周期" class="headerlink" title="Java线程生命周期"></a>Java线程生命周期</h1><a id="more"></a>
-<p><a href="https://zh.wikipedia.org/zh-hans/%E7%BA%BF%E7%A8%8B" target="_blank" rel="noopener">线程</a>是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并行多个线程，每条线程并行执行不同的任务。</p>
-<p>在多核或多CPU，或支持Hyper-threading的CPU上使用多线程程序设计的好处是显而易见，即提高了程序的执行吞吐率。在单CPU单核的计算机上，使用多线程技术，也可以把进程中负责I/O处理、人机交互而常被阻塞的部分与密集计算的部分分开来执行，编写专门的workhorse线程执行密集计算，从而提高了程序的执行效率。</p>
-<h2 id="线程的基本状态"><a href="#线程的基本状态" class="headerlink" title="线程的基本状态"></a>线程的基本状态</h2><p>在Thread类中存在着一个内部类Thread.State，它描述着Java中线程的六种状态</p>
-<ul>
-<li>NEW<br>A thread that has not yet started is in this state.</li>
-<li>RUNNABLE<br>A thread executing in the Java virtual machine is in this state.</li>
-<li>BLOCKED<br>A thread that is blocked waiting for a monitor lock is in this state.</li>
-<li>WAITING<br>A thread that is waiting indefinitely for another thread to perform a particular action is in this state.</li>
-<li>TIMED_WAITING<br>A thread that is waiting for another thread to perform an action for up to a specified waiting time is in this state.</li>
-<li>TERMINATED<br>A thread that has exited is in this state.</li>
-</ul>
-<p>线程在给定时间点只能处于一种状态。这些状态是虚拟机状态，不反映任何操作系统线程状态。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>自定义注解</title>
     <url>/2018/10/25/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><a id="more"></a>
+    <content><![CDATA[<p>使用自定义注解时的一些元注解。</p>
+<a id="more"></a>
 <h3 id="mate-annotation"><a href="#mate-annotation" class="headerlink" title="mate-annotation"></a>mate-annotation</h3><p>元注解是提供给注解的注解。Java5.0定义了4个标准的 meta-annotation 类型，它们被用来提供对其它 annotation 类型作说明。Java5.0 定义的元注解：</p>
 <ul>
 <li><code>@Target</code></li>

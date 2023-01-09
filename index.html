@@ -201,7 +201,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Typora的图床设置"><a href="#Typora的图床设置" class="headerlink" title="Typora的图床设置"></a>Typora的图床设置</h1><p>在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。</p>
+          <p>在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/12/20/typora-and-image/#more" rel="contents">
@@ -327,7 +327,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>kms激活密钥</p>
+          <p>简单记录一下为虚拟机激活的kms密钥</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/02/08/kms激活/#more" rel="contents">
@@ -336,66 +336,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2021/01/08/Linux下磁盘常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/08/Linux下磁盘常用命令/" class="post-title-link" itemprop="url">Linux下磁盘常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-08 17:57:49" itemprop="dateCreated datePublished" datetime="2021-01-08T17:57:49+08:00">2021-01-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Linux下磁盘常用命令"><a href="#Linux下磁盘常用命令" class="headerlink" title="Linux下磁盘常用命令"></a>Linux下磁盘常用命令</h1><p>df 报告文件系统磁盘空间使用情况</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df [OPTION]... [FILE]...</span><br></pre></td></tr></table></figure>
-<p>fdisk</p>
-
       
     </div>
 
@@ -453,21 +393,17 @@
 
       
           <ul>
-<li><p>使用 <code>ssh-keygen</code> 生成密钥对</p>
-<p><code>ssh-keygen -o -t rsa -b 4096 -C &quot;email@example.com&quot;</code></p>
-</li>
-<li><p>使用 <code>ssh-copy-id</code> 将公钥发送至目标主机</p>
-</li>
+<li>使用 <code>ssh-keygen</code> 生成密钥对</li>
 </ul>
-<blockquote>
-<p> <code>ssh-copy-id -i ~/.ssh/id_rsa.pub user@host</code></p>
-</blockquote>
-<p>  <code>ssh-keygen -t ed25519 -C &quot;your_email@example.com&quot;</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> ssh-keygen -o -t rsa -b 4096 -C "your_email@example.com"</span><br><span class="line"><span class="meta">#</span> ed25519 加密算法运算速度更快</span><br><span class="line">ssh-keygen -t ed25519 -C "your_email@example.com"</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>使用 <code>ssh</code> 免密登录</p>
-<p><code>ssh user@host</code></p>
-</li>
+<li>使用 <code>ssh-copy-id</code> 将公钥发送至目标主机</li>
 </ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>ssh</code> 免密登录</li>
+</ul>
+<p><code>ssh user@host</code></p>
 
       
     </div>
@@ -526,6 +462,7 @@
 
       
           <p><code>Oh My Zsh</code> 是一个令人愉悦的，开源的，社区驱动的框架，用于管理您的 <code>Zsh</code> 配置。它捆绑了成千上万的有用功能，助手，插件，主题以及一些让您大喊大叫的东西…</p>
+<p>毕竟一切向颜值看起，OMZ 的颜值绝对算得上能打的那一种。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/27/oh-my-zsh/#more" rel="contents">
@@ -626,73 +563,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/11/14/前端框架/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/14/前端框架/" class="post-title-link" itemprop="url">前端框架</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-14 14:36:00" itemprop="dateCreated datePublished" datetime="2018-11-14T14:36:00+08:00">2018-11-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="http://funtl.com/2018/06/17/appose/jQuery-Validation/" target="_blank" rel="noopener">jQuery Validation 表单验证插件</a></li>
-<li><a href="http://funtl.com/2018/06/18/appose/jQuery-iCheck/" target="_blank" rel="noopener">jQuery iCheck 复选/单选美化插件</a></li>
-<li><a href="http://funtl.com/2018/06/21/appose/jQuery-Datatables/" target="_blank" rel="noopener">jQuery Datatables 表格插件</a></li>
-<li><a href="http://funtl.com/2018/06/25/appose/jQuery-TreeTable/" target="_blank" rel="noopener">jQuery TreeTable 树表格插件</a></li>
-<li><a href="http://funtl.com/2018/06/25/appose/jQuery-zTree/" target="_blank" rel="noopener">jQuery zTree 树形结构插件</a></li>
-<li><a href="http://funtl.com/2018/06/27/appose/Dropzone-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6/" target="_blank" rel="noopener">Dropzone 图片上传插件</a></li>
-<li><a href="http://funtl.com/2018/06/28/appose/wangEditor-%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/" target="_blank" rel="noopener">wangEditor 富文本编辑器</a></li>
-</ul>
-<p><strong>SiteMesh</strong>： 是一个Web页面布局、装饰以及与现有Web应用整合的框架。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/11/14/动态代理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -731,7 +601,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2>
+          <p>所谓动态代理，即通过代理类：Proxy的代理，接口和实现类之间可以不直接发生联系，而可以在运行期（Runtime）实现动态关联。</p>
+<p>java动态代理主要是使用 <code>java.lang.reflect</code> 包中的两个类。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/14/动态代理/#more" rel="contents">
@@ -805,7 +676,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Dropzone-图片上传插件"><a href="#Dropzone-图片上传插件" class="headerlink" title="Dropzone 图片上传插件"></a>Dropzone 图片上传插件</h1><h2 id="Dropzone-简介"><a href="#Dropzone-简介" class="headerlink" title="Dropzone 简介"></a>Dropzone 简介</h2><p>Dropzone 是一个开源的 JavaScript 库，提供文件的异步上传功能，并支持拖拽上传功能</p>
+          <p>Dropzone 是一个开源的 JavaScript 库，提供文件的异步上传功能，并支持拖拽上传功能</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/13/Dropzone 图片上传插件/#more" rel="contents">
@@ -828,10 +699,146 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/11/13/常见的Content-Type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/13/常见的Content-Type/" class="post-title-link" itemprop="url">常见的Content-Type</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-13 10:43:00" itemprop="dateCreated datePublished" datetime="2018-11-13T10:43:00+08:00">2018-11-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一些常见的Content-Type属性</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/13/常见的Content-Type/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/10/31/ifream高度问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/31/ifream高度问题/" class="post-title-link" itemprop="url">ifream高度问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-10-31 15:21:00" itemprop="dateCreated datePublished" datetime="2018-10-31T15:21:00+08:00">2018-10-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Add this to your <code>&lt;head&gt;</code> section:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  function resizeIframe(obj) &#123;</span><br><span class="line">    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>And change your iframe to this:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"..."</span> <span class="attr">frameborder</span>=<span class="string">"0"</span> <span class="attr">scrolling</span>=<span class="string">"no"</span> <span class="attr">onload</span>=<span class="string">"resizeIframe(this)"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>As found on <a href="https://www.sitepoint.com/community/t/auto-height-iframe-content-script/67843" target="_blank" rel="noopener">sitepoint discussion</a>.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -897,20 +904,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -944,7 +951,7 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

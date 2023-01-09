@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"shepherd-xie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="To state it simply, why does query A return a result but B doesn’t?">
+  <meta name="description" content="工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。 To state it simply, why does query A return a result but B doesn’t?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL_NOTIN与IN中NULL值问题">
 <meta property="og:url" content="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN与IN中NULL值问题/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
-<meta property="og:description" content="To state it simply, why does query A return a result but B doesn’t?">
+<meta property="og:description" content="工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。 To state it simply, why does query A return a result but B doesn’t?">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-12-20T10:27:26.978Z">
+<meta property="og:updated_time" content="2023-01-09T06:53:08.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL_NOTIN与IN中NULL值问题">
-<meta name="twitter:description" content="To state it simply, why does query A return a result but B doesn’t?">
+<meta name="twitter:description" content="工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。 To state it simply, why does query A return a result but B doesn’t?">
 
 <link rel="canonical" href="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN与IN中NULL值问题/">
 
@@ -202,7 +202,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>To state it simply, why does query A return a result but B doesn’t?</p>
+        <p>工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。</p>
+<p>To state it simply, why does query A return a result but B doesn’t?</p>
 <a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A: select &apos;true&apos; where 3 in (1, 2, 3, null)</span><br><span class="line">B: select &apos;true&apos; where 3 not in (1, 2, null)</span><br></pre></td></tr></table></figure>
 <p>This was on SQL Server 2005. I also found that calling set ansi_nulls off causes B to return a result.</p>
@@ -231,8 +232,8 @@
       <i class="fa fa-chevron-left"></i> 单例设计模式优化
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/09/04/JNI/" rel="next" title="JNI简单示例">
-      JNI简单示例 <i class="fa fa-chevron-right"></i>
+    <a href="/2018/10/25/Java8内存模型/" rel="next" title="Java8内存模型">
+      Java8内存模型 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -305,20 +306,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -352,7 +353,7 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
