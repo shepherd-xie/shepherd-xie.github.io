@@ -261,6 +261,57 @@
       </tags>
   </entry>
   <entry>
+    <title>docker远程连接</title>
+    <url>/2023/01/13/docker-remote-conn/</url>
+    <content><![CDATA[<p>在 IDEA 中我们可以直接安装 docker 插件添加 docker 作为运行环境，但是通常来说 docker 都是部署在 Linux 机器上。就个人习惯而言，一般是将 docker 安装在 Debian 虚拟机中，毕竟 IDEA 主要是在 Windows 下运行，而在 Windows 下安装 docker 实在是有些不合适，所以就需要配置 docker 的远程连接。</p>
+<a id="more"></a>
+<p>docker 本身的模型就是 客户端 + 服务端 的模式，所以远程连接应该不会太麻烦，但是网上的许多教程都是复制粘贴的，所以打算自己研究一下这个问题。</p>
+<p>根据官方文档 <a href="https://docs.docker.com/config/daemon/remote-access/" target="_blank" rel="noopener">Configure remote access for Docker daemon</a> 我们对 docker 做如下配置。</p>
+<ol>
+<li><p>运行 <code>sudo systemctl edit docker.service</code> 编辑 <code>docker.service</code> 的覆盖文件</p>
+</li>
+<li><p>在文件中添加如下代码，远程连接 docker 需要将 <code>tcp://127.0.0.1:2375</code> 更换为 <code>tcp://0.0.0.0:2375</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Service]</span><br><span class="line">ExecStart=</span><br><span class="line">ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>保存文件</p>
+</li>
+<li><p>重启 <code>systemctl</code> 配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启 docker</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart docker.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查变更是否生效</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo netstat -lntp | grep dockerd</span><br><span class="line">tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在第一步编辑代码的时候，Debian 默认使用 nano 进行编辑，感觉有些别扭还是换成了 vim，更换方式如下。</p>
+<ol>
+<li><p>在 <code>~/.bashrc</code> 中添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export SYSTEMD_EDITOR=vim</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 <code>source ~/.bashrc</code> 更新配置</p>
+</li>
+</ol>
+<p>更多修改方式参考<a href="https://unix.stackexchange.com/questions/408413/change-default-editor-to-vim-for-sudo-systemctl-edit-unit-file" target="_blank" rel="noopener">Change default editor to vim for _ sudo systemctl edit [unit-file] _</a></p>
+<p>当然 docker 官方还提供了另一种修改 <code>daemon.json</code> 的方法，但是我始终是没有成功过。</p>
+<ol>
+<li><p>在 <code>/etc/docker/daemon.json</code> 中添加如下配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;hosts&quot;: [&quot;unix:///var/run/docker.sock&quot;, &quot;tcp://127.0.0.1:2375&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启 docker</p>
+</li>
+<li><p>检查变更</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo netstat -lntp | grep dockerd</span><br><span class="line">tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>docker 官方对这两种方式的提醒是一起使用会引起 docker 无法启动，感兴趣的可以自行研究一下使用 daemon.json 的方式。</p>
+<blockquote>
+<p>Configuring Docker to listen for connections using both the systemd unit file and the <code>daemon.json</code> file causes a conflict that prevents Docker from starting.</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
     <title>ifream高度问题</title>
     <url>/2018/10/31/ifream%E9%AB%98%E5%BA%A6%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>Add this to your <code>&lt;head&gt;</code> section:</p>
