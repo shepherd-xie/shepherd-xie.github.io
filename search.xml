@@ -261,6 +261,65 @@
       </tags>
   </entry>
   <entry>
+    <title>certbot 获取免费 SSL 证书</title>
+    <url>/2023/04/19/certbot/</url>
+    <content><![CDATA[<p>自建网站或者在访问别人的网站时，有些人习惯性的关注浏览器地址栏左侧的小绿锁，总觉得没有它这个网站就不安全，这个问题也许是对的，毕竟 12306 和 MIT 的网站至今也没加上锁。对于 HTTPS 的讨论不是今天所关注的终点范畴，我们今天研究的对象是——如何给我们的网站加上这一把小绿锁。</p>
+<a id="more"></a>
+<p>所谓的小绿锁，通常情况下指的是 SSL 证书。有关于 SSL 证书更详细的部分，那就看我什么时候有时间去研究一下了，或许会再出一篇博客吧。</p>
+<p>SSL 证书包含：</p>
+<ul>
+<li>针对其颁发证书的域名</li>
+<li>证书颁发给哪一个人、组织或设备</li>
+<li>证书由哪一证书颁发机构颁发</li>
+<li>证书颁发机构的数字签名</li>
+<li>关联的子域</li>
+<li>证书的颁发日期</li>
+<li>证书的到期日期</li>
+<li>公钥（私钥为保密状态）</li>
+</ul>
+<h1 id="如何获得-SSL-证书"><a href="#如何获得-SSL-证书" class="headerlink" title="如何获得 SSL 证书"></a>如何获得 SSL 证书</h1><p>绝大多数的域名服务商都会提供 SSL 证书服务，当然，大部分都是付费的。</p>
+<p>其次，你也可以使用 <em><strong>自签名证书</strong></em> ，但是基于安全考虑，自签名证书仅可以在信任证书的环境下使用，例如私人局域网。</p>
+<p>最后，还有一些机构免费提供 SSL 证书，包括 Cloudflare 和 <strong>Let’s Encrypt</strong> 。</p>
+<h1 id="使用-Certbot-获取-Let’s-Encrypt-证书"><a href="#使用-Certbot-获取-Let’s-Encrypt-证书" class="headerlink" title="使用 Certbot 获取 Let’s Encrypt 证书"></a>使用 Certbot 获取 Let’s Encrypt 证书</h1><p>终于到了今天的正题，certbot 是一个开源的工具软件，可以在自管理的网站上使用 Let’s Encrypt 的证书。</p>
+<p>certbot 可以通过多种方式获取证书，具体的方式列表可以参考<a href="https://eff-certbot.readthedocs.io/en/stable/using.html" target="_blank" rel="noopener">Certbot 官方文档</a>。</p>
+<h2 id="使用域名服务商插件获取证书"><a href="#使用域名服务商插件获取证书" class="headerlink" title="使用域名服务商插件获取证书"></a>使用域名服务商插件获取证书</h2><p>对于绝大多数域名服务商，certbot 都提供了插件，可以更便捷的获取证书，这里以 Cloudflare 为例。</p>
+<ol>
+<li><p>确认你在 Cloudflare 购买了域名，或域名 DNS 已被 Cloudflare 托管</p>
+</li>
+<li><p>在 My Profile -&gt; API Tokens 创建 Tokens<br><img src="https://images.orkva.com/images/2023/04/19/image-20230419144314550.png" alt="image-20230419144314550"></p>
+</li>
+<li><p>将 Token 保存在 your_token_file.ini 文件中</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">dns_cloudflare_api_token</span>=your_token</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 certbot 获取证书</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">certbot certonly \</span><br><span class="line">  --dns-cloudflare \</span><br><span class="line">  --dns-cloudflare-credentials your_token_file.ini \</span><br><span class="line">  -d example.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>证书会默认生成在 <code>/etc/letsencrypt/live</code> 下</p>
+</li>
+<li><p>在你的 HTTP 服务器中添加 SSL 证书配置，以 Nginx 为例</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen              443 ssl;</span><br><span class="line">    server_name         www.example.com;</span><br><span class="line">    ssl_certificate     www.example.com.crt;</span><br><span class="line">    ssl_certificate_key www.example.com.key;</span><br><span class="line">    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">    ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="使用根目录模式"><a href="#使用根目录模式" class="headerlink" title="使用根目录模式"></a>使用根目录模式</h2><p>如果你可以随意更改 HTTP 服务器的内容，那么你可以使用根目录模式。</p>
+<ol>
+<li><p>登录至 HTTP 服务器所在的主机</p>
+</li>
+<li><p>使用 certbot 获取证书</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">certbot certonly --webroot \</span><br><span class="line">			-w $&#123;your_web_local&#125; \</span><br><span class="line">        --email="admin@example.com" \</span><br><span class="line">        -d "example.com"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同域名服务商模式 5、6</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+      <tags>
+        <tag>HTTP</tag>
+        <tag>SSL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker远程连接</title>
     <url>/2023/01/13/docker-remote-conn/</url>
     <content><![CDATA[<p>在 IDEA 中我们可以直接安装 docker 插件添加 docker 作为运行环境，但是通常来说 docker 都是部署在 Linux 机器上。就个人习惯而言，一般是将 docker 安装在 Debian 虚拟机中，毕竟 IDEA 主要是在 Windows 下运行，而在 Windows 下安装 docker 实在是有些不合适，所以就需要配置 docker 的远程连接。</p>

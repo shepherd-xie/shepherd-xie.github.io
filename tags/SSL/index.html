@@ -20,19 +20,18 @@
     var CONFIG = {"hostname":"shepherd-xie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="使用自定义注解时的一些元注解。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="自定义注解">
-<meta property="og:url" content="https://shepherd-xie.github.io/2018/10/25/自定义注解/index.html">
+  <meta name="description" content="苦逼程序员的无聊日常">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shepherd&#39;s Blog">
+<meta property="og:url" content="https://shepherd-xie.github.io/tags/SSL/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
-<meta property="og:description" content="使用自定义注解时的一些元注解。">
+<meta property="og:description" content="苦逼程序员的无聊日常">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-04-19T07:07:10.692Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义注解">
-<meta name="twitter:description" content="使用自定义注解时的一些元注解。">
+<meta name="twitter:title" content="Shepherd&#39;s Blog">
+<meta name="twitter:description" content="苦逼程序员的无聊日常">
 
-<link rel="canonical" href="https://shepherd-xie.github.io/2018/10/25/自定义注解/">
+<link rel="canonical" href="https://shepherd-xie.github.io/tags/SSL/">
 
 
 <script id="page-configurations">
@@ -40,12 +39,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>自定义注解 | Shepherd's Blog</title>
+  <title>标签: SSL | Shepherd's Blog</title>
   
 
 
@@ -158,107 +157,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content tag">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/10/25/自定义注解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          自定义注解
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-25 17:51:00" itemprop="dateCreated datePublished" datetime="2018-10-25T17:51:00+08:00">2018-10-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">SSL
+          <small>标签</small>
+        </h2>
+      </div>
 
       
-        <p>使用自定义注解时的一些元注解。</p>
-<a id="more"></a>
-<h3 id="mate-annotation"><a href="#mate-annotation" class="headerlink" title="mate-annotation"></a>mate-annotation</h3><p>元注解是提供给注解的注解。Java5.0定义了4个标准的 meta-annotation 类型，它们被用来提供对其它 annotation 类型作说明。Java5.0 定义的元注解：</p>
-<ul>
-<li><code>@Target</code></li>
-<li><code>@Retention</code></li>
-<li><code>@Documented</code></li>
-<li><code>@Inherited</code></li>
-</ul>
-<h3 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h3><p><code>@Target</code> 说明了Annotation所修饰的对象范围： Annotation 可被用于 packages、types（类、接口、枚举、Annotation类型）、类型成员（方法、构造方法、成员变量、枚举值）、方法参数和本地变量（如循环变量、catch参数）。在 Annotation 类型的声明中使用了 target 可更加明晰其修饰的目标。</p>
-<p>取值定义在 <code>ElementType</code> 枚举中：</p>
-<ul>
-<li><code>ElementType.CONSTRUCTOR</code>: 用于描述构造器</li>
-<li><code>ElementType.FIELD</code>: 用于描述域</li>
-<li><code>ElementType.LOCAL_VARIABLE</code>: 用于描述局部变量</li>
-<li><code>ElementType.METHOD</code>: 用于描述方法</li>
-<li><code>ElementType.PACKAGE</code>: 用于描述包</li>
-<li><code>ElementType.PARAMETER</code>: 用于描述参数</li>
-<li><code>ElementType.TYPE</code>: 用于描述类、接口(包括注解类型) 或 <code>enum</code> 声明</li>
-</ul>
-<h3 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h3><p><code>@Retention</code> 定义了该 Annotation 被保留的时间长短：某些 Annotation 仅出现在源代码中，而被编译器丢弃；而另一些却被编译在 class 文件中；编译在 class 文件中的 Annotation 可能会被虚拟机忽略，而另一些在 class 被装载时将被读取（请注意并不影响 class 的执行，因为 Annotation 与 class 在使用上是被分离的）。使用这个 meta-Annotation 可以对 Annotation 的“生命周期”限制。</p>
-<p>取值定义在 <code>RetentionPoicy</code> 枚举中：</p>
-<ul>
-<li><code>RetentionPoicy.SOURCE</code>: 在源文件中有效</li>
-<li><code>RetentionPoicy.CLASS</code>: 在class文件中有效</li>
-<li><code>RetentionPoicy.RUNTIME</code>: 在运行时有效</li>
-</ul>
-<h3 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h3><p><code>@Documented</code> 用于描述其它类型的 annotation 应该被作为被标注的程序成员的公共API，因此可以被例如 javadoc 此类的工具文档化。<code>@Documented</code> 是一个标记注解，没有成员。</p>
-<h3 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h3><p><code>@Inherited</code> 元注解是一个标记注解，<code>@Inherited</code>表示了被标注的 annotation 是可以被继承的。如果一个使用了 <code>@Inherited</code> 修饰的 annotation 类型被用于一个 class，则这个 annotation 将被用于该 class 的子类。当使用反射获取该某个类的子类 annotation 时也会获取到父类存在有 <code>@inherited</code> 声明的 annotation 。</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2023</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2023-04-19T14:16:40+08:00"
+              content="2023-04-19">
+          04-19
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2023/04/19/certbot/" itemprop="url">
+            <span itemprop="name">certbot 获取免费 SSL 证书</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2018/10/25/Java内省/" rel="prev" title="Java内省机制">
-      <i class="fa fa-chevron-left"></i> Java内省机制
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2018/10/31/ifream高度问题/" rel="next" title="ifream高度问题">
-      ifream高度问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
@@ -311,7 +254,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mate-annotation"><span class="nav-number">1.</span> <span class="nav-text">mate-annotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Target"><span class="nav-number">2.</span> <span class="nav-text">@Target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Retention"><span class="nav-number">3.</span> <span class="nav-text">@Retention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Documented"><span class="nav-number">4.</span> <span class="nav-text">@Documented</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inherited"><span class="nav-number">5.</span> <span class="nav-text">@Inherited</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
