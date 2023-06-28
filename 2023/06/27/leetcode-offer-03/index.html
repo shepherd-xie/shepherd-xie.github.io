@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"shepherd-xie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Java内省机制内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。">
+  <meta name="description" content="2595. 奇偶位数 给你一个 正 整数 n 。 用 even 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的偶数下标的个数。  用 odd 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的奇数下标的个数。 返回整数数组 answer ，其中 answer = [even, odd] 。 示例 1： 123456&amp;gt; 输入：n = 17&amp;gt; 输出：[2,0]&amp;gt;">
+<meta name="keywords" content="easy,位运算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java内省机制">
-<meta property="og:url" content="https://shepherd-xie.github.io/2018/10/25/Java内省/index.html">
+<meta property="og:title" content="leetcode 2595. 奇偶位数">
+<meta property="og:url" content="https://shepherd-xie.github.io/2023/06/27/leetcode-offer-03/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
-<meta property="og:description" content="Java内省机制内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。">
+<meta property="og:description" content="2595. 奇偶位数 给你一个 正 整数 n 。 用 even 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的偶数下标的个数。  用 odd 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的奇数下标的个数。 返回整数数组 answer ，其中 answer = [even, odd] 。 示例 1： 123456&amp;gt; 输入：n = 17&amp;gt; 输出：[2,0]&amp;gt;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2023-06-28T06:00:18.621Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java内省机制">
-<meta name="twitter:description" content="Java内省机制内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。">
+<meta name="twitter:title" content="leetcode 2595. 奇偶位数">
+<meta name="twitter:description" content="2595. 奇偶位数 给你一个 正 整数 n 。 用 even 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的偶数下标的个数。  用 odd 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的奇数下标的个数。 返回整数数组 answer ，其中 answer = [even, odd] 。 示例 1： 123456&amp;gt; 输入：n = 17&amp;gt; 输出：[2,0]&amp;gt;">
 
-<link rel="canonical" href="https://shepherd-xie.github.io/2018/10/25/Java内省/">
+<link rel="canonical" href="https://shepherd-xie.github.io/2023/06/27/leetcode-offer-03/">
 
 
 <script id="page-configurations">
@@ -45,7 +46,7 @@
   };
 </script>
 
-  <title>Java内省机制 | Shepherd's Blog</title>
+  <title>leetcode 2595. 奇偶位数 | Shepherd's Blog</title>
   
 
 
@@ -165,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/10/25/Java内省/">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/27/leetcode-offer-03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java内省机制
+          leetcode 2595. 奇偶位数
         </h1>
 
         <div class="post-meta">
@@ -188,7 +189,20 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-10-25 16:02:00" itemprop="dateCreated datePublished" datetime="2018-10-25T16:02:00+08:00">2018-10-25</time>
+              <time title="创建时间：2023-06-27 14:48:53" itemprop="dateCreated datePublished" datetime="2023-06-27T14:48:53+08:00">2023-06-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
             </span>
 
           
@@ -202,23 +216,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Java内省机制"><a href="#Java内省机制" class="headerlink" title="Java内省机制"></a>Java内省机制</h2><p>内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。</p>
-<a id="more"></a>
-<p>JavaBean是一种特殊的类，主要用于传递数据信息，这种类中的方法主要用于访问私有的字段，且方法名符合某种命名规则。如果在两个模块之间传递信息，可以将信息封装进 JavaBean 中，这种对象称为“值对象”( Value Object )，或“ VO ”。方法比较少。这些信息储存在类的私有变量中，通过 <code>setter/getter</code> 获得。</p>
-<p>Java JDK 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法，这就是内省。</p>
-<h2 id="JDK内省类库"><a href="#JDK内省类库" class="headerlink" title="JDK内省类库"></a>JDK内省类库</h2><h3 id="PropertyDescriptor类"><a href="#PropertyDescriptor类" class="headerlink" title="PropertyDescriptor类"></a><code>PropertyDescriptor</code>类</h3><p><code>PropertyDescriptor</code>类表示 JavaBean 类通过存储器导出一个属性。主要方法：</p>
-<ol>
-<li><code>getPropertyType()</code>，获得属性的 Class 对象;</li>
-<li><code>getReadMethod()</code>，获得用于读取属性值的方法；</li>
-<li><code>getWriteMethod()</code>，获得用于写入属性值的方法;</li>
-<li><code>hashCode()</code>，获取对象的哈希值;</li>
-<li><code>setReadMethod(Method readMethod)</code>，设置用于读取属性值的方法;</li>
-<li><code>setWriteMethod(Method writeMethod)</code>，设置用于写入属性值的方法。</li>
-</ol>
-<h3 id="Introspector类"><a href="#Introspector类" class="headerlink" title="Introspector类"></a><code>Introspector</code>类</h3><p>将 JavaBean 中的属性封装起来进行操作。在程序把一个类当做 JavaBean 来看，就是调用 <code>Introspector.getBeanInfo()</code> 方法，得到的 BeanInfo 对象封装了把这个类当做 JavaBean 看的结果信息，即属性的信息。</p>
-<h3 id="BeanUtils工具包"><a href="#BeanUtils工具包" class="headerlink" title="BeanUtils工具包"></a><code>BeanUtils</code>工具包</h3><p>Apache开发了一套简单、易用的API来操作Bean的属性——BeanUtils工具包。</p>
-<p><a href="http://commons.apache.org/beanutils/" target="_blank" rel="noopener">BeanUtils工具包</a></p>
-<p>注意：应用的时候还需要一个<a href="http://commons.apache.org/logging/" target="_blank" rel="noopener">logging包</a></p>
+        <blockquote>
+<p><a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/description/" target="_blank" rel="noopener">2595. 奇偶位数</a></p>
+<p>给你一个 <strong>正</strong> 整数 <code>n</code> 。</p>
+<p>用 <code>even</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的偶数下标的个数。</p>
+<p> 用 <code>odd</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的奇数下标的个数。</p>
+<p>返回整数数组 <code>answer</code> ，其中 <code>answer = [even, odd]</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：n = 17</span><br><span class="line">&gt; 输出：[2,0]</span><br><span class="line">&gt;解释：17 的二进制形式是 10001 。 </span><br><span class="line">&gt; 下标 0 和 下标 4 对应的值为 1 。 </span><br><span class="line">&gt;共有 2 个偶数下标，0 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：n = 2</span><br><span class="line">&gt; 输出：[0,1]</span><br><span class="line">&gt;解释：2 的二进制形式是 10 。 </span><br><span class="line">&gt; 下标 1 对应的值为 1 。 </span><br><span class="line">&gt;共有 0 个偶数下标，1 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 1000</code></li>
+</ul>
+</blockquote>
+<p>确实是简单题，像我这种菜鸡都能很快的理清思路，显然是利用 <em>移位</em> 操作和位运算来解决。直接上题解吧。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((n &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            result[count] += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        count ^= <span class="number">1</span>;</span><br><span class="line">        n = n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再看看大神们的操作，显然比我的方法简洁太多。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">var</span> ans = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; n &gt; <span class="number">0</span>; i ^= <span class="number">1</span>, n &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">        ans[i] += n &amp; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，另一个操作就更神奇了，我们完全可以利用掩码的方式将原始字符做处理。</p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">&gt;     <span class="keyword">final</span> <span class="keyword">int</span> MASK = <span class="number">0x5555</span>;</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;Integer.bitCount(n &amp; MASK), Integer.bitCount(n &amp; (MASK &gt;&gt; <span class="number">1</span>))&#125;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>作者：灵茶山艾府<br>链接：<a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/" target="_blank" rel="noopener">https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/</a><br>来源：力扣（LeetCode）</p>
+</blockquote>
 
     </div>
 
@@ -227,6 +254,10 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/easy/" rel="tag"># easy</a>
+              <a href="/tags/位运算/" rel="tag"># 位运算</a>
+          </div>
 
         
 
@@ -234,12 +265,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/10/25/Java8内存模型/" rel="prev" title="Java8内存模型">
-      <i class="fa fa-chevron-left"></i> Java8内存模型
+    <a href="/2023/06/26/leetcode-1524/" rel="prev" title="leetcode 1524. 和为奇数的子数组数目">
+      <i class="fa fa-chevron-left"></i> leetcode 1524. 和为奇数的子数组数目
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/10/25/自定义注解/" rel="next" title="自定义注解">
-      自定义注解 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/06/28/leetcode-2595/" rel="next" title="剑指 Offer 03. 数组中重复的数字">
+      剑指 Offer 03. 数组中重复的数字 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -299,7 +330,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内省机制"><span class="nav-number">1.</span> <span class="nav-text">Java内省机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK内省类库"><span class="nav-number">2.</span> <span class="nav-text">JDK内省类库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertyDescriptor类"><span class="nav-number">2.1.</span> <span class="nav-text">PropertyDescriptor类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introspector类"><span class="nav-number">2.2.</span> <span class="nav-text">Introspector类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeanUtils工具包"><span class="nav-number">2.3.</span> <span class="nav-text">BeanUtils工具包</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
