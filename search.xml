@@ -1,6 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java8内存模型</title>
+    <url>/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>Java8内存模型</p>
+<p><img src="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg" alt="Java8内存模型"></p>
+<a id="more"></a>
+<p><img src="https://images.orkva.com/images/2023/01/09/Cookbook_JVMArguments_2_MemoryModel.png" alt="区域的内存大小"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">控制参数</th>
+<th style="text-align:center">使用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-Xms</td>
+<td style="text-align:center">设置堆的最小空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-Xmx</td>
+<td style="text-align:center">设置堆的最大空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:NewSize</td>
+<td style="text-align:center">设置新生代最小空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:MaxNewSize</td>
+<td style="text-align:center">设置新生代最大空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:PermSize</td>
+<td style="text-align:center">设置永久代最小空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:MaxPermSize</td>
+<td style="text-align:center">设置永久代最大空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-Xss</td>
+<td style="text-align:center">设置每个线程的堆栈大小</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>HEAP：<br>堆内存由JVM在程序启动时创建，用于存储对象。堆内存可以被任何线程访问，进一步分为三代<code>Young Generation</code>，<code>Old</code>＆<code>PermGen</code>（永久生成）。当对象被创建时，它首先进入Young代（尤其是Eden空间），当对象变老时，它会移动到Old / tenured Generation。在PermGen空间中，存储所有静态和实例变量名称 - 值对（对象的名称引用）。</li>
+<li>Stack：<br>使用程序创建的每个线程生成堆栈。它由线程关联。每个线程都有自己的堆栈。所有局部变量和函数调用都存储在堆栈中。它的生命取决于线程的生命，因为线程将存在，它也将存在，反之亦然。它也可以手动增加</li>
+<li>PC寄存器：<br>它也与其线程相关联。它基本上是正在执行的当前指令的地址。由于每个线程将要执行的一些方法集取决于PC寄存器。它对每个指令都有一些值，对于本机方法是未定义的。通常用于跟踪指令。</li>
+<li>Method Area：<br>它是像Heap这样的所有线程共享的内存。它是在Java Virtual Machine启动时创建的。它包含代码实际上是编译的代码，方法及其数据和字段。运行时常量池也是方法区域的一部分。它的内存默认由JVM分配，如果需要可以增加。运行时常量池是常量表的每个类表示。它包含在编译时定义的所有文字和将在运行时解决的引用。</li>
+<li>Native方法堆栈本：<br>机方法是用java以外的语言编写的方法。JVM实现无法加载本机方法，也无法依赖传统堆栈。它还与每个线程相关联。简而言之，它与堆栈相同，但它用于本机方法。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java内省机制</title>
+    <url>/2018/10/25/Java%E5%86%85%E7%9C%81/</url>
+    <content><![CDATA[<h2 id="Java内省机制"><a href="#Java内省机制" class="headerlink" title="Java内省机制"></a>Java内省机制</h2><p>内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。</p>
+<a id="more"></a>
+<p>JavaBean是一种特殊的类，主要用于传递数据信息，这种类中的方法主要用于访问私有的字段，且方法名符合某种命名规则。如果在两个模块之间传递信息，可以将信息封装进 JavaBean 中，这种对象称为“值对象”( Value Object )，或“ VO ”。方法比较少。这些信息储存在类的私有变量中，通过 <code>setter/getter</code> 获得。</p>
+<p>Java JDK 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法，这就是内省。</p>
+<h2 id="JDK内省类库"><a href="#JDK内省类库" class="headerlink" title="JDK内省类库"></a>JDK内省类库</h2><h3 id="PropertyDescriptor类"><a href="#PropertyDescriptor类" class="headerlink" title="PropertyDescriptor类"></a><code>PropertyDescriptor</code>类</h3><p><code>PropertyDescriptor</code>类表示 JavaBean 类通过存储器导出一个属性。主要方法：</p>
+<ol>
+<li><code>getPropertyType()</code>，获得属性的 Class 对象;</li>
+<li><code>getReadMethod()</code>，获得用于读取属性值的方法；</li>
+<li><code>getWriteMethod()</code>，获得用于写入属性值的方法;</li>
+<li><code>hashCode()</code>，获取对象的哈希值;</li>
+<li><code>setReadMethod(Method readMethod)</code>，设置用于读取属性值的方法;</li>
+<li><code>setWriteMethod(Method writeMethod)</code>，设置用于写入属性值的方法。</li>
+</ol>
+<h3 id="Introspector类"><a href="#Introspector类" class="headerlink" title="Introspector类"></a><code>Introspector</code>类</h3><p>将 JavaBean 中的属性封装起来进行操作。在程序把一个类当做 JavaBean 来看，就是调用 <code>Introspector.getBeanInfo()</code> 方法，得到的 BeanInfo 对象封装了把这个类当做 JavaBean 看的结果信息，即属性的信息。</p>
+<h3 id="BeanUtils工具包"><a href="#BeanUtils工具包" class="headerlink" title="BeanUtils工具包"></a><code>BeanUtils</code>工具包</h3><p>Apache开发了一套简单、易用的API来操作Bean的属性——BeanUtils工具包。</p>
+<p><a href="http://commons.apache.org/beanutils/" target="_blank" rel="noopener">BeanUtils工具包</a></p>
+<p>注意：应用的时候还需要一个<a href="http://commons.apache.org/logging/" target="_blank" rel="noopener">logging包</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Dropzone 图片上传插件</title>
     <url>/2018/11/13/Dropzone%20%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[<p>Dropzone 是一个开源的 JavaScript 库，提供文件的异步上传功能，并支持拖拽上传功能</p>
@@ -80,85 +159,6 @@
       <categories>
         <category>组件</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Java8内存模型</title>
-    <url>/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<p>Java8内存模型</p>
-<p><img src="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg" alt="Java8内存模型"></p>
-<a id="more"></a>
-<p><img src="https://images.orkva.com/images/2023/01/09/Cookbook_JVMArguments_2_MemoryModel.png" alt="区域的内存大小"></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">控制参数</th>
-<th style="text-align:center">使用说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-Xms</td>
-<td style="text-align:center">设置堆的最小空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-Xmx</td>
-<td style="text-align:center">设置堆的最大空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:NewSize</td>
-<td style="text-align:center">设置新生代最小空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:MaxNewSize</td>
-<td style="text-align:center">设置新生代最大空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:PermSize</td>
-<td style="text-align:center">设置永久代最小空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:MaxPermSize</td>
-<td style="text-align:center">设置永久代最大空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-Xss</td>
-<td style="text-align:center">设置每个线程的堆栈大小</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>HEAP：<br>堆内存由JVM在程序启动时创建，用于存储对象。堆内存可以被任何线程访问，进一步分为三代<code>Young Generation</code>，<code>Old</code>＆<code>PermGen</code>（永久生成）。当对象被创建时，它首先进入Young代（尤其是Eden空间），当对象变老时，它会移动到Old / tenured Generation。在PermGen空间中，存储所有静态和实例变量名称 - 值对（对象的名称引用）。</li>
-<li>Stack：<br>使用程序创建的每个线程生成堆栈。它由线程关联。每个线程都有自己的堆栈。所有局部变量和函数调用都存储在堆栈中。它的生命取决于线程的生命，因为线程将存在，它也将存在，反之亦然。它也可以手动增加</li>
-<li>PC寄存器：<br>它也与其线程相关联。它基本上是正在执行的当前指令的地址。由于每个线程将要执行的一些方法集取决于PC寄存器。它对每个指令都有一些值，对于本机方法是未定义的。通常用于跟踪指令。</li>
-<li>Method Area：<br>它是像Heap这样的所有线程共享的内存。它是在Java Virtual Machine启动时创建的。它包含代码实际上是编译的代码，方法及其数据和字段。运行时常量池也是方法区域的一部分。它的内存默认由JVM分配，如果需要可以增加。运行时常量池是常量表的每个类表示。它包含在编译时定义的所有文字和将在运行时解决的引用。</li>
-<li>Native方法堆栈本：<br>机方法是用java以外的语言编写的方法。JVM实现无法加载本机方法，也无法依赖传统堆栈。它还与每个线程相关联。简而言之，它与堆栈相同，但它用于本机方法。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java内省机制</title>
-    <url>/2018/10/25/Java%E5%86%85%E7%9C%81/</url>
-    <content><![CDATA[<h2 id="Java内省机制"><a href="#Java内省机制" class="headerlink" title="Java内省机制"></a>Java内省机制</h2><p>内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。</p>
-<a id="more"></a>
-<p>JavaBean是一种特殊的类，主要用于传递数据信息，这种类中的方法主要用于访问私有的字段，且方法名符合某种命名规则。如果在两个模块之间传递信息，可以将信息封装进 JavaBean 中，这种对象称为“值对象”( Value Object )，或“ VO ”。方法比较少。这些信息储存在类的私有变量中，通过 <code>setter/getter</code> 获得。</p>
-<p>Java JDK 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法，这就是内省。</p>
-<h2 id="JDK内省类库"><a href="#JDK内省类库" class="headerlink" title="JDK内省类库"></a>JDK内省类库</h2><h3 id="PropertyDescriptor类"><a href="#PropertyDescriptor类" class="headerlink" title="PropertyDescriptor类"></a><code>PropertyDescriptor</code>类</h3><p><code>PropertyDescriptor</code>类表示 JavaBean 类通过存储器导出一个属性。主要方法：</p>
-<ol>
-<li><code>getPropertyType()</code>，获得属性的 Class 对象;</li>
-<li><code>getReadMethod()</code>，获得用于读取属性值的方法；</li>
-<li><code>getWriteMethod()</code>，获得用于写入属性值的方法;</li>
-<li><code>hashCode()</code>，获取对象的哈希值;</li>
-<li><code>setReadMethod(Method readMethod)</code>，设置用于读取属性值的方法;</li>
-<li><code>setWriteMethod(Method writeMethod)</code>，设置用于写入属性值的方法。</li>
-</ol>
-<h3 id="Introspector类"><a href="#Introspector类" class="headerlink" title="Introspector类"></a><code>Introspector</code>类</h3><p>将 JavaBean 中的属性封装起来进行操作。在程序把一个类当做 JavaBean 来看，就是调用 <code>Introspector.getBeanInfo()</code> 方法，得到的 BeanInfo 对象封装了把这个类当做 JavaBean 看的结果信息，即属性的信息。</p>
-<h3 id="BeanUtils工具包"><a href="#BeanUtils工具包" class="headerlink" title="BeanUtils工具包"></a><code>BeanUtils</code>工具包</h3><p>Apache开发了一套简单、易用的API来操作Bean的属性——BeanUtils工具包。</p>
-<p><a href="http://commons.apache.org/beanutils/" target="_blank" rel="noopener">BeanUtils工具包</a></p>
-<p>注意：应用的时候还需要一个<a href="http://commons.apache.org/logging/" target="_blank" rel="noopener">logging包</a></p>
-]]></content>
   </entry>
   <entry>
     <title>SQL_NOTIN与IN中NULL值问题</title>
@@ -956,6 +956,67 @@
       </categories>
       <tags>
         <tag>哈希表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>71. 简化路径</title>
+    <url>/2023/06/30/leetcode-71/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/simplify-path/description/" target="_blank" rel="noopener">71. 简化路径</a></p>
+<p>给你一个字符串 <code>path</code> ，表示指向某一文件或目录的 Unix 风格 <strong>绝对路径</strong> （以 <code>&#39;/&#39;</code> 开头），请你将其转化为更加简洁的规范路径。</p>
+<p>在 Unix 风格的文件系统中，一个点（<code>.</code>）表示当前目录本身；此外，两个点 （<code>..</code>） 表示将目录切换到上一级（指向父目录）；两者都可以是复杂相对路径的组成部分。任意多个连续的斜杠（即，<code>&#39;//&#39;</code>）都被视为单个斜杠 <code>&#39;/&#39;</code> 。 对于此问题，任何其他格式的点（例如，<code>&#39;...&#39;</code>）均被视为文件/目录名称。</p>
+<p>请注意，返回的 <strong>规范路径</strong> 必须遵循下述格式：</p>
+<ul>
+<li>始终以斜杠 <code>&#39;/&#39;</code> 开头。</li>
+<li>两个目录名之间必须只有一个斜杠 <code>&#39;/&#39;</code> 。</li>
+<li>最后一个目录名（如果存在）<strong>不能</strong> 以 <code>&#39;/&#39;</code> 结尾。</li>
+<li>此外，路径仅包含从根目录到目标文件或目录的路径上的目录（即，不含 <code>&#39;.&#39;</code> 或 <code>&#39;..&#39;</code>）。</li>
+</ul>
+<p>返回简化后得到的 <strong>规范路径</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：path = &quot;/home/&quot;</span><br><span class="line">&gt; 输出：&quot;/home&quot;</span><br><span class="line">&gt; 解释：注意，最后一个目录名后面没有斜杠。 </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：path = &quot;/../&quot;</span><br><span class="line">&gt; 输出：&quot;/&quot;</span><br><span class="line">&gt; 解释：从根目录向上一级是不可行的，因为根目录是你可以到达的最高级。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：path = &quot;/home//foo/&quot;</span><br><span class="line">&gt; 输出：&quot;/home/foo&quot;</span><br><span class="line">&gt; 解释：在规范路径中，多个连续斜杠需要用一个斜杠替换。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：path = &quot;/a/./b/../../c/&quot;</span><br><span class="line">&gt; 输出：&quot;/c&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= path.length &lt;= 3000</code></li>
+<li><code>path</code> 由英文字母，数字，<code>&#39;.&#39;</code>，<code>&#39;/&#39;</code> 或 <code>&#39;_&#39;</code> 组成。</li>
+<li><code>path</code> 是一个有效的 Unix 风格绝对路径。</li>
+</ul>
+</blockquote>
+<p>虽然是一道中等难度的题，但是不难看出还是比较简单的，只要慢慢理清思路即可。</p>
+<ul>
+<li>第一步，将字符串按照斜杠分割成数组。</li>
+<li>第二步，遍历数组判断当前路径字符串组成<ul>
+<li>若为空或是 <code>.</code> 则跳过不处理</li>
+<li>若为 <code>..</code> 则删除上一个保存的路径</li>
+<li>不为以上两种则保存至待栈中</li>
+</ul>
+</li>
+<li>第三步，组合栈中的路径，若栈为空则输出根路径。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">simplifyPath</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">        String[] split = path.split(<span class="string">"/"</span>);</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (String s : split) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"."</span>.equals(s) || s.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">".."</span>.equals(s)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!list.isEmpty()) &#123;</span><br><span class="line">                    list.removeLast();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            list.add(s);</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (String s : list) &#123;</span><br><span class="line">            sb.append(<span class="string">'/'</span>).append(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list.isEmpty() ? <span class="string">"/"</span> : sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>medium</tag>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
