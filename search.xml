@@ -1,85 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Java8内存模型</title>
-    <url>/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<p>Java8内存模型</p>
-<p><img src="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg" alt="Java8内存模型"></p>
-<a id="more"></a>
-<p><img src="https://images.orkva.com/images/2023/01/09/Cookbook_JVMArguments_2_MemoryModel.png" alt="区域的内存大小"></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">控制参数</th>
-<th style="text-align:center">使用说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-Xms</td>
-<td style="text-align:center">设置堆的最小空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-Xmx</td>
-<td style="text-align:center">设置堆的最大空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:NewSize</td>
-<td style="text-align:center">设置新生代最小空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:MaxNewSize</td>
-<td style="text-align:center">设置新生代最大空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:PermSize</td>
-<td style="text-align:center">设置永久代最小空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-XX:MaxPermSize</td>
-<td style="text-align:center">设置永久代最大空间大小</td>
-</tr>
-<tr>
-<td style="text-align:center">-Xss</td>
-<td style="text-align:center">设置每个线程的堆栈大小</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>HEAP：<br>堆内存由JVM在程序启动时创建，用于存储对象。堆内存可以被任何线程访问，进一步分为三代<code>Young Generation</code>，<code>Old</code>＆<code>PermGen</code>（永久生成）。当对象被创建时，它首先进入Young代（尤其是Eden空间），当对象变老时，它会移动到Old / tenured Generation。在PermGen空间中，存储所有静态和实例变量名称 - 值对（对象的名称引用）。</li>
-<li>Stack：<br>使用程序创建的每个线程生成堆栈。它由线程关联。每个线程都有自己的堆栈。所有局部变量和函数调用都存储在堆栈中。它的生命取决于线程的生命，因为线程将存在，它也将存在，反之亦然。它也可以手动增加</li>
-<li>PC寄存器：<br>它也与其线程相关联。它基本上是正在执行的当前指令的地址。由于每个线程将要执行的一些方法集取决于PC寄存器。它对每个指令都有一些值，对于本机方法是未定义的。通常用于跟踪指令。</li>
-<li>Method Area：<br>它是像Heap这样的所有线程共享的内存。它是在Java Virtual Machine启动时创建的。它包含代码实际上是编译的代码，方法及其数据和字段。运行时常量池也是方法区域的一部分。它的内存默认由JVM分配，如果需要可以增加。运行时常量池是常量表的每个类表示。它包含在编译时定义的所有文字和将在运行时解决的引用。</li>
-<li>Native方法堆栈本：<br>机方法是用java以外的语言编写的方法。JVM实现无法加载本机方法，也无法依赖传统堆栈。它还与每个线程相关联。简而言之，它与堆栈相同，但它用于本机方法。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java内省机制</title>
-    <url>/2018/10/25/Java%E5%86%85%E7%9C%81/</url>
-    <content><![CDATA[<h2 id="Java内省机制"><a href="#Java内省机制" class="headerlink" title="Java内省机制"></a>Java内省机制</h2><p>内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。</p>
-<a id="more"></a>
-<p>JavaBean是一种特殊的类，主要用于传递数据信息，这种类中的方法主要用于访问私有的字段，且方法名符合某种命名规则。如果在两个模块之间传递信息，可以将信息封装进 JavaBean 中，这种对象称为“值对象”( Value Object )，或“ VO ”。方法比较少。这些信息储存在类的私有变量中，通过 <code>setter/getter</code> 获得。</p>
-<p>Java JDK 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法，这就是内省。</p>
-<h2 id="JDK内省类库"><a href="#JDK内省类库" class="headerlink" title="JDK内省类库"></a>JDK内省类库</h2><h3 id="PropertyDescriptor类"><a href="#PropertyDescriptor类" class="headerlink" title="PropertyDescriptor类"></a><code>PropertyDescriptor</code>类</h3><p><code>PropertyDescriptor</code>类表示 JavaBean 类通过存储器导出一个属性。主要方法：</p>
-<ol>
-<li><code>getPropertyType()</code>，获得属性的 Class 对象;</li>
-<li><code>getReadMethod()</code>，获得用于读取属性值的方法；</li>
-<li><code>getWriteMethod()</code>，获得用于写入属性值的方法;</li>
-<li><code>hashCode()</code>，获取对象的哈希值;</li>
-<li><code>setReadMethod(Method readMethod)</code>，设置用于读取属性值的方法;</li>
-<li><code>setWriteMethod(Method writeMethod)</code>，设置用于写入属性值的方法。</li>
-</ol>
-<h3 id="Introspector类"><a href="#Introspector类" class="headerlink" title="Introspector类"></a><code>Introspector</code>类</h3><p>将 JavaBean 中的属性封装起来进行操作。在程序把一个类当做 JavaBean 来看，就是调用 <code>Introspector.getBeanInfo()</code> 方法，得到的 BeanInfo 对象封装了把这个类当做 JavaBean 看的结果信息，即属性的信息。</p>
-<h3 id="BeanUtils工具包"><a href="#BeanUtils工具包" class="headerlink" title="BeanUtils工具包"></a><code>BeanUtils</code>工具包</h3><p>Apache开发了一套简单、易用的API来操作Bean的属性——BeanUtils工具包。</p>
-<p><a href="http://commons.apache.org/beanutils/" target="_blank" rel="noopener">BeanUtils工具包</a></p>
-<p>注意：应用的时候还需要一个<a href="http://commons.apache.org/logging/" target="_blank" rel="noopener">logging包</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Dropzone 图片上传插件</title>
     <url>/2018/11/13/Dropzone%20%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[<p>Dropzone 是一个开源的 JavaScript 库，提供文件的异步上传功能，并支持拖拽上传功能</p>
@@ -159,6 +80,85 @@
       <categories>
         <category>组件</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Java8内存模型</title>
+    <url>/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>Java8内存模型</p>
+<p><img src="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg" alt="Java8内存模型"></p>
+<a id="more"></a>
+<p><img src="https://images.orkva.com/images/2023/01/09/Cookbook_JVMArguments_2_MemoryModel.png" alt="区域的内存大小"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">控制参数</th>
+<th style="text-align:center">使用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-Xms</td>
+<td style="text-align:center">设置堆的最小空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-Xmx</td>
+<td style="text-align:center">设置堆的最大空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:NewSize</td>
+<td style="text-align:center">设置新生代最小空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:MaxNewSize</td>
+<td style="text-align:center">设置新生代最大空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:PermSize</td>
+<td style="text-align:center">设置永久代最小空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-XX:MaxPermSize</td>
+<td style="text-align:center">设置永久代最大空间大小</td>
+</tr>
+<tr>
+<td style="text-align:center">-Xss</td>
+<td style="text-align:center">设置每个线程的堆栈大小</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>HEAP：<br>堆内存由JVM在程序启动时创建，用于存储对象。堆内存可以被任何线程访问，进一步分为三代<code>Young Generation</code>，<code>Old</code>＆<code>PermGen</code>（永久生成）。当对象被创建时，它首先进入Young代（尤其是Eden空间），当对象变老时，它会移动到Old / tenured Generation。在PermGen空间中，存储所有静态和实例变量名称 - 值对（对象的名称引用）。</li>
+<li>Stack：<br>使用程序创建的每个线程生成堆栈。它由线程关联。每个线程都有自己的堆栈。所有局部变量和函数调用都存储在堆栈中。它的生命取决于线程的生命，因为线程将存在，它也将存在，反之亦然。它也可以手动增加</li>
+<li>PC寄存器：<br>它也与其线程相关联。它基本上是正在执行的当前指令的地址。由于每个线程将要执行的一些方法集取决于PC寄存器。它对每个指令都有一些值，对于本机方法是未定义的。通常用于跟踪指令。</li>
+<li>Method Area：<br>它是像Heap这样的所有线程共享的内存。它是在Java Virtual Machine启动时创建的。它包含代码实际上是编译的代码，方法及其数据和字段。运行时常量池也是方法区域的一部分。它的内存默认由JVM分配，如果需要可以增加。运行时常量池是常量表的每个类表示。它包含在编译时定义的所有文字和将在运行时解决的引用。</li>
+<li>Native方法堆栈本：<br>机方法是用java以外的语言编写的方法。JVM实现无法加载本机方法，也无法依赖传统堆栈。它还与每个线程相关联。简而言之，它与堆栈相同，但它用于本机方法。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java内省机制</title>
+    <url>/2018/10/25/Java%E5%86%85%E7%9C%81/</url>
+    <content><![CDATA[<h2 id="Java内省机制"><a href="#Java内省机制" class="headerlink" title="Java内省机制"></a>Java内省机制</h2><p>内省( Introspector ) 是 Java 语言对 JavaBean 类属性、事件的一种缺省处理方法。</p>
+<a id="more"></a>
+<p>JavaBean是一种特殊的类，主要用于传递数据信息，这种类中的方法主要用于访问私有的字段，且方法名符合某种命名规则。如果在两个模块之间传递信息，可以将信息封装进 JavaBean 中，这种对象称为“值对象”( Value Object )，或“ VO ”。方法比较少。这些信息储存在类的私有变量中，通过 <code>setter/getter</code> 获得。</p>
+<p>Java JDK 中提供了一套 API 用来访问某个属性的 <code>getter/setter</code> 方法，这就是内省。</p>
+<h2 id="JDK内省类库"><a href="#JDK内省类库" class="headerlink" title="JDK内省类库"></a>JDK内省类库</h2><h3 id="PropertyDescriptor类"><a href="#PropertyDescriptor类" class="headerlink" title="PropertyDescriptor类"></a><code>PropertyDescriptor</code>类</h3><p><code>PropertyDescriptor</code>类表示 JavaBean 类通过存储器导出一个属性。主要方法：</p>
+<ol>
+<li><code>getPropertyType()</code>，获得属性的 Class 对象;</li>
+<li><code>getReadMethod()</code>，获得用于读取属性值的方法；</li>
+<li><code>getWriteMethod()</code>，获得用于写入属性值的方法;</li>
+<li><code>hashCode()</code>，获取对象的哈希值;</li>
+<li><code>setReadMethod(Method readMethod)</code>，设置用于读取属性值的方法;</li>
+<li><code>setWriteMethod(Method writeMethod)</code>，设置用于写入属性值的方法。</li>
+</ol>
+<h3 id="Introspector类"><a href="#Introspector类" class="headerlink" title="Introspector类"></a><code>Introspector</code>类</h3><p>将 JavaBean 中的属性封装起来进行操作。在程序把一个类当做 JavaBean 来看，就是调用 <code>Introspector.getBeanInfo()</code> 方法，得到的 BeanInfo 对象封装了把这个类当做 JavaBean 看的结果信息，即属性的信息。</p>
+<h3 id="BeanUtils工具包"><a href="#BeanUtils工具包" class="headerlink" title="BeanUtils工具包"></a><code>BeanUtils</code>工具包</h3><p>Apache开发了一套简单、易用的API来操作Bean的属性——BeanUtils工具包。</p>
+<p><a href="http://commons.apache.org/beanutils/" target="_blank" rel="noopener">BeanUtils工具包</a></p>
+<p>注意：应用的时候还需要一个<a href="http://commons.apache.org/logging/" target="_blank" rel="noopener">logging包</a></p>
+]]></content>
   </entry>
   <entry>
     <title>SQL_NOTIN与IN中NULL值问题</title>
@@ -868,6 +868,51 @@
       </tags>
   </entry>
   <entry>
+    <title>454. 四数相加 II</title>
+    <url>/2023/07/03/leetcode-454/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/4sum-ii/description/" target="_blank" rel="noopener">454. 四数相加 II</a></p>
+<p>给你四个整数数组 <code>nums1</code>、<code>nums2</code>、<code>nums3</code> 和 <code>nums4</code> ，数组长度都是 <code>n</code> ，请你计算有多少个元组 <code>(i, j, k, l)</code> 能满足：</p>
+<ul>
+<li><code>0 &lt;= i, j, k, l &lt; n</code></li>
+<li><code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code></li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;输入：nums1 = [1,2], nums2 = [-2,-1], nums3 = [-1,2], nums4 = [0,2]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt;解释：</span><br><span class="line">&gt;  两个元组如下：</span><br><span class="line">&gt;1. (0, 0, 0, 1) -&gt; nums1[0] + nums2[0] + nums3[0] + nums4[1] = 1 + (-2) + (-1) + 2 = 0</span><br><span class="line">&gt; 2. (1, 1, 0, 0) -&gt; nums1[1] + nums2[1] + nums3[0] + nums4[0] = 2 + (-1) + (-1) + 0 = 0</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：nums1 = [0], nums2 = [0], nums3 = [0], nums4 = [0]</span><br><span class="line">&gt;输出：1</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p> <strong>提示：</strong></p>
+<ul>
+<li><code>n == nums1.length</code></li>
+<li><code>n == nums2.length</code></li>
+<li><code>n == nums3.length</code></li>
+<li><code>n == nums4.length</code></li>
+<li><code>1 &lt;= n &lt;= 200</code></li>
+<li><code>-228 &lt;= nums1[i], nums2[i], nums3[i], nums4[i] &lt;= 228</code></li>
+</ul>
+</blockquote>
+<p>像这种可以计算的题，最简单直接的思路便是多重循环。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums1.length; i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums2.length; j ++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; nums3.length; k ++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; nums4.length; l++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (nums1[i] + nums2[j] + nums3[k] + nums4[l] == <span class="number">0</span>) &#123;</span><br><span class="line">                            result ++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>超不超时什么的是管不了的，起码这是一种行之有效的方法。当然，对于我们来说一定是为了去寻求更加有效的方法。</p>
+<p>审查题目后发现一个很有意思的点 <strong>和为0</strong>，众所周知，在数学的世界里，对于0、1、-1这样的数字都要相当敏感。</p>
+<p>当0出现时，<code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code>就可以变为 <code>nums1[i] + nums2[j] = nums3[k] + nums4[l]</code> ，即，我们从最初的四重循环，降低到了两重循环，在时间复杂度上就减少了两个量级。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num1 : nums1) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num2 : nums2) &#123;</span><br><span class="line">                map.put(num1 + num2, map.getOrDefault(num1 + num2, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num3 : nums3) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num4 : nums4) &#123;</span><br><span class="line">                result += map.getOrDefault(-num3 - num4, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>哈希表</tag>
+        <tag>数组</tag>
+        <tag>medium</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>54. 螺旋矩阵</title>
     <url>/2023/06/29/leetcode-54/</url>
     <content><![CDATA[<blockquote>
@@ -906,8 +951,8 @@
       </categories>
       <tags>
         <tag>数组</tag>
-        <tag>矩阵</tag>
         <tag>medium</tag>
+        <tag>矩阵</tag>
       </tags>
   </entry>
   <entry>
