@@ -1340,4 +1340,49 @@
 <h3 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h3><p><code>@Inherited</code> 元注解是一个标记注解，<code>@Inherited</code>表示了被标注的 annotation 是可以被继承的。如果一个使用了 <code>@Inherited</code> 修饰的 annotation 类型被用于一个 class，则这个 annotation 将被用于该 class 的子类。当使用反射获取该某个类的子类 annotation 时也会获取到父类存在有 <code>@inherited</code> 声明的 annotation 。</p>
 ]]></content>
   </entry>
+  <entry>
+    <title>454. 四数相加 II</title>
+    <url>/2023/07/03/leetcode-454/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/4sum-ii/description/" target="_blank" rel="noopener">454. 四数相加 II</a></p>
+<p>给你四个整数数组 <code>nums1</code>、<code>nums2</code>、<code>nums3</code> 和 <code>nums4</code> ，数组长度都是 <code>n</code> ，请你计算有多少个元组 <code>(i, j, k, l)</code> 能满足：</p>
+<ul>
+<li><code>0 &lt;= i, j, k, l &lt; n</code></li>
+<li><code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code></li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：nums1 = [1,2], nums2 = [-2,-1], nums3 = [-1,2], nums4 = [0,2]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt; 解释：</span><br><span class="line">&gt;  两个元组如下：</span><br><span class="line">&gt; 1. (0, 0, 0, 1) -&gt; nums1[0] + nums2[0] + nums3[0] + nums4[1] = 1 + (-2) + (-1) + 2 = 0</span><br><span class="line">&gt; 2. (1, 1, 0, 0) -&gt; nums1[1] + nums2[1] + nums3[0] + nums4[0] = 2 + (-1) + (-1) + 0 = 0</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：nums1 = [0], nums2 = [0], nums3 = [0], nums4 = [0]</span><br><span class="line">&gt; 输出：1</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p> <strong>提示：</strong></p>
+<ul>
+<li><code>n == nums1.length</code></li>
+<li><code>n == nums2.length</code></li>
+<li><code>n == nums3.length</code></li>
+<li><code>n == nums4.length</code></li>
+<li><code>1 &lt;= n &lt;= 200</code></li>
+<li><code>-228 &lt;= nums1[i], nums2[i], nums3[i], nums4[i] &lt;= 228</code></li>
+</ul>
+</blockquote>
+<p>像这种可以计算的题，最简单直接的思路便是多重循环。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums1.length; i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums2.length; j ++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; nums3.length; k ++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; nums4.length; l++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (nums1[i] + nums2[j] + nums3[k] + nums4[l] == <span class="number">0</span>) &#123;</span><br><span class="line">                            result ++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>超不超时什么的是管不了的，起码这是一种行之有效的方法。当然，对于我们来说一定是为了去寻求更加有效的方法。</p>
+<p>审查题目后发现一个很有意思的点 <strong>和为0</strong>，众所周知，在数学的世界里，对于0、1、-1这样的数字都要相当敏感。</p>
+<p>当0出现时，<code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code>就可以变为 <code>nums1[i] + nums2[j] = nums3[k] + nums4[l]</code> ，即，我们从最初的四重循环，降低到了两重循环，在时间复杂度上就减少了两个量级。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num1 : nums1) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num2 : nums2) &#123;</span><br><span class="line">                map.put(num1 + num2, map.getOrDefault(num1 + num2, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num3 : nums3) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num4 : nums4) &#123;</span><br><span class="line">                result += map.getOrDefault(-num3 - num4, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>哈希表</tag>
+        <tag>数组</tag>
+        <tag>medium</tag>
+      </tags>
+  </entry>
 </search>
