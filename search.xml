@@ -868,6 +868,51 @@
       </tags>
   </entry>
   <entry>
+    <title>454. 四数相加 II</title>
+    <url>/2023/07/03/leetcode-454/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/4sum-ii/description/" target="_blank" rel="noopener">454. 四数相加 II</a></p>
+<p>给你四个整数数组 <code>nums1</code>、<code>nums2</code>、<code>nums3</code> 和 <code>nums4</code> ，数组长度都是 <code>n</code> ，请你计算有多少个元组 <code>(i, j, k, l)</code> 能满足：</p>
+<ul>
+<li><code>0 &lt;= i, j, k, l &lt; n</code></li>
+<li><code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code></li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：nums1 = [1,2], nums2 = [-2,-1], nums3 = [-1,2], nums4 = [0,2]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt; 解释：</span><br><span class="line">&gt;  两个元组如下：</span><br><span class="line">&gt; 1. (0, 0, 0, 1) -&gt; nums1[0] + nums2[0] + nums3[0] + nums4[1] = 1 + (-2) + (-1) + 2 = 0</span><br><span class="line">&gt; 2. (1, 1, 0, 0) -&gt; nums1[1] + nums2[1] + nums3[0] + nums4[0] = 2 + (-1) + (-1) + 0 = 0</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：nums1 = [0], nums2 = [0], nums3 = [0], nums4 = [0]</span><br><span class="line">&gt; 输出：1</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p> <strong>提示：</strong></p>
+<ul>
+<li><code>n == nums1.length</code></li>
+<li><code>n == nums2.length</code></li>
+<li><code>n == nums3.length</code></li>
+<li><code>n == nums4.length</code></li>
+<li><code>1 &lt;= n &lt;= 200</code></li>
+<li><code>-228 &lt;= nums1[i], nums2[i], nums3[i], nums4[i] &lt;= 228</code></li>
+</ul>
+</blockquote>
+<p>像这种可以计算的题，最简单直接的思路便是多重循环。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums1.length; i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums2.length; j ++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; nums3.length; k ++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; nums4.length; l++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (nums1[i] + nums2[j] + nums3[k] + nums4[l] == <span class="number">0</span>) &#123;</span><br><span class="line">                            result ++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>超不超时什么的是管不了的，起码这是一种行之有效的方法。当然，对于我们来说一定是为了去寻求更加有效的方法。</p>
+<p>审查题目后发现一个很有意思的点 <strong>和为0</strong>，众所周知，在数学的世界里，对于0、1、-1这样的数字都要相当敏感。</p>
+<p>当0出现时，<code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code>就可以变为 <code>nums1[i] + nums2[j] = nums3[k] + nums4[l]</code> ，即，我们从最初的四重循环，降低到了两重循环，在时间复杂度上就减少了两个量级。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num1 : nums1) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num2 : nums2) &#123;</span><br><span class="line">                map.put(num1 + num2, map.getOrDefault(num1 + num2, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num3 : nums3) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num4 : nums4) &#123;</span><br><span class="line">                result += map.getOrDefault(-num3 - num4, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>哈希表</tag>
+        <tag>数组</tag>
+        <tag>medium</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>54. 螺旋矩阵</title>
     <url>/2023/06/29/leetcode-54/</url>
     <content><![CDATA[<blockquote>
@@ -906,8 +951,8 @@
       </categories>
       <tags>
         <tag>数组</tag>
-        <tag>矩阵</tag>
         <tag>medium</tag>
+        <tag>矩阵</tag>
       </tags>
   </entry>
   <entry>
@@ -1168,6 +1213,38 @@
       </tags>
   </entry>
   <entry>
+    <title>剑指 Offer 61. 扑克牌中的顺子</title>
+    <url>/2023/07/05/leetcode-offer-61/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/description/" target="_blank" rel="noopener">剑指 Offer 61. 扑克牌中的顺子</a></p>
+<p>从<strong>若干副扑克牌</strong>中随机抽 <code>5</code> 张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入: [1,2,3,4,5]</span><br><span class="line">&gt;输出: True</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入: [0,0,1,2,5]</span><br><span class="line">&gt;输出: True</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>限制：</strong></p>
+<p>数组长度为 5 </p>
+<p>数组的数取值为 [0, 13] .</p>
+</blockquote>
+<p>最直接能够想到的方法就是先进行排序，然后遍历，获取 0 的数量后，判断后续差值，若差值大于王的数量则不连续。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isStraight</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> kings = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (num == <span class="number">0</span>) &#123;</span><br><span class="line">                kings ++;</span><br><span class="line">                i ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i ++; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] - nums[i - <span class="number">1</span>] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (kings == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] - nums[i - <span class="number">1</span>] - <span class="number">1</span> &lt;= kings) &#123;</span><br><span class="line">                    kings -= nums[i] - nums[i - <span class="number">1</span>] - <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实在当前题目的规则之下，只要判断除 0 外的数字中，最大值减去最小值只要小于 5 那么一定能够组成顺子。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isStraight</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> joker = <span class="number">0</span>;</span><br><span class="line">        Arrays.sort(nums); <span class="comment">// 数组排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] == <span class="number">0</span>) joker++; <span class="comment">// 统计大小王数量</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[i] == nums[i + <span class="number">1</span>]) <span class="keyword">return</span> <span class="keyword">false</span>; <span class="comment">// 若有重复，提前返回 false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">4</span>] - nums[joker] &lt; <span class="number">5</span>; <span class="comment">// 最大牌 - 最小牌 &lt; 5 则可构成顺子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：Krahets</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solutions/212071/mian-shi-ti-61-bu-ke-pai-zhong-de-shun-zi-ji-he-se/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>easy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>oh-my-zsh</title>
     <url>/2020/02/27/oh-my-zsh/</url>
     <content><![CDATA[<p><code>Oh My Zsh</code> 是一个令人愉悦的，开源的，社区驱动的框架，用于管理您的 <code>Zsh</code> 配置。它捆绑了成千上万的有用功能，助手，插件，主题以及一些让您大喊大叫的东西…</p>
@@ -1339,50 +1416,5 @@
 <h3 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h3><p><code>@Documented</code> 用于描述其它类型的 annotation 应该被作为被标注的程序成员的公共API，因此可以被例如 javadoc 此类的工具文档化。<code>@Documented</code> 是一个标记注解，没有成员。</p>
 <h3 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h3><p><code>@Inherited</code> 元注解是一个标记注解，<code>@Inherited</code>表示了被标注的 annotation 是可以被继承的。如果一个使用了 <code>@Inherited</code> 修饰的 annotation 类型被用于一个 class，则这个 annotation 将被用于该 class 的子类。当使用反射获取该某个类的子类 annotation 时也会获取到父类存在有 <code>@inherited</code> 声明的 annotation 。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>454. 四数相加 II</title>
-    <url>/2023/07/03/leetcode-454/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://leetcode.cn/problems/4sum-ii/description/" target="_blank" rel="noopener">454. 四数相加 II</a></p>
-<p>给你四个整数数组 <code>nums1</code>、<code>nums2</code>、<code>nums3</code> 和 <code>nums4</code> ，数组长度都是 <code>n</code> ，请你计算有多少个元组 <code>(i, j, k, l)</code> 能满足：</p>
-<ul>
-<li><code>0 &lt;= i, j, k, l &lt; n</code></li>
-<li><code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code></li>
-</ul>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：nums1 = [1,2], nums2 = [-2,-1], nums3 = [-1,2], nums4 = [0,2]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt; 解释：</span><br><span class="line">&gt;  两个元组如下：</span><br><span class="line">&gt; 1. (0, 0, 0, 1) -&gt; nums1[0] + nums2[0] + nums3[0] + nums4[1] = 1 + (-2) + (-1) + 2 = 0</span><br><span class="line">&gt; 2. (1, 1, 0, 0) -&gt; nums1[1] + nums2[1] + nums3[0] + nums4[0] = 2 + (-1) + (-1) + 0 = 0</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：nums1 = [0], nums2 = [0], nums3 = [0], nums4 = [0]</span><br><span class="line">&gt; 输出：1</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p> <strong>提示：</strong></p>
-<ul>
-<li><code>n == nums1.length</code></li>
-<li><code>n == nums2.length</code></li>
-<li><code>n == nums3.length</code></li>
-<li><code>n == nums4.length</code></li>
-<li><code>1 &lt;= n &lt;= 200</code></li>
-<li><code>-228 &lt;= nums1[i], nums2[i], nums3[i], nums4[i] &lt;= 228</code></li>
-</ul>
-</blockquote>
-<p>像这种可以计算的题，最简单直接的思路便是多重循环。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums1.length; i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums2.length; j ++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; nums3.length; k ++) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; nums4.length; l++) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (nums1[i] + nums2[j] + nums3[k] + nums4[l] == <span class="number">0</span>) &#123;</span><br><span class="line">                            result ++;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>超不超时什么的是管不了的，起码这是一种行之有效的方法。当然，对于我们来说一定是为了去寻求更加有效的方法。</p>
-<p>审查题目后发现一个很有意思的点 <strong>和为0</strong>，众所周知，在数学的世界里，对于0、1、-1这样的数字都要相当敏感。</p>
-<p>当0出现时，<code>nums1[i] + nums2[j] + nums3[k] + nums4[l] == 0</code>就可以变为 <code>nums1[i] + nums2[j] = nums3[k] + nums4[l]</code> ，即，我们从最初的四重循环，降低到了两重循环，在时间复杂度上就减少了两个量级。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num1 : nums1) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num2 : nums2) &#123;</span><br><span class="line">                map.put(num1 + num2, map.getOrDefault(num1 + num2, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num3 : nums3) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num4 : nums4) &#123;</span><br><span class="line">                result += map.getOrDefault(-num3 - num4, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>哈希表</tag>
-        <tag>数组</tag>
-        <tag>medium</tag>
-      </tags>
   </entry>
 </search>
