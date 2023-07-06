@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Satisfy:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shepherd-xie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="自己的服务器日志只是简单的做了按天分割的处理，要想从日志中找些什么确实是一个很难完成的事情，于是想到了对日志文件的处理，对于这样的任务，经常在服务中使用的 ELK 成为了我的首选。  以下所有服务的搭建都基于 Docker Compose  服务搭建首先便是搭建 Kibana、Elastic Search、Filebeat 和 Metricbeat 四个服务。 123456789101112131">
+<meta name="keywords" content="Docker,Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 ElasticSearch 处理 Nginx 日志">
+<meta property="og:url" content="https://shepherd-xie.github.io/2023/07/06/nginx-elastic-setup/index.html">
+<meta property="og:site_name" content="Shepherd&#39;s Blog">
+<meta property="og:description" content="自己的服务器日志只是简单的做了按天分割的处理，要想从日志中找些什么确实是一个很难完成的事情，于是想到了对日志文件的处理，对于这样的任务，经常在服务中使用的 ELK 成为了我的首选。  以下所有服务的搭建都基于 Docker Compose  服务搭建首先便是搭建 Kibana、Elastic Search、Filebeat 和 Metricbeat 四个服务。 123456789101112131">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.orkva.com/images/2023/07/06/image-20230706182402842.png">
+<meta property="og:updated_time" content="2023-07-06T10:38:40.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 ElasticSearch 处理 Nginx 日志">
+<meta name="twitter:description" content="自己的服务器日志只是简单的做了按天分割的处理，要想从日志中找些什么确实是一个很难完成的事情，于是想到了对日志文件的处理，对于这样的任务，经常在服务中使用的 ELK 成为了我的首选。  以下所有服务的搭建都基于 Docker Compose  服务搭建首先便是搭建 Kibana、Elastic Search、Filebeat 和 Metricbeat 四个服务。 123456789101112131">
+<meta name="twitter:image" content="https://images.orkva.com/images/2023/07/06/image-20230706182402842.png">
+
+<link rel="canonical" href="https://shepherd-xie.github.io/2023/07/06/nginx-elastic-setup/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>使用 ElasticSearch 处理 Nginx 日志 | Shepherd's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Shepherd's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/07/06/nginx-elastic-setup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 ElasticSearch 处理 Nginx 日志
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-06 14:54:19" itemprop="dateCreated datePublished" datetime="2023-07-06T14:54:19+08:00">2023-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>自己的服务器日志只是简单的做了按天分割的处理，要想从日志中找些什么确实是一个很难完成的事情，于是想到了对日志文件的处理，对于这样的任务，经常在服务中使用的 ELK 成为了我的首选。</p>
+<blockquote>
+<p>以下所有服务的搭建都基于 Docker Compose</p>
+</blockquote>
+<h3 id="服务搭建"><a href="#服务搭建" class="headerlink" title="服务搭建"></a>服务搭建</h3><p>首先便是搭建 Kibana、Elastic Search、Filebeat 和 Metricbeat 四个服务。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">'3.8'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/elasticsearch/elasticsearch:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">elasticsearch</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"discovery.type=single-node"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9200</span><span class="string">:9200</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9300</span><span class="string">:9300</span></span><br><span class="line">  <span class="attr">kibana:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/kibana/kibana:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kibana</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"ELASTICSEARCH_HOSTS=http://elasticsearch:9200"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">5601</span><span class="string">:5601</span></span><br><span class="line">  <span class="attr">metricbeat:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/beats/metricbeat:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">metricbeat</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">metricbeat</span> <span class="string">-e</span> <span class="string">-E</span> <span class="string">setup.kibana.host=kibana:5601</span> <span class="string">-E</span> <span class="string">output.elasticsearch.hosts=["elasticsearch:9200"]</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./metricbeat/modules.d:/usr/share/metricbeat/modules.d</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/proc:/hostfs/proc:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/:/hostfs:ro</span></span><br><span class="line">  <span class="attr">filebeat:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/beats/filebeat:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">filebeat</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">filebeat</span> <span class="string">-e</span> <span class="string">--strict.perms=false</span> <span class="string">-E</span> <span class="string">setup.kibana.host=kibana:5601</span> <span class="string">-E</span> <span class="string">output.elasticsearch.hosts=["elasticsearch:9200"]</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./filebeat/modules.d:/usr/share/filebeat/modules.d</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/lib/docker/containers:/var/lib/docker/containers:ro</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">elastic_nginx</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">elastic:</span></span><br></pre></td></tr></table></figure>
+<p>这里使用的版本是 7.17.11 版本，当前最新版本为 8.8，在当前版本增强了安全特性，导致测试不是太过友好，所以这次搭建选择了较老的版本，新版本以后有机会再试吧。</p>
+<p>可以看到，使用我们将所有的服务全部放在了同一个 Network 下，并且将 <code>/var/run/docker.sock</code> 映射到了 <code>filebeat</code> 与 <code>metricbeat</code> 两个服务中，便于获取 <code>nginx</code> 的信息。</p>
+<h3 id="metricbeat-配置"><a href="#metricbeat-配置" class="headerlink" title="metricbeat 配置"></a>metricbeat 配置</h3><h4 id="启用-Nginx-模块"><a href="#启用-Nginx-模块" class="headerlink" title="启用 Nginx 模块"></a>启用 Nginx 模块</h4><p>metricbeat 默认包含许多预配置项，对于 nginx 直接启用即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose exec metricbeat metricbeat modules enable nginx</span><br></pre></td></tr></table></figure>
+<h4 id="自动发现"><a href="#自动发现" class="headerlink" title="自动发现"></a>自动发现</h4><p>由于我们的服务是基于 Docker 无法像传统服务执行本机路径，所以需要配置自动发现。</p>
+<p>配置文件为 <code>metricbeat.yml</code>。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">metricbeat.autodiscover:</span></span><br><span class="line">  <span class="attr">providers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">      <span class="attr">templates:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">condition:</span></span><br><span class="line">            <span class="attr">contains:</span></span><br><span class="line">              <span class="attr">docker.container.image:</span> <span class="string">nginx</span></span><br><span class="line">          <span class="attr">config:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">module:</span> <span class="string">nginx</span></span><br><span class="line">              <span class="attr">metricsets:</span> <span class="string">["stubstatus"]</span></span><br><span class="line">              <span class="attr">hosts:</span> <span class="string">"$&#123;data.host&#125;:$&#123;data.port&#125;"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Filebeat-配置"><a href="#Filebeat-配置" class="headerlink" title="Filebeat 配置"></a>Filebeat 配置</h3><h4 id="启用-Nginx-模块-1"><a href="#启用-Nginx-模块-1" class="headerlink" title="启用 Nginx 模块"></a>启用 Nginx 模块</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose exec filebeat filebeat modules enable nginx</span><br></pre></td></tr></table></figure>
+<h4 id="自动发现-1"><a href="#自动发现-1" class="headerlink" title="自动发现"></a>自动发现</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">filebeat.autodiscover:</span></span><br><span class="line"> <span class="attr">providers:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">     <span class="attr">templates:</span></span><br><span class="line">       <span class="bullet">-</span> <span class="attr">condition:</span></span><br><span class="line">         <span class="attr">contains:</span></span><br><span class="line">           <span class="attr">docker.container.image:</span> <span class="string">nginx</span></span><br><span class="line">         <span class="attr">config:</span></span><br><span class="line">           <span class="bullet">-</span> <span class="attr">module:</span> <span class="string">nginx</span></span><br><span class="line">             <span class="attr">access:</span></span><br><span class="line">               <span class="attr">input:</span></span><br><span class="line">                 <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">                 <span class="attr">containers.ids:</span></span><br><span class="line">                   <span class="bullet">-</span> <span class="string">"$&#123;data.docker.container.id&#125;"</span></span><br><span class="line">             <span class="attr">error:</span></span><br><span class="line">               <span class="attr">input:</span></span><br><span class="line">                 <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">                 <span class="attr">containers.ids:</span></span><br><span class="line">                   <span class="bullet">-</span> <span class="string">"$&#123;data.docker.container.id&#125;"</span></span><br></pre></td></tr></table></figure>
+<p>配置结束后便可以启动服务。</p>
+<h3 id="Kibana-和-Elastic-Search"><a href="#Kibana-和-Elastic-Search" class="headerlink" title="Kibana 和 Elastic Search"></a>Kibana 和 Elastic Search</h3><p>访问 <a href="http://127.0.0.1:9200/" target="_blank" rel="noopener">http://127.0.0.1:9200/</a> 可以检查 ES 的启动是否成功。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"name"</span>:<span class="string">"6c6c3a287390"</span>,</span><br><span class="line">   <span class="attr">"cluster_name"</span>:<span class="string">"docker-cluster"</span>,</span><br><span class="line">   <span class="attr">"cluster_uuid"</span>:<span class="string">"d77Jxv4TRIWYBrIMWKA8Dw"</span>,</span><br><span class="line">   <span class="attr">"version"</span>:&#123;</span><br><span class="line">      <span class="attr">"number"</span>:<span class="string">"7.17.11"</span>,</span><br><span class="line">      <span class="attr">"build_flavor"</span>:<span class="string">"default"</span>,</span><br><span class="line">      <span class="attr">"build_type"</span>:<span class="string">"docker"</span>,</span><br><span class="line">      <span class="attr">"build_hash"</span>:<span class="string">"eeedb98c60326ea3d46caef960fb4c77958fb885"</span>,</span><br><span class="line">      <span class="attr">"build_date"</span>:<span class="string">"2023-06-23T05:33:12.261262042Z"</span>,</span><br><span class="line">      <span class="attr">"build_snapshot"</span>:<span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"lucene_version"</span>:<span class="string">"8.11.1"</span>,</span><br><span class="line">      <span class="attr">"minimum_wire_compatibility_version"</span>:<span class="string">"6.8.0"</span>,</span><br><span class="line">      <span class="attr">"minimum_index_compatibility_version"</span>:<span class="string">"6.0.0-beta1"</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">"tagline"</span>:<span class="string">"You Know, for Search"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <a href="http://127.0.0.1:5601/" target="_blank" rel="noopener">http://127.0.0.1:5601/</a> 访问 Kibana。</p>
+<p>点击左侧 <strong>Observability</strong> 可以查看可视化数据，点击 Logs 可以查看 Nginx 日志。</p>
+<p><img src="https://images.orkva.com/images/2023/07/06/image-20230706182402842.png" alt="image-20230706182402842"></p>
+<blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.elastic.co/cn/blog/how-to-monitor-nginx-web-servers-with-the-elastic-stack" target="_blank" rel="noopener">如何使用 Elastic Stack 监测 Nginx Web 服务器</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/05/leetcode-offer-61/" rel="prev" title="剑指 Offer 61. 扑克牌中的顺子">
+      <i class="fa fa-chevron-left"></i> 剑指 Offer 61. 扑克牌中的顺子
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务搭建"><span class="nav-number">1.</span> <span class="nav-text">服务搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#metricbeat-配置"><span class="nav-number">2.</span> <span class="nav-text">metricbeat 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启用-Nginx-模块"><span class="nav-number">2.1.</span> <span class="nav-text">启用 Nginx 模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动发现"><span class="nav-number">2.2.</span> <span class="nav-text">自动发现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filebeat-配置"><span class="nav-number">3.</span> <span class="nav-text">Filebeat 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启用-Nginx-模块-1"><span class="nav-number">3.1.</span> <span class="nav-text">启用 Nginx 模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动发现-1"><span class="nav-number">3.2.</span> <span class="nav-text">自动发现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kibana-和-Elastic-Search"><span class="nav-number">4.</span> <span class="nav-text">Kibana 和 Elastic Search</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Shepherd Xie</p>
+  <div class="site-description" itemprop="description">苦逼程序员的无聊日常</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shepherd-xie" title="GitHub → https://github.com/shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.orkva.com/blog-book" title="GitBook → https://blog.orkva.com/blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shepherd.xie@gmail.com" title="E-Mail → mailto:shepherd.xie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shepherd Xie</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

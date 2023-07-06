@@ -163,6 +163,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/20/leetcode-554/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/20/leetcode-554/" class="post-title-link" itemprop="url">leetcode-554 砖墙</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-20 10:54:14" itemprop="dateCreated datePublished" datetime="2023-06-20T10:54:14+08:00">2023-06-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><a href="https://leetcode.cn/problems/brick-wall/description/" target="_blank" rel="noopener">554. 砖墙</a></p>
+<p>你的面前有一堵矩形的、由 <code>n</code> 行砖块组成的砖墙。这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。</p>
+<p>   你现在要画一条 <strong>自顶向下</strong> 的、穿过 <strong>最少</strong> 砖块的垂线。如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。<strong>你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。</strong></p>
+<p>给你一个二维数组 <code>wall</code> ，该数组包含这堵墙的相关信息。其中，<code>wall[i]</code> 是一个代表从左至右每块砖的宽度的数组。你需要找出怎样画才能使这条线 <strong>穿过的砖块数量最少</strong> ，并且返回 <strong>穿过的砖块数量</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><strong><img src="https://images.orkva.com/images/2023/06/20/1619762681-rvgTEO-image.png" alt="image.png"></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：wall = [[1,2,2,1],[3,1,2],[1,3,2],[2,4],[3,1,2],[1,3,1,1]]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：wall = [[1],[1],[1]]</span><br><span class="line">&gt; 输出：3</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == wall.length</code><ul>
+<li><code>1 &lt;= n &lt;= 104</code></li>
+<li><code>1 &lt;= wall[i].length &lt;= 104</code></li>
+<li><code>1 &lt;= sum(wall[i].length) &lt;= 2 * 104</code></li>
+<li>对于每一行 <code>i</code> ，<code>sum(wall[i])</code> 是相同的</li>
+<li><code>1 &lt;= wall[i][j] &lt;= 231 - 1</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>这道题目相对来说比较简单，思路也比较清晰，只需要计算出所有位置上墙的个数，然后取最小值即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> allWallWidth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer wallWithe : wall.get(<span class="number">0</span>)) &#123;</span><br><span class="line">        allWallWidth += wallWithe;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (allWallWidth &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> wall.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] overlap = <span class="keyword">new</span> <span class="keyword">int</span>[allWallWidth];</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="keyword">int</span> startGap = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWithe : wallLine) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = startGap + <span class="number">1</span>; i &lt; startGap + wallWithe; i++) &#123;</span><br><span class="line">                overlap[i] += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            startGap += wallWithe;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> through = wall.size();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; overlap.length; i++) &#123;</span><br><span class="line">        through = Math.min(through, overlap[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> through;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么问题来了，有这样的一个测试用例。</p>
+<blockquote>
+<p>[[100000000],[100000000],[100000000]]</p>
+</blockquote>
+<p>很显然，如果是计算墙壁的厚度，在这个测试用例上不可避免的会导致内存溢出，我们还是需要想其他的思路。</p>
+<p>既然计算墙壁的厚度会导致内存溢出，那么我们可不可以计算空隙的数量，然后用总厚度减去最大的间隙？</p>
+<p>显然是可以的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> </span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; gapMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="keyword">int</span> rightEdge = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWidth : wallLine) &#123;</span><br><span class="line">            rightEdge += wallWidth;</span><br><span class="line">            Integer gapCount = gapMap.getOrDefault(rightEdge, <span class="number">0</span>);</span><br><span class="line">            gapMap.put(rightEdge, gapCount + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不计算两侧的空隙</span></span><br><span class="line">        gapMap.remove(rightEdge);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxGapCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer gapCount : gapMap.values()) &#123;</span><br><span class="line">        maxGapCount = Math.max(gapCount, maxGapCount);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> wall.size() - maxGapCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/19/leetcode-318/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -851,76 +957,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2020/02/27/oh-my-zsh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/27/oh-my-zsh/" class="post-title-link" itemprop="url">oh-my-zsh</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-27 13:24:09" itemprop="dateCreated datePublished" datetime="2020-02-27T13:24:09+08:00">2020-02-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>Oh My Zsh</code> 是一个令人愉悦的，开源的，社区驱动的框架，用于管理您的 <code>Zsh</code> 配置。它捆绑了成千上万的有用功能，助手，插件，主题以及一些让您大喊大叫的东西…</p>
-<p>毕竟一切向颜值看起，OMZ 的颜值绝对算得上能打的那一种。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/27/oh-my-zsh/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -986,20 +1026,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

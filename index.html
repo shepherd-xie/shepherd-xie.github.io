@@ -163,6 +163,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/07/06/nginx-elastic-setup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/06/nginx-elastic-setup/" class="post-title-link" itemprop="url">使用 ElasticSearch 处理 Nginx 日志</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-06 14:54:19" itemprop="dateCreated datePublished" datetime="2023-07-06T14:54:19+08:00">2023-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>自己的服务器日志只是简单的做了按天分割的处理，要想从日志中找些什么确实是一个很难完成的事情，于是想到了对日志文件的处理，对于这样的任务，经常在服务中使用的 ELK 成为了我的首选。</p>
+<blockquote>
+<p>以下所有服务的搭建都基于 Docker Compose</p>
+</blockquote>
+<h3 id="服务搭建"><a href="#服务搭建" class="headerlink" title="服务搭建"></a>服务搭建</h3><p>首先便是搭建 Kibana、Elastic Search、Filebeat 和 Metricbeat 四个服务。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">'3.8'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/elasticsearch/elasticsearch:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">elasticsearch</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"discovery.type=single-node"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9200</span><span class="string">:9200</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9300</span><span class="string">:9300</span></span><br><span class="line">  <span class="attr">kibana:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/kibana/kibana:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kibana</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"ELASTICSEARCH_HOSTS=http://elasticsearch:9200"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">5601</span><span class="string">:5601</span></span><br><span class="line">  <span class="attr">metricbeat:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/beats/metricbeat:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">metricbeat</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">metricbeat</span> <span class="string">-e</span> <span class="string">-E</span> <span class="string">setup.kibana.host=kibana:5601</span> <span class="string">-E</span> <span class="string">output.elasticsearch.hosts=["elasticsearch:9200"]</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./metricbeat/modules.d:/usr/share/metricbeat/modules.d</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/proc:/hostfs/proc:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/:/hostfs:ro</span></span><br><span class="line">  <span class="attr">filebeat:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/beats/filebeat:7.17.11</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">filebeat</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">filebeat</span> <span class="string">-e</span> <span class="string">--strict.perms=false</span> <span class="string">-E</span> <span class="string">setup.kibana.host=kibana:5601</span> <span class="string">-E</span> <span class="string">output.elasticsearch.hosts=["elasticsearch:9200"]</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./filebeat/modules.d:/usr/share/filebeat/modules.d</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/lib/docker/containers:/var/lib/docker/containers:ro</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">elastic_nginx</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">elastic:</span></span><br></pre></td></tr></table></figure>
+<p>这里使用的版本是 7.17.11 版本，当前最新版本为 8.8，在当前版本增强了安全特性，导致测试不是太过友好，所以这次搭建选择了较老的版本，新版本以后有机会再试吧。</p>
+<p>可以看到，使用我们将所有的服务全部放在了同一个 Network 下，并且将 <code>/var/run/docker.sock</code> 映射到了 <code>filebeat</code> 与 <code>metricbeat</code> 两个服务中，便于获取 <code>nginx</code> 的信息。</p>
+<h3 id="metricbeat-配置"><a href="#metricbeat-配置" class="headerlink" title="metricbeat 配置"></a>metricbeat 配置</h3><h4 id="启用-Nginx-模块"><a href="#启用-Nginx-模块" class="headerlink" title="启用 Nginx 模块"></a>启用 Nginx 模块</h4><p>metricbeat 默认包含许多预配置项，对于 nginx 直接启用即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose exec metricbeat metricbeat modules enable nginx</span><br></pre></td></tr></table></figure>
+<h4 id="自动发现"><a href="#自动发现" class="headerlink" title="自动发现"></a>自动发现</h4><p>由于我们的服务是基于 Docker 无法像传统服务执行本机路径，所以需要配置自动发现。</p>
+<p>配置文件为 <code>metricbeat.yml</code>。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">metricbeat.autodiscover:</span></span><br><span class="line">  <span class="attr">providers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">      <span class="attr">templates:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">condition:</span></span><br><span class="line">            <span class="attr">contains:</span></span><br><span class="line">              <span class="attr">docker.container.image:</span> <span class="string">nginx</span></span><br><span class="line">          <span class="attr">config:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">module:</span> <span class="string">nginx</span></span><br><span class="line">              <span class="attr">metricsets:</span> <span class="string">["stubstatus"]</span></span><br><span class="line">              <span class="attr">hosts:</span> <span class="string">"$&#123;data.host&#125;:$&#123;data.port&#125;"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Filebeat-配置"><a href="#Filebeat-配置" class="headerlink" title="Filebeat 配置"></a>Filebeat 配置</h3><h4 id="启用-Nginx-模块-1"><a href="#启用-Nginx-模块-1" class="headerlink" title="启用 Nginx 模块"></a>启用 Nginx 模块</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose exec filebeat filebeat modules enable nginx</span><br></pre></td></tr></table></figure>
+<h4 id="自动发现-1"><a href="#自动发现-1" class="headerlink" title="自动发现"></a>自动发现</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">filebeat.autodiscover:</span></span><br><span class="line"> <span class="attr">providers:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">     <span class="attr">templates:</span></span><br><span class="line">       <span class="bullet">-</span> <span class="attr">condition:</span></span><br><span class="line">         <span class="attr">contains:</span></span><br><span class="line">           <span class="attr">docker.container.image:</span> <span class="string">nginx</span></span><br><span class="line">         <span class="attr">config:</span></span><br><span class="line">           <span class="bullet">-</span> <span class="attr">module:</span> <span class="string">nginx</span></span><br><span class="line">             <span class="attr">access:</span></span><br><span class="line">               <span class="attr">input:</span></span><br><span class="line">                 <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">                 <span class="attr">containers.ids:</span></span><br><span class="line">                   <span class="bullet">-</span> <span class="string">"$&#123;data.docker.container.id&#125;"</span></span><br><span class="line">             <span class="attr">error:</span></span><br><span class="line">               <span class="attr">input:</span></span><br><span class="line">                 <span class="attr">type:</span> <span class="string">docker</span></span><br><span class="line">                 <span class="attr">containers.ids:</span></span><br><span class="line">                   <span class="bullet">-</span> <span class="string">"$&#123;data.docker.container.id&#125;"</span></span><br></pre></td></tr></table></figure>
+<p>配置结束后便可以启动服务。</p>
+<h3 id="Kibana-和-Elastic-Search"><a href="#Kibana-和-Elastic-Search" class="headerlink" title="Kibana 和 Elastic Search"></a>Kibana 和 Elastic Search</h3><p>访问 <a href="http://127.0.0.1:9200/" target="_blank" rel="noopener">http://127.0.0.1:9200/</a> 可以检查 ES 的启动是否成功。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"name"</span>:<span class="string">"6c6c3a287390"</span>,</span><br><span class="line">   <span class="attr">"cluster_name"</span>:<span class="string">"docker-cluster"</span>,</span><br><span class="line">   <span class="attr">"cluster_uuid"</span>:<span class="string">"d77Jxv4TRIWYBrIMWKA8Dw"</span>,</span><br><span class="line">   <span class="attr">"version"</span>:&#123;</span><br><span class="line">      <span class="attr">"number"</span>:<span class="string">"7.17.11"</span>,</span><br><span class="line">      <span class="attr">"build_flavor"</span>:<span class="string">"default"</span>,</span><br><span class="line">      <span class="attr">"build_type"</span>:<span class="string">"docker"</span>,</span><br><span class="line">      <span class="attr">"build_hash"</span>:<span class="string">"eeedb98c60326ea3d46caef960fb4c77958fb885"</span>,</span><br><span class="line">      <span class="attr">"build_date"</span>:<span class="string">"2023-06-23T05:33:12.261262042Z"</span>,</span><br><span class="line">      <span class="attr">"build_snapshot"</span>:<span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"lucene_version"</span>:<span class="string">"8.11.1"</span>,</span><br><span class="line">      <span class="attr">"minimum_wire_compatibility_version"</span>:<span class="string">"6.8.0"</span>,</span><br><span class="line">      <span class="attr">"minimum_index_compatibility_version"</span>:<span class="string">"6.0.0-beta1"</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">"tagline"</span>:<span class="string">"You Know, for Search"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <a href="http://127.0.0.1:5601/" target="_blank" rel="noopener">http://127.0.0.1:5601/</a> 访问 Kibana。</p>
+<p>点击左侧 <strong>Observability</strong> 可以查看可视化数据，点击 Logs 可以查看 Nginx 日志。</p>
+<p><img src="https://images.orkva.com/images/2023/07/06/image-20230706182402842.png" alt="image-20230706182402842"></p>
+<blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://www.elastic.co/cn/blog/how-to-monitor-nginx-web-servers-with-the-elastic-stack" target="_blank" rel="noopener">如何使用 Elastic Stack 监测 Nginx Web 服务器</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/07/05/leetcode-offer-61/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1088,116 +1181,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/20/leetcode-554/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/20/leetcode-554/" class="post-title-link" itemprop="url">leetcode-554 砖墙</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-20 10:54:14" itemprop="dateCreated datePublished" datetime="2023-06-20T10:54:14+08:00">2023-06-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><a href="https://leetcode.cn/problems/brick-wall/description/" target="_blank" rel="noopener">554. 砖墙</a></p>
-<p>你的面前有一堵矩形的、由 <code>n</code> 行砖块组成的砖墙。这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。</p>
-<p>   你现在要画一条 <strong>自顶向下</strong> 的、穿过 <strong>最少</strong> 砖块的垂线。如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。<strong>你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。</strong></p>
-<p>给你一个二维数组 <code>wall</code> ，该数组包含这堵墙的相关信息。其中，<code>wall[i]</code> 是一个代表从左至右每块砖的宽度的数组。你需要找出怎样画才能使这条线 <strong>穿过的砖块数量最少</strong> ，并且返回 <strong>穿过的砖块数量</strong> 。</p>
-<p><strong>示例 1：</strong></p>
-<p><strong><img src="https://images.orkva.com/images/2023/06/20/1619762681-rvgTEO-image.png" alt="image.png"></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：wall = [[1,2,2,1],[3,1,2],[1,3,2],[2,4],[3,1,2],[1,3,1,1]]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：wall = [[1],[1],[1]]</span><br><span class="line">&gt; 输出：3</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>n == wall.length</code><ul>
-<li><code>1 &lt;= n &lt;= 104</code></li>
-<li><code>1 &lt;= wall[i].length &lt;= 104</code></li>
-<li><code>1 &lt;= sum(wall[i].length) &lt;= 2 * 104</code></li>
-<li>对于每一行 <code>i</code> ，<code>sum(wall[i])</code> 是相同的</li>
-<li><code>1 &lt;= wall[i][j] &lt;= 231 - 1</code></li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<p>这道题目相对来说比较简单，思路也比较清晰，只需要计算出所有位置上墙的个数，然后取最小值即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> allWallWidth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer wallWithe : wall.get(<span class="number">0</span>)) &#123;</span><br><span class="line">        allWallWidth += wallWithe;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (allWallWidth &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> wall.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] overlap = <span class="keyword">new</span> <span class="keyword">int</span>[allWallWidth];</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="keyword">int</span> startGap = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWithe : wallLine) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = startGap + <span class="number">1</span>; i &lt; startGap + wallWithe; i++) &#123;</span><br><span class="line">                overlap[i] += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            startGap += wallWithe;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> through = wall.size();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; overlap.length; i++) &#123;</span><br><span class="line">        through = Math.min(through, overlap[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> through;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么问题来了，有这样的一个测试用例。</p>
-<blockquote>
-<p>[[100000000],[100000000],[100000000]]</p>
-</blockquote>
-<p>很显然，如果是计算墙壁的厚度，在这个测试用例上不可避免的会导致内存溢出，我们还是需要想其他的思路。</p>
-<p>既然计算墙壁的厚度会导致内存溢出，那么我们可不可以计算空隙的数量，然后用总厚度减去最大的间隙？</p>
-<p>显然是可以的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> </span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; gapMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="keyword">int</span> rightEdge = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWidth : wallLine) &#123;</span><br><span class="line">            rightEdge += wallWidth;</span><br><span class="line">            Integer gapCount = gapMap.getOrDefault(rightEdge, <span class="number">0</span>);</span><br><span class="line">            gapMap.put(rightEdge, gapCount + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不计算两侧的空隙</span></span><br><span class="line">        gapMap.remove(rightEdge);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxGapCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer gapCount : gapMap.values()) &#123;</span><br><span class="line">        maxGapCount = Math.max(gapCount, maxGapCount);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> wall.size() - maxGapCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1263,20 +1250,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
