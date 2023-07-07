@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"shepherd-xie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="318. 最大单词长度乘积  给你一个字符串数组 words ，找出并返回 length(words[i]) * length(words[j]) 的最大值，并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 0 。    示例 1：   1234&amp;gt;  输入：words = [&amp;quot;abcw&amp;quot;,&amp;quot;baz&amp;quot;,&amp;quot;foo&amp;quot;,&amp;qu">
-<meta name="keywords" content="位运算,字符串">
+  <meta name="description" content="380. O(1) 时间插入、删除和获取随机元素 实现RandomizedSet 类：  RandomizedSet() 初始化 RandomizedSet 对象 bool insert(int val) 当元素 val 不存在时，向集合中插入该项，并返回 true ；否则，返回 false 。 bool remove(int val) 当元素 val 存在时，从集合中移除该项，并返回 true">
+<meta name="keywords" content="数组,medium,哈希表,设计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-318 最大单词长度乘积">
-<meta property="og:url" content="https://shepherd-xie.github.io/2023/06/19/leetcode-318/index.html">
+<meta property="og:title" content="380. O(1) 时间插入、删除和获取随机元素">
+<meta property="og:url" content="https://shepherd-xie.github.io/2023/06/29/leetcode-380/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
-<meta property="og:description" content="318. 最大单词长度乘积  给你一个字符串数组 words ，找出并返回 length(words[i]) * length(words[j]) 的最大值，并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 0 。    示例 1：   1234&amp;gt;  输入：words = [&amp;quot;abcw&amp;quot;,&amp;quot;baz&amp;quot;,&amp;quot;foo&amp;quot;,&amp;qu">
+<meta property="og:description" content="380. O(1) 时间插入、删除和获取随机元素 实现RandomizedSet 类：  RandomizedSet() 初始化 RandomizedSet 对象 bool insert(int val) 当元素 val 不存在时，向集合中插入该项，并返回 true ；否则，返回 false 。 bool remove(int val) 当元素 val 存在时，从集合中移除该项，并返回 true">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2023-07-07T06:48:56.043Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-318 最大单词长度乘积">
-<meta name="twitter:description" content="318. 最大单词长度乘积  给你一个字符串数组 words ，找出并返回 length(words[i]) * length(words[j]) 的最大值，并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 0 。    示例 1：   1234&amp;gt;  输入：words = [&amp;quot;abcw&amp;quot;,&amp;quot;baz&amp;quot;,&amp;quot;foo&amp;quot;,&amp;qu">
+<meta name="twitter:title" content="380. O(1) 时间插入、删除和获取随机元素">
+<meta name="twitter:description" content="380. O(1) 时间插入、删除和获取随机元素 实现RandomizedSet 类：  RandomizedSet() 初始化 RandomizedSet 对象 bool insert(int val) 当元素 val 不存在时，向集合中插入该项，并返回 true ；否则，返回 false 。 bool remove(int val) 当元素 val 存在时，从集合中移除该项，并返回 true">
 
-<link rel="canonical" href="https://shepherd-xie.github.io/2023/06/19/leetcode-318/">
+<link rel="canonical" href="https://shepherd-xie.github.io/2023/06/29/leetcode-380/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>leetcode-318 最大单词长度乘积 | Shepherd's Blog</title>
+  <title>380. O(1) 时间插入、删除和获取随机元素 | Shepherd's Blog</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/19/leetcode-318/">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/29/leetcode-380/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          leetcode-318 最大单词长度乘积
+          380. O(1) 时间插入、删除和获取随机元素
         </h1>
 
         <div class="post-meta">
@@ -189,7 +189,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-19 15:35:24" itemprop="dateCreated datePublished" datetime="2023-06-19T15:35:24+08:00">2023-06-19</time>
+              <time title="创建时间：2023-06-29 14:42:45" itemprop="dateCreated datePublished" datetime="2023-06-29T14:42:45+08:00">2023-06-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,52 +217,28 @@
 
       
         <blockquote>
-<p><a href="https://leetcode.cn/problems/maximum-product-of-word-lengths/" target="_blank" rel="noopener">318. 最大单词长度乘积</a></p>
+<p><a href="https://leetcode.cn/problems/insert-delete-getrandom-o1/description/" target="_blank" rel="noopener">380. O(1) 时间插入、删除和获取随机元素</a></p>
+<p>实现<code>RandomizedSet</code> 类：</p>
 <ul>
-<li>给你一个字符串数组 <code>words</code> ，找出并返回 <code>length(words[i]) * length(words[j])</code> 的最大值，并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 <code>0</code> 。</li>
+<li><code>RandomizedSet()</code> 初始化 <code>RandomizedSet</code> 对象</li>
+<li><code>bool insert(int val)</code> 当元素 <code>val</code> 不存在时，向集合中插入该项，并返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
+<li><code>bool remove(int val)</code> 当元素 <code>val</code> 存在时，从集合中移除该项，并返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
+<li><code>int getRandom()</code> 随机返回现有集合中的一项（测试用例保证调用此方法时集合中至少存在一个元素）。每个元素应该有 <strong>相同的概率</strong> 被返回。</li>
 </ul>
-<p>  <strong>示例 1：</strong></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;  输入：words = [&quot;abcw&quot;,&quot;baz&quot;,&quot;foo&quot;,&quot;bar&quot;,&quot;xtfn&quot;,&quot;abcdef&quot;]</span><br><span class="line">&gt;   输出：16 </span><br><span class="line">&gt;  解释：这两个单词为 &quot;abcw&quot;, &quot;xtfn&quot;。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<p>你必须实现类的所有函数，并满足每个函数的 <strong>平均</strong> 时间复杂度为 <code>O(1)</code> 。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入</span><br><span class="line">&gt; [&quot;RandomizedSet&quot;, &quot;insert&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;]</span><br><span class="line">&gt; [[], [1], [2], [2], [], [1], [2], []]</span><br><span class="line">&gt; 输出</span><br><span class="line">&gt; [null, true, false, true, 2, true, false, 2]</span><br><span class="line">&gt; </span><br><span class="line">&gt; 解释</span><br><span class="line">&gt; RandomizedSet randomizedSet = new RandomizedSet();</span><br><span class="line">&gt; randomizedSet.insert(1); // 向集合中插入 1 。返回 true 表示 1 被成功地插入。</span><br><span class="line">&gt; randomizedSet.remove(2); // 返回 false ，表示集合中不存在 2 。</span><br><span class="line">&gt; randomizedSet.insert(2); // 向集合中插入 2 。返回 true 。集合现在包含 [1,2] 。</span><br><span class="line">&gt; randomizedSet.getRandom(); // getRandom 应随机返回 1 或 2 。</span><br><span class="line">&gt; randomizedSet.remove(1); // 从集合中移除 1 ，返回 true 。集合现在包含 [2] 。</span><br><span class="line">&gt; randomizedSet.insert(2); // 2 已在集合中，所以返回 false 。</span><br><span class="line">&gt; randomizedSet.getRandom(); // 由于 2 是集合中唯一的数字，getRandom 总是返回 2 。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <blockquote>
-<p>  <strong>示例 2：</strong></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;   输入：words = [&quot;a&quot;,&quot;ab&quot;,&quot;abc&quot;,&quot;d&quot;,&quot;cd&quot;,&quot;bcd&quot;,&quot;abcd&quot;]</span><br><span class="line">&gt;   输出：4 </span><br><span class="line">&gt;   解释：这两个单词为 &quot;ab&quot;, &quot;cd&quot;。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>  <strong>示例 3：</strong></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;  输入：words = [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]</span><br><span class="line">&gt;   输出：0 </span><br><span class="line">&gt;  解释：不存在这样的两个单词。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p> <strong>提示：</strong></p>
+<p><strong>提示：</strong></p>
 <ul>
-<li><code>2 &lt;= words.length &lt;= 1000</code><ul>
-<li><code>1 &lt;= words[i].length &lt;= 1000</code></li>
-<li><code>words[i]</code> 仅包含小写字母</li>
-</ul>
-</li>
+<li><code>-231 &lt;= val &lt;= 231 - 1</code></li>
+<li>最多调用 <code>insert</code>、<code>remove</code> 和 <code>getRandom</code> 函数 <code>2 * `</code>105` 次</li>
+<li>在调用 <code>getRandom</code> 方法时，数据结构中 <strong>至少存在一个</strong> 元素。</li>
 </ul>
 </blockquote>
-<p>由题目和提示信息可以归纳出两点：</p>
-<ul>
-<li>第一，本题难点在于判断两个单词中是否含有公共字母</li>
-<li>第二，<code>words[i]</code> 仅包含小写字母，那便意味着 <code>words[i].length() = 26</code> 是一个有限的集合</li>
-</ul>
-<p>既然是一个有限的集合那么我们就可以利用第二的特点来解决第一个问题。</p>
-<p>我们可以定义一个长度为 26 的数组来代表字符串</p>
-<blockquote>
-<p>例如：abcw = [</p>
-<p>​    “1”,”1”,”1”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,</p>
-<p>​    “0”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,</p>
-<p>​    “0”,”0”,”1”,”0”,”0”,”0”</p>
-<p>]</p>
-</blockquote>
-<p>这样在进行比较的时候只要按位比较数组上的相同的位置是都存在值即可。</p>
-<p>但是已经走到了这一步为什么不用 <em>位符号</em> 来表示字母。</p>
-<blockquote>
-<p>例如：abcw = 11100000000000000000001000</p>
-</blockquote>
-<p>在进行比较时直接进行 &amp; 运算即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(String[] words)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] bitWords = <span class="keyword">new</span> <span class="keyword">int</span>[words.length];</span><br><span class="line">    <span class="comment">// 对 words 中的数据做位转换处理</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">        <span class="keyword">char</span>[] chars = words[i].toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">            bitWords[i] |= <span class="number">1</span> &lt;&lt; (aChar - <span class="string">'a'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; words.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((bitWords[i] &amp; bitWords[j]) == <span class="number">0</span>) &#123;</span><br><span class="line">                answer = Math.max(answer, words[i].length() * words[j].length());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>既然题目中指定了时间复杂度为 O(1) 那么可供选择的数据结构也就只剩下了哈希表，但是题目又要求 <strong>相同的概率随机返回</strong> 表明这个存储数据必须要有序，那么可供选择的就只剩下 <strong>可变数组 + 哈希表</strong> ，可变数组用于提供随机访问的概率稳定性、哈希表用来存储对象及对象在数组中的位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomizedSet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Map&lt;Integer, Integer&gt; hashMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RandomizedSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hashMap.containsKey(val)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        hashMap.put(val, list.size());</span><br><span class="line">        list.add(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!hashMap.containsKey(val)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Integer idx = hashMap.get(val);</span><br><span class="line">        Integer last = list.get(list.size() - <span class="number">1</span>);</span><br><span class="line">        list.set(idx, last);</span><br><span class="line">        list.remove(list.size() - <span class="number">1</span>);</span><br><span class="line">        hashMap.put(last, idx);</span><br><span class="line">        hashMap.remove(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.get(random.nextInt(list.size()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -272,8 +248,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/位运算/" rel="tag"># 位运算</a>
-              <a href="/tags/字符串/" rel="tag"># 字符串</a>
+              <a href="/tags/数组/" rel="tag"># 数组</a>
+              <a href="/tags/medium/" rel="tag"># medium</a>
+              <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+              <a href="/tags/设计/" rel="tag"># 设计</a>
           </div>
 
         
@@ -282,12 +260,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/06/16/leetcode-851/" rel="prev" title="leetcode-851 喧闹和富有">
-      <i class="fa fa-chevron-left"></i> leetcode-851 喧闹和富有
+    <a href="/2023/06/29/leetcode-1375/" rel="prev" title="1375. 二进制字符串前缀一致的次数">
+      <i class="fa fa-chevron-left"></i> 1375. 二进制字符串前缀一致的次数
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/06/20/leetcode-554/" rel="next" title="leetcode-554 砖墙">
-      leetcode-554 砖墙 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/06/29/leetcode-54/" rel="next" title="54. 螺旋矩阵">
+      54. 螺旋矩阵 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

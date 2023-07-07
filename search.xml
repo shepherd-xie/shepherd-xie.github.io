@@ -906,6 +906,44 @@
       </tags>
   </entry>
   <entry>
+    <title>380. O(1) 时间插入、删除和获取随机元素</title>
+    <url>/2023/06/29/leetcode-380/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/insert-delete-getrandom-o1/description/" target="_blank" rel="noopener">380. O(1) 时间插入、删除和获取随机元素</a></p>
+<p>实现<code>RandomizedSet</code> 类：</p>
+<ul>
+<li><code>RandomizedSet()</code> 初始化 <code>RandomizedSet</code> 对象</li>
+<li><code>bool insert(int val)</code> 当元素 <code>val</code> 不存在时，向集合中插入该项，并返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
+<li><code>bool remove(int val)</code> 当元素 <code>val</code> 存在时，从集合中移除该项，并返回 <code>true</code> ；否则，返回 <code>false</code> 。</li>
+<li><code>int getRandom()</code> 随机返回现有集合中的一项（测试用例保证调用此方法时集合中至少存在一个元素）。每个元素应该有 <strong>相同的概率</strong> 被返回。</li>
+</ul>
+<p>你必须实现类的所有函数，并满足每个函数的 <strong>平均</strong> 时间复杂度为 <code>O(1)</code> 。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入</span><br><span class="line">&gt; [&quot;RandomizedSet&quot;, &quot;insert&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;, &quot;remove&quot;, &quot;insert&quot;, &quot;getRandom&quot;]</span><br><span class="line">&gt; [[], [1], [2], [2], [], [1], [2], []]</span><br><span class="line">&gt; 输出</span><br><span class="line">&gt; [null, true, false, true, 2, true, false, 2]</span><br><span class="line">&gt; </span><br><span class="line">&gt; 解释</span><br><span class="line">&gt; RandomizedSet randomizedSet = new RandomizedSet();</span><br><span class="line">&gt; randomizedSet.insert(1); // 向集合中插入 1 。返回 true 表示 1 被成功地插入。</span><br><span class="line">&gt; randomizedSet.remove(2); // 返回 false ，表示集合中不存在 2 。</span><br><span class="line">&gt; randomizedSet.insert(2); // 向集合中插入 2 。返回 true 。集合现在包含 [1,2] 。</span><br><span class="line">&gt; randomizedSet.getRandom(); // getRandom 应随机返回 1 或 2 。</span><br><span class="line">&gt; randomizedSet.remove(1); // 从集合中移除 1 ，返回 true 。集合现在包含 [2] 。</span><br><span class="line">&gt; randomizedSet.insert(2); // 2 已在集合中，所以返回 false 。</span><br><span class="line">&gt; randomizedSet.getRandom(); // 由于 2 是集合中唯一的数字，getRandom 总是返回 2 。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>-231 &lt;= val &lt;= 231 - 1</code></li>
+<li>最多调用 <code>insert</code>、<code>remove</code> 和 <code>getRandom</code> 函数 <code>2 * `</code>105` 次</li>
+<li>在调用 <code>getRandom</code> 方法时，数据结构中 <strong>至少存在一个</strong> 元素。</li>
+</ul>
+</blockquote>
+<p>既然题目中指定了时间复杂度为 O(1) 那么可供选择的数据结构也就只剩下了哈希表，但是题目又要求 <strong>相同的概率随机返回</strong> 表明这个存储数据必须要有序，那么可供选择的就只剩下 <strong>可变数组 + 哈希表</strong> ，可变数组用于提供随机访问的概率稳定性、哈希表用来存储对象及对象在数组中的位置。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomizedSet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Map&lt;Integer, Integer&gt; hashMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RandomizedSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hashMap.containsKey(val)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        hashMap.put(val, list.size());</span><br><span class="line">        list.add(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!hashMap.containsKey(val)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Integer idx = hashMap.get(val);</span><br><span class="line">        Integer last = list.get(list.size() - <span class="number">1</span>);</span><br><span class="line">        list.set(idx, last);</span><br><span class="line">        list.remove(list.size() - <span class="number">1</span>);</span><br><span class="line">        hashMap.put(last, idx);</span><br><span class="line">        hashMap.remove(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.get(random.nextInt(list.size()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>medium</tag>
+        <tag>哈希表</tag>
+        <tag>设计</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>454. 四数相加 II</title>
     <url>/2023/07/03/leetcode-454/</url>
     <content><![CDATA[<blockquote>
