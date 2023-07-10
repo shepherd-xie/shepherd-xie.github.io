@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"shepherd-xie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="2595. 奇偶位数 给你一个 正 整数 n 。 用 even 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的偶数下标的个数。  用 odd 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的奇数下标的个数。 返回整数数组 answer ，其中 answer = [even, odd] 。 示例 1： 123456&amp;gt; 输入：n = 17&amp;gt; 输出：[2,0]&amp;gt;">
-<meta name="keywords" content="easy,位运算">
+  <meta name="description" content="https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/">
+<meta name="keywords" content="leetcode,哈希表,easy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode 2595. 奇偶位数">
-<meta property="og:url" content="https://shepherd-xie.github.io/2023/06/27/leetcode-offer-03/index.html">
+<meta property="og:title" content="961. 在长度 2N 的数组中找出重复 N 次的元素">
+<meta property="og:url" content="https://shepherd-xie.github.io/2023/07/10/leetcode-961/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
-<meta property="og:description" content="2595. 奇偶位数 给你一个 正 整数 n 。 用 even 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的偶数下标的个数。  用 odd 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的奇数下标的个数。 返回整数数组 answer ，其中 answer = [even, odd] 。 示例 1： 123456&amp;gt; 输入：n = 17&amp;gt; 输出：[2,0]&amp;gt;">
+<meta property="og:description" content="https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-09T07:50:49.717Z">
+<meta property="og:updated_time" content="2023-07-10T08:50:07.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode 2595. 奇偶位数">
-<meta name="twitter:description" content="2595. 奇偶位数 给你一个 正 整数 n 。 用 even 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的偶数下标的个数。  用 odd 表示在 n 的二进制形式（下标从 0 开始）中值为 1 的奇数下标的个数。 返回整数数组 answer ，其中 answer = [even, odd] 。 示例 1： 123456&amp;gt; 输入：n = 17&amp;gt; 输出：[2,0]&amp;gt;">
+<meta name="twitter:title" content="961. 在长度 2N 的数组中找出重复 N 次的元素">
+<meta name="twitter:description" content="https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/">
 
-<link rel="canonical" href="https://shepherd-xie.github.io/2023/06/27/leetcode-offer-03/">
+<link rel="canonical" href="https://shepherd-xie.github.io/2023/07/10/leetcode-961/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>leetcode 2595. 奇偶位数 | Shepherd's Blog</title>
+  <title>961. 在长度 2N 的数组中找出重复 N 次的元素 | Shepherd's Blog</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/27/leetcode-offer-03/">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/07/10/leetcode-961/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          leetcode 2595. 奇偶位数
+          961. 在长度 2N 的数组中找出重复 N 次的元素
         </h1>
 
         <div class="post-meta">
@@ -189,7 +189,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-27 14:48:53" itemprop="dateCreated datePublished" datetime="2023-06-27T14:48:53+08:00">2023-06-27</time>
+              <time title="创建时间：2023-07-10 16:35:39" itemprop="dateCreated datePublished" datetime="2023-07-10T16:35:39+08:00">2023-07-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -197,11 +197,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -216,36 +212,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <blockquote>
-<p><a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/description/" target="_blank" rel="noopener">2595. 奇偶位数</a></p>
-<p>给你一个 <strong>正</strong> 整数 <code>n</code> 。</p>
-<p>用 <code>even</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的偶数下标的个数。</p>
-<p> 用 <code>odd</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的奇数下标的个数。</p>
-<p>返回整数数组 <code>answer</code> ，其中 <code>answer = [even, odd]</code> 。</p>
+        <p><a href="https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/" target="_blank" rel="noopener">https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/</a></p>
+<a id="more"></a>
+<blockquote>
+<p>给你一个整数数组 <code>nums</code> ，该数组具有以下属性：</p>
+<ul>
+<li><code>nums.length == 2 * n</code>.</li>
+<li><code>nums</code> 包含 <code>n + 1</code> 个 <strong>不同的</strong> 元素</li>
+<li><code>nums</code> 中恰有一个元素重复 <code>n</code> 次</li>
+</ul>
+<p>找出并返回重复了 <code>n</code> 次的那个元素。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：n = 17</span><br><span class="line">&gt; 输出：[2,0]</span><br><span class="line">&gt;解释：17 的二进制形式是 10001 。 </span><br><span class="line">&gt; 下标 0 和 下标 4 对应的值为 1 。 </span><br><span class="line">&gt;共有 2 个偶数下标，0 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;输入：nums = [1,2,3,3]</span><br><span class="line">&gt; 输出：3</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <blockquote>
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：n = 2</span><br><span class="line">&gt; 输出：[0,1]</span><br><span class="line">&gt;解释：2 的二进制形式是 10 。 </span><br><span class="line">&gt; 下标 1 对应的值为 1 。 </span><br><span class="line">&gt;共有 0 个偶数下标，1 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;输入：nums = [2,1,2,5,3,2]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;输入：nums = [5,1,5,2,5,3,5,4]</span><br><span class="line">&gt; 输出：5</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <blockquote>
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= n &lt;= 1000</code></li>
+<li><code>2 &lt;= n &lt;= 5000</code><ul>
+<li><code>nums.length == 2 * n</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 104</code></li>
+<li><code>nums</code> 由 <code>n + 1</code> 个 <strong>不同的</strong> 元素组成，且其中一个元素恰好重复 <code>n</code> 次</li>
+</ul>
+</li>
 </ul>
 </blockquote>
-<p>确实是简单题，像我这种菜鸡都能很快的理清思路，显然是利用 <em>移位</em> 操作和位运算来解决。直接上题解吧。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((n &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            result[count] += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        count ^= <span class="number">1</span>;</span><br><span class="line">        n = n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再看看大神们的操作，显然比我的方法简洁太多。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">var</span> ans = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; n &gt; <span class="number">0</span>; i ^= <span class="number">1</span>, n &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">        ans[i] += n &amp; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，另一个操作就更神奇了，我们完全可以利用掩码的方式将原始字符做处理。</p>
-<blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">&gt;     <span class="keyword">final</span> <span class="keyword">int</span> MASK = <span class="number">0x5555</span>;</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;Integer.bitCount(n &amp; MASK), Integer.bitCount(n &amp; (MASK &gt;&gt; <span class="number">1</span>))&#125;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>作者：灵茶山艾府<br>链接：<a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/" target="_blank" rel="noopener">https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/</a><br>来源：力扣（LeetCode）</p>
-</blockquote>
+<p>这道题过于简单了，就不过多赘述，直接哈希表处理即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">repeatedNTimes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(num)) &#123;</span><br><span class="line">                <span class="keyword">return</span> num;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(num, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然题解区也有很多有意思的思路，值得自己去看看。</p>
 
     </div>
 
@@ -255,8 +256,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
               <a href="/tags/easy/" rel="tag"># easy</a>
-              <a href="/tags/位运算/" rel="tag"># 位运算</a>
           </div>
 
         
@@ -265,12 +267,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/06/26/leetcode-1524/" rel="prev" title="leetcode 1524. 和为奇数的子数组数目">
-      <i class="fa fa-chevron-left"></i> leetcode 1524. 和为奇数的子数组数目
+    <a href="/2023/07/09/bugfix-nextcloud-upgrade/" rel="prev" title="Nextcloud 升级故障修复">
+      <i class="fa fa-chevron-left"></i> Nextcloud 升级故障修复
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/06/28/leetcode-2595/" rel="next" title="剑指 Offer 03. 数组中重复的数字">
-      剑指 Offer 03. 数组中重复的数字 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/07/10/leetcode-1920/" rel="next" title="1920. 基于排列构建数组">
+      1920. 基于排列构建数组 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -343,20 +345,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

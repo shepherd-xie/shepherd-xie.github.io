@@ -808,12 +808,12 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numTimesAllBlue</span><span class="params">(<span class="keyword">int</span>[] flips)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> curmax = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; flips.length; i++) &#123;</span><br><span class="line">            curmax = Math.max(flips[i], curmax);</span><br><span class="line">            <span class="keyword">if</span> (curmax == i + <span class="number">1</span>) &#123;</span><br><span class="line">                result ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
         <tag>medium</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -876,53 +876,90 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numOfSubarrays</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> MODULO = <span class="number">1_000_000_007</span>;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> odd = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> even = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        sum += arr[i];</span><br><span class="line">        <span class="keyword">if</span> (sum % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            count = (count + odd) % MODULO;</span><br><span class="line">            even ++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            count = (count + even) % MODULO;</span><br><span class="line">            odd ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
+        <tag>leetcode</tag>
         <tag>哈希表</tag>
       </tags>
   </entry>
   <entry>
-    <title>剑指 Offer 03. 数组中重复的数字</title>
-    <url>/2023/06/28/leetcode-2595/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://leetcode.cn/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/description/" target="_blank" rel="noopener">剑指 Offer 03. 数组中重复的数字</a></p>
-<p>找出数组中重复的数字。</p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+    <title>1920. 基于排列构建数组</title>
+    <url>/2023/07/10/leetcode-1920/</url>
+    <content><![CDATA[<p><a href="https://leetcode.cn/problems/build-array-from-permutation/" target="_blank" rel="noopener">https://leetcode.cn/problems/build-array-from-permutation/</a></p>
+<a id="more"></a>
+<blockquote>
+<p>给你一个 <strong>从 0 开始的排列</strong> <code>nums</code>（<strong>下标也从 0 开始</strong>）。请你构建一个 <strong>同样长度</strong> 的数组 <code>ans</code> ，其中，对于每个 <code>i</code>（<code>0 &lt;= i &lt; nums.length</code>），都满足 <code>ans[i] = nums[nums[i]]</code> 。返回构建好的数组 <code>ans</code> 。</p>
+<p><strong>从 0 开始的排列</strong> <code>nums</code> 是一个由 <code>0</code> 到 <code>nums.length - 1</code>（<code>0</code> 和 <code>nums.length - 1</code> 也包含在内）的不同整数组成的数组。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;  输入：</span><br><span class="line">&gt; [2, 3, 1, 0, 2, 5, 3]</span><br><span class="line">&gt; 输出：2 或 3 </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;输入：nums = [0,2,1,5,3,4]</span><br><span class="line">&gt; 输出：[0,1,2,4,5,3]</span><br><span class="line">&gt;解释：数组 ans 构建如下：</span><br><span class="line">&gt; ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]</span><br><span class="line">&gt;    = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]</span><br><span class="line">&gt;     = [0,1,2,4,5,3]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <blockquote>
-<p><strong>限制：</strong></p>
-<p><code>2 &lt;= n &lt;= 100000</code></p>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;输入：nums = [5,0,1,2,3,4]</span><br><span class="line">&gt; 输出：[4,5,0,1,2,3]</span><br><span class="line">&gt;解释：数组 ans 构建如下：</span><br><span class="line">&gt; ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]</span><br><span class="line">&gt;     = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]</span><br><span class="line">&gt;     = [4,5,0,1,2,3]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>这个题目看似是比较简单的，但是可以有多重解法来满足不同的空间复杂度和时间复杂度。</p>
-<h3 id="方法一：哈希表"><a href="#方法一：哈希表" class="headerlink" title="方法一：哈希表"></a>方法一：哈希表</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] hash = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums[i]] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            hash[nums[i]] ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>提示：</strong></p>
 <ul>
-<li><strong>时间复杂度</strong>：O(N)</li>
-<li><strong>空间复杂度</strong>：O(N)</li>
+<li><code>1 &lt;= nums.length &lt;= 1000</code></li>
+<li><code>0 &lt;= nums[i] &lt; nums.length</code></li>
+<li><code>nums</code> 中的元素 <strong>互不相同</strong></li>
 </ul>
-<h3 id="方法二：排序"><a href="#方法二：排序" class="headerlink" title="方法二：排序"></a>方法二：排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i - <span class="number">1</span>] == nums[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>时间复杂度</strong>：O(N log(N))，数组排序时间</li>
-<li><strong>空间复杂度</strong>：O(N)</li>
-</ul>
-<h3 id="方法三：原地交换"><a href="#方法三：原地交换" class="headerlink" title="方法三：原地交换"></a>方法三：原地交换</h3><p>由于题目中指明 <code>所有数字都在 0～n-1 的范围内</code>，那么我们可以将数组中的值一一映射至它们对应的下标位置，那么一定会存在同一个下标对应多个相同值得情况。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == i) &#123;</span><br><span class="line">                i ++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[nums[i]] == nums[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[nums[i]];</span><br><span class="line">            nums[nums[i]] = nums[i];</span><br><span class="line">            nums[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>时间复杂度</strong>：O(N)</li>
-<li><strong>空间复杂度</strong>：O(1)</li>
-</ul>
+</blockquote>
+<p>解答的时候有点头晕，可能这道题的难点是读懂题目吧。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] buildArray(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            result[i] = nums[nums[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
-        <tag>哈希表</tag>
+        <tag>leetcode</tag>
+        <tag>模拟</tag>
         <tag>easy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode 2595. 奇偶位数</title>
+    <url>/2023/06/27/leetcode-2595/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/description/" target="_blank" rel="noopener">2595. 奇偶位数</a></p>
+<p>给你一个 <strong>正</strong> 整数 <code>n</code> 。</p>
+<p>用 <code>even</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的偶数下标的个数。</p>
+<p> 用 <code>odd</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的奇数下标的个数。</p>
+<p>返回整数数组 <code>answer</code> ，其中 <code>answer = [even, odd]</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：n = 17</span><br><span class="line">&gt; 输出：[2,0]</span><br><span class="line">&gt;解释：17 的二进制形式是 10001 。 </span><br><span class="line">&gt; 下标 0 和 下标 4 对应的值为 1 。 </span><br><span class="line">&gt;共有 2 个偶数下标，0 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：n = 2</span><br><span class="line">&gt; 输出：[0,1]</span><br><span class="line">&gt;解释：2 的二进制形式是 10 。 </span><br><span class="line">&gt; 下标 1 对应的值为 1 。 </span><br><span class="line">&gt;共有 0 个偶数下标，1 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 1000</code></li>
+</ul>
+</blockquote>
+<p>确实是简单题，像我这种菜鸡都能很快的理清思路，显然是利用 <em>移位</em> 操作和位运算来解决。直接上题解吧。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((n &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            result[count] += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        count ^= <span class="number">1</span>;</span><br><span class="line">        n = n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再看看大神们的操作，显然比我的方法简洁太多。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">var</span> ans = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; n &gt; <span class="number">0</span>; i ^= <span class="number">1</span>, n &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">        ans[i] += n &amp; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，另一个操作就更神奇了，我们完全可以利用掩码的方式将原始字符做处理。</p>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">&gt;     <span class="keyword">final</span> <span class="keyword">int</span> MASK = <span class="number">0x5555</span>;</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;Integer.bitCount(n &amp; MASK), Integer.bitCount(n &amp; (MASK &gt;&gt; <span class="number">1</span>))&#125;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>作者：灵茶山艾府<br>链接：<a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/" target="_blank" rel="noopener">https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/</a><br>来源：力扣（LeetCode）</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>easy</tag>
+        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>
@@ -977,10 +1014,10 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(String[] words)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] bitWords = <span class="keyword">new</span> <span class="keyword">int</span>[words.length];</span><br><span class="line">    <span class="comment">// 对 words 中的数据做位转换处理</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">        <span class="keyword">char</span>[] chars = words[i].toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> aChar : chars) &#123;</span><br><span class="line">            bitWords[i] |= <span class="number">1</span> &lt;&lt; (aChar - <span class="string">'a'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> answer = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; words.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((bitWords[i] &amp; bitWords[j]) == <span class="number">0</span>) &#123;</span><br><span class="line">                answer = Math.max(answer, words[i].length() * words[j].length());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
+        <tag>leetcode</tag>
         <tag>位运算</tag>
         <tag>字符串</tag>
       </tags>
@@ -1013,12 +1050,12 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomizedSet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Map&lt;Integer, Integer&gt; hashMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RandomizedSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (hashMap.containsKey(val)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        hashMap.put(val, list.size());</span><br><span class="line">        list.add(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!hashMap.containsKey(val)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Integer idx = hashMap.get(val);</span><br><span class="line">        Integer last = list.get(list.size() - <span class="number">1</span>);</span><br><span class="line">        list.set(idx, last);</span><br><span class="line">        list.remove(list.size() - <span class="number">1</span>);</span><br><span class="line">        hashMap.put(last, idx);</span><br><span class="line">        hashMap.remove(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> list.get(random.nextInt(list.size()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
         <tag>medium</tag>
+        <tag>leetcode</tag>
         <tag>哈希表</tag>
         <tag>设计</tag>
       </tags>
@@ -1059,12 +1096,12 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fourSumCount</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2, <span class="keyword">int</span>[] nums3, <span class="keyword">int</span>[] nums4)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num1 : nums1) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num2 : nums2) &#123;</span><br><span class="line">                map.put(num1 + num2, map.getOrDefault(num1 + num2, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num3 : nums3) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num4 : nums4) &#123;</span><br><span class="line">                result += map.getOrDefault(-num3 - num4, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
         <tag>medium</tag>
+        <tag>leetcode</tag>
         <tag>哈希表</tag>
       </tags>
   </entry>
@@ -1102,12 +1139,12 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">spiralOrder</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> bottom = matrix.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (top &gt; bottom) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt;= right; i++)</span><br><span class="line">                result.add(matrix[top][i]);</span><br><span class="line">            top ++;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (right &lt; left) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = top; i &lt;= bottom; i++)</span><br><span class="line">                result.add(matrix[i][right]);</span><br><span class="line">            right --;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (bottom &lt; top) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = right; i &gt;= left; i--)</span><br><span class="line">                result.add(matrix[bottom][i]);</span><br><span class="line">            bottom --;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (left &gt; right) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = bottom; i &gt;= top; i--)</span><br><span class="line">                result.add(matrix[i][left]);</span><br><span class="line">            left ++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
         <tag>medium</tag>
+        <tag>leetcode</tag>
         <tag>矩阵</tag>
       </tags>
   </entry>
@@ -1152,10 +1189,10 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> </span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; gapMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="keyword">int</span> rightEdge = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWidth : wallLine) &#123;</span><br><span class="line">            rightEdge += wallWidth;</span><br><span class="line">            Integer gapCount = gapMap.getOrDefault(rightEdge, <span class="number">0</span>);</span><br><span class="line">            gapMap.put(rightEdge, gapCount + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不计算两侧的空隙</span></span><br><span class="line">        gapMap.remove(rightEdge);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxGapCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer gapCount : gapMap.values()) &#123;</span><br><span class="line">        maxGapCount = Math.max(gapCount, maxGapCount);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> wall.size() - maxGapCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
+        <tag>leetcode</tag>
         <tag>哈希表</tag>
       </tags>
   </entry>
@@ -1211,11 +1248,11 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">simplifyPath</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">        String[] split = path.split(<span class="string">"/"</span>);</span><br><span class="line">        LinkedList&lt;String&gt; list = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (String s : split) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">"."</span>.equals(s) || s.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">".."</span>.equals(s)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!list.isEmpty()) &#123;</span><br><span class="line">                    list.removeLast();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            list.add(s);</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (String s : list) &#123;</span><br><span class="line">            sb.append(<span class="string">'/'</span>).append(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list.isEmpty() ? <span class="string">"/"</span> : sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
         <tag>medium</tag>
+        <tag>leetcode</tag>
         <tag>字符串</tag>
         <tag>栈</tag>
       </tags>
@@ -1267,10 +1304,10 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] loudAndRich(<span class="keyword">int</span>[][] richer, <span class="keyword">int</span>[] quiet) &#123;</span><br><span class="line">    List&lt;Integer&gt;[] grids = <span class="keyword">new</span> List[quiet.length];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grids.length; i++) &#123;</span><br><span class="line">        grids[i] = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span>[] rich : richer) &#123;</span><br><span class="line">        grids[rich[<span class="number">1</span>]].add(rich[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] answer = <span class="keyword">new</span> <span class="keyword">int</span>[quiet.length];</span><br><span class="line">    Arrays.fill(answer, -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; quiet.length; i ++) &#123;</span><br><span class="line">        dfs(i, quiet, grids, answer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> person, <span class="keyword">int</span>[] quiet, List&lt;Integer&gt;[] grids, <span class="keyword">int</span>[] answer)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (answer[person] != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    answer[person] = person;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> richer : grids[person]) &#123;</span><br><span class="line">        dfs(richer, quiet, grids, answer);</span><br><span class="line">        <span class="keyword">if</span> (quiet[answer[richer]] &lt; quiet[answer[person]]) &#123;</span><br><span class="line">            answer[person] = answer[richer];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
+        <tag>leetcode</tag>
         <tag>深度优先搜索</tag>
         <tag>图</tag>
         <tag>拓扑排序</tag>
@@ -1316,56 +1353,103 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAlienSorted</span><span class="params">(String[] words, String order)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (words.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] dict = <span class="keyword">new</span> <span class="keyword">int</span>[order.length()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; order.length(); i++) &#123;</span><br><span class="line">            dict[order.charAt(i) - <span class="string">'a'</span>] = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> compareLength = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; Math.min(words[i - <span class="number">1</span>].length(), words[i].length()); j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dict[words[i - <span class="number">1</span>].charAt(j)  - <span class="string">'a'</span>] &lt; dict[words[i].charAt(j)  - <span class="string">'a'</span>]) &#123;</span><br><span class="line">                    compareLength = <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((dict[words[i - <span class="number">1</span>].charAt(j)  - <span class="string">'a'</span>] &gt; dict[words[i].charAt(j)  - <span class="string">'a'</span>])) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (compareLength &amp;&amp; words[i - <span class="number">1</span>].length() &gt; words[i].length()) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
+        <tag>leetcode</tag>
         <tag>哈希表</tag>
         <tag>easy</tag>
         <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
-    <title>leetcode 2595. 奇偶位数</title>
-    <url>/2023/06/27/leetcode-offer-03/</url>
-    <content><![CDATA[<blockquote>
-<p><a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/description/" target="_blank" rel="noopener">2595. 奇偶位数</a></p>
-<p>给你一个 <strong>正</strong> 整数 <code>n</code> 。</p>
-<p>用 <code>even</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的偶数下标的个数。</p>
-<p> 用 <code>odd</code> 表示在 <code>n</code> 的二进制形式（下标从 <strong>0</strong> 开始）中值为 <code>1</code> 的奇数下标的个数。</p>
-<p>返回整数数组 <code>answer</code> ，其中 <code>answer = [even, odd]</code> 。</p>
+    <title>961. 在长度 2N 的数组中找出重复 N 次的元素</title>
+    <url>/2023/07/10/leetcode-961/</url>
+    <content><![CDATA[<p><a href="https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/" target="_blank" rel="noopener">https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/</a></p>
+<a id="more"></a>
+<blockquote>
+<p>给你一个整数数组 <code>nums</code> ，该数组具有以下属性：</p>
+<ul>
+<li><code>nums.length == 2 * n</code>.</li>
+<li><code>nums</code> 包含 <code>n + 1</code> 个 <strong>不同的</strong> 元素</li>
+<li><code>nums</code> 中恰有一个元素重复 <code>n</code> 次</li>
+</ul>
+<p>找出并返回重复了 <code>n</code> 次的那个元素。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：n = 17</span><br><span class="line">&gt; 输出：[2,0]</span><br><span class="line">&gt;解释：17 的二进制形式是 10001 。 </span><br><span class="line">&gt; 下标 0 和 下标 4 对应的值为 1 。 </span><br><span class="line">&gt;共有 2 个偶数下标，0 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;输入：nums = [1,2,3,3]</span><br><span class="line">&gt; 输出：3</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <blockquote>
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 输入：n = 2</span><br><span class="line">&gt; 输出：[0,1]</span><br><span class="line">&gt;解释：2 的二进制形式是 10 。 </span><br><span class="line">&gt; 下标 1 对应的值为 1 。 </span><br><span class="line">&gt;共有 0 个偶数下标，1 个奇数下标。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;输入：nums = [2,1,2,5,3,2]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;输入：nums = [5,1,5,2,5,3,5,4]</span><br><span class="line">&gt; 输出：5</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <blockquote>
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>1 &lt;= n &lt;= 1000</code></li>
+<li><code>2 &lt;= n &lt;= 5000</code><ul>
+<li><code>nums.length == 2 * n</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 104</code></li>
+<li><code>nums</code> 由 <code>n + 1</code> 个 <strong>不同的</strong> 元素组成，且其中一个元素恰好重复 <code>n</code> 次</li>
+</ul>
+</li>
 </ul>
 </blockquote>
-<p>确实是简单题，像我这种菜鸡都能很快的理清思路，显然是利用 <em>移位</em> 操作和位运算来解决。直接上题解吧。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((n &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            result[count] += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        count ^= <span class="number">1</span>;</span><br><span class="line">        n = n &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再看看大神们的操作，显然比我的方法简洁太多。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="keyword">var</span> ans = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; n &gt; <span class="number">0</span>; i ^= <span class="number">1</span>, n &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">        ans[i] += n &amp; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然，另一个操作就更神奇了，我们完全可以利用掩码的方式将原始字符做处理。</p>
-<blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="keyword">int</span>[] evenOddBit(<span class="keyword">int</span> n) &#123;</span><br><span class="line">&gt;     <span class="keyword">final</span> <span class="keyword">int</span> MASK = <span class="number">0x5555</span>;</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;Integer.bitCount(n &amp; MASK), Integer.bitCount(n &amp; (MASK &gt;&gt; <span class="number">1</span>))&#125;;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>作者：灵茶山艾府<br>链接：<a href="https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/" target="_blank" rel="noopener">https://leetcode.cn/problems/number-of-even-and-odd-bits/solutions/2177848/er-jin-zhi-ji-ben-cao-zuo-pythonjavacgo-o82o2/</a><br>来源：力扣（LeetCode）</p>
-</blockquote>
+<p>这道题过于简单了，就不过多赘述，直接哈希表处理即可。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">repeatedNTimes</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(num)) &#123;</span><br><span class="line">                <span class="keyword">return</span> num;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(num, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然题解区也有很多有意思的思路，值得自己去看看。</p>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
+        <tag>leetcode</tag>
+        <tag>哈希表</tag>
         <tag>easy</tag>
-        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑指 Offer 03. 数组中重复的数字</title>
+    <url>/2023/06/28/leetcode-offer-03/</url>
+    <content><![CDATA[<blockquote>
+<p><a href="https://leetcode.cn/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/description/" target="_blank" rel="noopener">剑指 Offer 03. 数组中重复的数字</a></p>
+<p>找出数组中重复的数字。</p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt;  输入：</span><br><span class="line">&gt; [2, 3, 1, 0, 2, 5, 3]</span><br><span class="line">&gt; 输出：2 或 3 </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>限制：</strong></p>
+<p><code>2 &lt;= n &lt;= 100000</code></p>
+</blockquote>
+<p>这个题目看似是比较简单的，但是可以有多重解法来满足不同的空间复杂度和时间复杂度。</p>
+<h3 id="方法一：哈希表"><a href="#方法一：哈希表" class="headerlink" title="方法一：哈希表"></a>方法一：哈希表</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] hash = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (hash[nums[i]] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            hash[nums[i]] ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>时间复杂度</strong>：O(N)</li>
+<li><strong>空间复杂度</strong>：O(N)</li>
+</ul>
+<h3 id="方法二：排序"><a href="#方法二：排序" class="headerlink" title="方法二：排序"></a>方法二：排序</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i - <span class="number">1</span>] == nums[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>时间复杂度</strong>：O(N log(N))，数组排序时间</li>
+<li><strong>空间复杂度</strong>：O(N)</li>
+</ul>
+<h3 id="方法三：原地交换"><a href="#方法三：原地交换" class="headerlink" title="方法三：原地交换"></a>方法三：原地交换</h3><p>由于题目中指明 <code>所有数字都在 0～n-1 的范围内</code>，那么我们可以将数组中的值一一映射至它们对应的下标位置，那么一定会存在同一个下标对应多个相同值得情况。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == i) &#123;</span><br><span class="line">                i ++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (nums[nums[i]] == nums[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> temp = nums[nums[i]];</span><br><span class="line">            nums[nums[i]] = nums[i];</span><br><span class="line">            nums[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>时间复杂度</strong>：O(N)</li>
+<li><strong>空间复杂度</strong>：O(1)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>leetcode</tag>
+        <tag>哈希表</tag>
+        <tag>easy</tag>
       </tags>
   </entry>
   <entry>
@@ -1392,11 +1476,11 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isStraight</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> joker = <span class="number">0</span>;</span><br><span class="line">        Arrays.sort(nums); <span class="comment">// 数组排序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] == <span class="number">0</span>) joker++; <span class="comment">// 统计大小王数量</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[i] == nums[i + <span class="number">1</span>]) <span class="keyword">return</span> <span class="keyword">false</span>; <span class="comment">// 若有重复，提前返回 false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[<span class="number">4</span>] - nums[joker] &lt; <span class="number">5</span>; <span class="comment">// 最大牌 - 最小牌 &lt; 5 则可构成顺子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：Krahets</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/solutions/212071/mian-shi-ti-61-bu-ke-pai-zhong-de-shun-zi-ji-he-se/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>leetcode</category>
         <category>算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
+        <tag>leetcode</tag>
         <tag>easy</tag>
       </tags>
   </entry>
