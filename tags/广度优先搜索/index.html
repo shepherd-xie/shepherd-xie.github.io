@@ -20,20 +20,18 @@
     var CONFIG = {"hostname":"shepherd-xie.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="https://leetcode.cn/problems/build-array-from-permutation/">
-<meta name="keywords" content="数组,leetcode,模拟,easy">
-<meta property="og:type" content="article">
-<meta property="og:title" content="1920. 基于排列构建数组">
-<meta property="og:url" content="https://shepherd-xie.github.io/2023/07/10/leetcode-1920/index.html">
+  <meta name="description" content="苦逼程序员的无聊日常">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shepherd&#39;s Blog">
+<meta property="og:url" content="https://shepherd-xie.github.io/tags/广度优先搜索/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
-<meta property="og:description" content="https://leetcode.cn/problems/build-array-from-permutation/">
+<meta property="og:description" content="苦逼程序员的无聊日常">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-12T06:35:18.611Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1920. 基于排列构建数组">
-<meta name="twitter:description" content="https://leetcode.cn/problems/build-array-from-permutation/">
+<meta name="twitter:title" content="Shepherd&#39;s Blog">
+<meta name="twitter:description" content="苦逼程序员的无聊日常">
 
-<link rel="canonical" href="https://shepherd-xie.github.io/2023/07/10/leetcode-1920/">
+<link rel="canonical" href="https://shepherd-xie.github.io/tags/广度优先搜索/">
 
 
 <script id="page-configurations">
@@ -41,12 +39,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>1920. 基于排列构建数组 | Shepherd's Blog</title>
+  <title>标签: 广度优先搜索 | Shepherd's Blog</title>
   
 
 
@@ -159,115 +157,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content tag">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/07/10/leetcode-1920/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          1920. 基于排列构建数组
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-10 16:49:32" itemprop="dateCreated datePublished" datetime="2023-07-10T16:49:32+08:00">2023-07-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">广度优先搜索
+          <small>标签</small>
+        </h2>
+      </div>
 
       
-        <p><a href="https://leetcode.cn/problems/build-array-from-permutation/" target="_blank" rel="noopener">https://leetcode.cn/problems/build-array-from-permutation/</a></p>
-<a id="more"></a>
-<blockquote>
-<p>给你一个 <strong>从 0 开始的排列</strong> <code>nums</code>（<strong>下标也从 0 开始</strong>）。请你构建一个 <strong>同样长度</strong> 的数组 <code>ans</code> ，其中，对于每个 <code>i</code>（<code>0 &lt;= i &lt; nums.length</code>），都满足 <code>ans[i] = nums[nums[i]]</code> 。返回构建好的数组 <code>ans</code> 。</p>
-<p><strong>从 0 开始的排列</strong> <code>nums</code> 是一个由 <code>0</code> 到 <code>nums.length - 1</code>（<code>0</code> 和 <code>nums.length - 1</code> 也包含在内）的不同整数组成的数组。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;输入：nums = [0,2,1,5,3,4]</span><br><span class="line">&gt; 输出：[0,1,2,4,5,3]</span><br><span class="line">&gt;解释：数组 ans 构建如下：</span><br><span class="line">&gt; ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]</span><br><span class="line">&gt;    = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]</span><br><span class="line">&gt;     = [0,1,2,4,5,3]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;输入：nums = [5,0,1,2,3,4]</span><br><span class="line">&gt; 输出：[4,5,0,1,2,3]</span><br><span class="line">&gt;解释：数组 ans 构建如下：</span><br><span class="line">&gt; ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]</span><br><span class="line">&gt;     = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]</span><br><span class="line">&gt;     = [4,5,0,1,2,3]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 1000</code></li>
-<li><code>0 &lt;= nums[i] &lt; nums.length</code></li>
-<li><code>nums</code> 中的元素 <strong>互不相同</strong></li>
-</ul>
-</blockquote>
-<p>解答的时候有点头晕，可能这道题的难点是读懂题目吧。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] buildArray(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            result[i] = nums[nums[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+    <div class="collection-year">
+      <span class="collection-header">2023</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/数组/" rel="tag"># 数组</a>
-              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
-              <a href="/tags/模拟/" rel="tag"># 模拟</a>
-              <a href="/tags/easy/" rel="tag"># easy</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2023-07-12T13:25:33+08:00"
+              content="2023-07-12">
+          07-12
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2023/07/12/leetcode-655/" itemprop="url">
+            <span itemprop="name">655. 输出二叉树</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2023/07/10/leetcode-961/" rel="prev" title="961. 在长度 2N 的数组中找出重复 N 次的元素">
-      <i class="fa fa-chevron-left"></i> 961. 在长度 2N 的数组中找出重复 N 次的元素
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/07/11/leetcode-1899/" rel="next" title="1899. 合并若干三元组以形成目标三元组">
-      1899. 合并若干三元组以形成目标三元组 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
