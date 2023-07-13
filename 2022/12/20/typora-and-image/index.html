@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 7.0.0-rc2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -21,17 +21,18 @@
   </script>
 
   <meta name="description" content="在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。">
-<meta name="keywords" content="Typora,图床">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Typora和图床">
 <meta property="og:url" content="https://shepherd-xie.github.io/2022/12/20/typora-and-image/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
 <meta property="og:description" content="在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-12T06:35:18.615Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-20T09:30:22.000Z">
+<meta property="article:modified_time" content="2023-07-13T03:18:46.905Z">
+<meta property="article:author" content="Shepherd Xie">
+<meta property="article:tag" content="Typora">
+<meta property="article:tag" content="图床">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Typora和图床">
-<meta name="twitter:description" content="在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。">
 
 <link rel="canonical" href="https://shepherd-xie.github.io/2022/12/20/typora-and-image/">
 
@@ -204,7 +205,8 @@
 
       
         <p>在使用 Markdown 编写博客插入图片时，经常会先将图片上传至图床，然后再将图床链接插入 Markdown 中，但是这种操作过于麻烦，Typora 的自动上传功能让我们可以在插入图片的同时自动将图片上传至我们设定的图床并且更换 Markdown 中的路径。</p>
-<a id="more"></a>
+<span id="more"></span>
+
 <p>Typora 不用过多介绍，一个非常漂亮的 Markdown 编辑器，支持多种主题，总有一款适合你，使用这个编辑器的时候会觉得写 Markdown 会是一种享受。但是只要是工具就会有这样或那样的痛点，比如说自 1.0 版本之后的 Typora 终于进入了收费模式，这让很多白嫖党十分痛心（包括我），而且低于 1.0 版本的 Typora 会强制检测当前是否为付费版本，非付费版本会禁止用户使用。当然本文说的问题并不是这个，但是这并不妨碍我们吐槽一番。</p>
 <h2 id="Typora-图片上传服务"><a href="#Typora-图片上传服务" class="headerlink" title="Typora 图片上传服务"></a>Typora 图片上传服务</h2><p>Typora 十分贴心的提供了图片上传服务，并提供了默认客户端：</p>
 <ul>
@@ -222,15 +224,17 @@
 </ul>
 </li>
 </ul>
-<p>除了介绍的这些客户端之外，Typora 还支持自定义命令，你可以自己编写上传工具/脚本。</p>
-<h2 id="PicGo-Core"><a href="#PicGo-Core" class="headerlink" title="PicGo-Core"></a>PicGo-Core</h2><p><a href="https://picgo.github.io/PicGo-Core-Doc/" target="_blank" rel="noopener">PicGo-Core</a>是 PicGo 的核心组件，简单的说，你可以把它看做一个文件上传命令行工具，Typora 原生支持 PicGo-Core，可以在 <code>Typora - 偏好设置 - 图像 - 上传服务设置</code> 中下载它，然后使用 <code>打开配置文件</code> 选项配置图床参数，配置文件参数可以参考 <a href="https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html" target="_blank" rel="noopener">PicGo-Core配置文件</a>。</p>
-<h2 id="Chevereto"><a href="#Chevereto" class="headerlink" title="Chevereto"></a>Chevereto</h2><p><a href="https://chevereto.com/" target="_blank" rel="noopener">Chevereto</a> 是一个图床服务，可以部署在自己的服务器上，此次选择这个服务作为我们的在线图床。</p>
-<p>Chevereto 从 V4 版本之后进入付费使用阶段，所以我们此次使用的是还未收费的 <a href="https://github.com/rodber/chevereto-free" target="_blank" rel="noopener">Chevereto-Free</a> 虽然相对于最新版有许多功能不能使用，但是对于个人图床工具来说还是够用了。</p>
-<h2 id="PicGo-Core-上传-Chevereto-配置文件"><a href="#PicGo-Core-上传-Chevereto-配置文件" class="headerlink" title="PicGo-Core 上传 Chevereto 配置文件"></a>PicGo-Core 上传 Chevereto 配置文件</h2><p>PicGo-Core 并不原生支持 Chevereto，但是 PicGo-Core 拥有众多的插件，我们可以使用 <a href="https://github.com/yuki-xin/picgo-plugin-web-uploader" target="_blank" rel="noopener">picgo-plugin-web-uploader</a> 将图片上传至 Chevereto。</p>
+<p>除了介绍的这些客户端之外，Typora 还支持自定义命令，你可以自己编写上传工具&#x2F;脚本。</p>
+<h2 id="PicGo-Core"><a href="#PicGo-Core" class="headerlink" title="PicGo-Core"></a>PicGo-Core</h2><p><a href="https://picgo.github.io/PicGo-Core-Doc/">PicGo-Core</a>是 PicGo 的核心组件，简单的说，你可以把它看做一个文件上传命令行工具，Typora 原生支持 PicGo-Core，可以在 <code>Typora - 偏好设置 - 图像 - 上传服务设置</code> 中下载它，然后使用 <code>打开配置文件</code> 选项配置图床参数，配置文件参数可以参考 <a href="https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html">PicGo-Core配置文件</a>。</p>
+<h2 id="Chevereto"><a href="#Chevereto" class="headerlink" title="Chevereto"></a>Chevereto</h2><p><a href="https://chevereto.com/">Chevereto</a> 是一个图床服务，可以部署在自己的服务器上，此次选择这个服务作为我们的在线图床。</p>
+<p>Chevereto 从 V4 版本之后进入付费使用阶段，所以我们此次使用的是还未收费的 <a href="https://github.com/rodber/chevereto-free">Chevereto-Free</a> 虽然相对于最新版有许多功能不能使用，但是对于个人图床工具来说还是够用了。</p>
+<h2 id="PicGo-Core-上传-Chevereto-配置文件"><a href="#PicGo-Core-上传-Chevereto-配置文件" class="headerlink" title="PicGo-Core 上传 Chevereto 配置文件"></a>PicGo-Core 上传 Chevereto 配置文件</h2><p>PicGo-Core 并不原生支持 Chevereto，但是 PicGo-Core 拥有众多的插件，我们可以使用 <a href="https://github.com/yuki-xin/picgo-plugin-web-uploader">picgo-plugin-web-uploader</a> 将图片上传至 Chevereto。</p>
 <p>配置文件实例：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"picgoPlugins"</span>: &#123;</span><br><span class="line">    <span class="attr">"picgo-plugin-web-uploader"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"picBed"</span>: &#123;</span><br><span class="line">    <span class="attr">"current"</span>: <span class="string">"web-uploader"</span>,</span><br><span class="line">    <span class="attr">"web-uploader"</span>: &#123;</span><br><span class="line">      <span class="attr">"customBody"</span>: <span class="string">"&#123;\"key\":\"[Chevereto Key：从 Chevereto 管理界面获取]\"&#125;"</span>,</span><br><span class="line">      <span class="attr">"customHeader"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"jsonPath"</span>: <span class="string">"image.url"</span>,</span><br><span class="line">      <span class="attr">"paramName"</span>: <span class="string">"source"</span>,</span><br><span class="line">      <span class="attr">"url"</span>: <span class="string">"http://[Chevereto 地址]/api/1/upload"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;picgoPlugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;picgo-plugin-web-uploader&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picBed&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;current&quot;</span><span class="punctuation">:</span> <span class="string">&quot;web-uploader&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;web-uploader&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;customBody&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&#123;\&quot;key\&quot;:\&quot;[Chevereto Key：从 Chevereto 管理界面获取]\&quot;&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;customHeader&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;jsonPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;image.url&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;paramName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;source&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://[Chevereto 地址]/api/1/upload&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
 <p>配置好后可以点击 <code>验证图片上传选项</code> 来进行验证</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[PicGo INFO]: Before transform</span><br><span class="line">[PicGo INFO]: Transforming...</span><br><span class="line">[PicGo INFO]: Before upload</span><br><span class="line">[PicGo INFO]: Uploading...</span><br><span class="line">[PicGo SUCCESS]:</span><br><span class="line">https://chevereto/images/2022/12/20/typora-icon2.png</span><br><span class="line">https://chevereto/images/2022/12/20/typora-icon.png</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[PicGo INFO]: Before transform</span><br><span class="line">[PicGo INFO]: Transforming...</span><br><span class="line">[PicGo INFO]: Before upload</span><br><span class="line">[PicGo INFO]: Uploading...</span><br><span class="line">[PicGo SUCCESS]:</span><br><span class="line">https://chevereto/images/2022/12/20/typora-icon2.png</span><br><span class="line">https://chevereto/images/2022/12/20/typora-icon.png</span><br></pre></td></tr></table></figure>
+
 <p>如上输出则上传成功</p>
 
     </div>
@@ -242,7 +246,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Typora/" rel="tag"># Typora</a>
-              <a href="/tags/图床/" rel="tag"># 图床</a>
+              <a href="/tags/%E5%9B%BE%E5%BA%8A/" rel="tag"># 图床</a>
           </div>
 
         
@@ -316,7 +320,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Typora-图片上传服务"><span class="nav-number">1.</span> <span class="nav-text">Typora 图片上传服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PicGo-Core"><span class="nav-number">2.</span> <span class="nav-text">PicGo-Core</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chevereto"><span class="nav-number">3.</span> <span class="nav-text">Chevereto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PicGo-Core-上传-Chevereto-配置文件"><span class="nav-number">4.</span> <span class="nav-text">PicGo-Core 上传 Chevereto 配置文件</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Typora-%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">Typora 图片上传服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PicGo-Core"><span class="nav-number">2.</span> <span class="nav-text">PicGo-Core</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chevereto"><span class="nav-number">3.</span> <span class="nav-text">Chevereto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PicGo-Core-%E4%B8%8A%E4%BC%A0-Chevereto-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">PicGo-Core 上传 Chevereto 配置文件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -330,7 +334,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -350,10 +354,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/shepherd-xie" title="GitHub → https://github.com/shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/shepherd-xie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://blog.orkva.com/blog-book" title="GitBook → https://blog.orkva.com/blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
+        <a href="https://blog.orkva.com/blog-book" title="GitBook → https:&#x2F;&#x2F;blog.orkva.com&#x2F;blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:shepherd.xie@gmail.com" title="E-Mail → mailto:shepherd.xie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
@@ -377,7 +381,7 @@
         
 
         
-  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
   </div>
 
 <div class="copyright">
@@ -389,7 +393,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Shepherd Xie</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -409,9 +413,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 

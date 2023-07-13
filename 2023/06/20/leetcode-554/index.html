@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 7.0.0-rc2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -21,18 +21,19 @@
   </script>
 
   <meta name="description" content="554. 砖墙 你的面前有一堵矩形的、由 n 行砖块组成的砖墙。这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。    你现在要画一条 自顶向下 的、穿过 最少 砖块的垂线。如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。 给你一个二维数组 wall ，该数组包含这堵墙的相关信息。其中，wall[i]">
-<meta name="keywords" content="leetcode,哈希表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode-554 砖墙">
 <meta property="og:url" content="https://shepherd-xie.github.io/2023/06/20/leetcode-554/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
 <meta property="og:description" content="554. 砖墙 你的面前有一堵矩形的、由 n 行砖块组成的砖墙。这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。    你现在要画一条 自顶向下 的、穿过 最少 砖块的垂线。如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。 给你一个二维数组 wall ，该数组包含这堵墙的相关信息。其中，wall[i]">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://images.orkva.com/images/2023/06/20/1619762681-rvgTEO-image.png">
-<meta property="og:updated_time" content="2023-07-12T06:35:18.611Z">
+<meta property="article:published_time" content="2023-06-20T02:54:14.000Z">
+<meta property="article:modified_time" content="2023-07-13T03:18:46.905Z">
+<meta property="article:author" content="Shepherd Xie">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="哈希表">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode-554 砖墙">
-<meta name="twitter:description" content="554. 砖墙 你的面前有一堵矩形的、由 n 行砖块组成的砖墙。这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。    你现在要画一条 自顶向下 的、穿过 最少 砖块的垂线。如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。 给你一个二维数组 wall ，该数组包含这堵墙的相关信息。其中，wall[i]">
 <meta name="twitter:image" content="https://images.orkva.com/images/2023/06/20/1619762681-rvgTEO-image.png">
 
 <link rel="canonical" href="https://shepherd-xie.github.io/2023/06/20/leetcode-554/">
@@ -199,7 +200,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -215,33 +216,30 @@
 
       
         <blockquote>
-<p><a href="https://leetcode.cn/problems/brick-wall/description/" target="_blank" rel="noopener">554. 砖墙</a></p>
+<p><a href="https://leetcode.cn/problems/brick-wall/description/">554. 砖墙</a></p>
 <p>你的面前有一堵矩形的、由 <code>n</code> 行砖块组成的砖墙。这些砖块高度相同（也就是一个单位高）但是宽度不同。每一行砖块的宽度之和相等。</p>
 <p>   你现在要画一条 <strong>自顶向下</strong> 的、穿过 <strong>最少</strong> 砖块的垂线。如果你画的线只是从砖块的边缘经过，就不算穿过这块砖。<strong>你不能沿着墙的两个垂直边缘之一画线，这样显然是没有穿过一块砖的。</strong></p>
 <p>给你一个二维数组 <code>wall</code> ，该数组包含这堵墙的相关信息。其中，<code>wall[i]</code> 是一个代表从左至右每块砖的宽度的数组。你需要找出怎样画才能使这条线 <strong>穿过的砖块数量最少</strong> ，并且返回 <strong>穿过的砖块数量</strong> 。</p>
 <p><strong>示例 1：</strong></p>
 <p><strong><img src="https://images.orkva.com/images/2023/06/20/1619762681-rvgTEO-image.png" alt="image.png"></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：wall = [[1,2,2,1],[3,1,2],[1,3,2],[2,4],[3,1,2],[1,3,1,1]]</span><br><span class="line">&gt; 输出：2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：wall = [[1,2,2,1],[3,1,2],[1,3,2],[2,4],[3,1,2],[1,3,1,1]]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入：wall = [[1],[1],[1]]</span><br><span class="line">&gt; 输出：3</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：wall = [[1],[1],[1]]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>n == wall.length</code><ul>
+<li><code>n == wall.length</code></li>
 <li><code>1 &lt;= n &lt;= 104</code></li>
 <li><code>1 &lt;= wall[i].length &lt;= 104</code></li>
 <li><code>1 &lt;= sum(wall[i].length) &lt;= 2 * 104</code></li>
 <li>对于每一行 <code>i</code> ，<code>sum(wall[i])</code> 是相同的</li>
 <li><code>1 &lt;= wall[i][j] &lt;= 231 - 1</code></li>
 </ul>
-</li>
-</ul>
 </blockquote>
 <p>这道题目相对来说比较简单，思路也比较清晰，只需要计算出所有位置上墙的个数，然后取最小值即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> allWallWidth = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer wallWithe : wall.get(<span class="number">0</span>)) &#123;</span><br><span class="line">        allWallWidth += wallWithe;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (allWallWidth &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> wall.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] overlap = <span class="keyword">new</span> <span class="keyword">int</span>[allWallWidth];</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="keyword">int</span> startGap = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWithe : wallLine) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = startGap + <span class="number">1</span>; i &lt; startGap + wallWithe; i++) &#123;</span><br><span class="line">                overlap[i] += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            startGap += wallWithe;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> through = wall.size();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; overlap.length; i++) &#123;</span><br><span class="line">        through = Math.min(through, overlap[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> through;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">allWallWidth</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer wallWithe : wall.get(<span class="number">0</span>)) &#123;</span><br><span class="line">        allWallWidth += wallWithe;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (allWallWidth &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> wall.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span>[] overlap = <span class="keyword">new</span> <span class="title class_">int</span>[allWallWidth];</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">startGap</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWithe : wallLine) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> startGap + <span class="number">1</span>; i &lt; startGap + wallWithe; i++) &#123;</span><br><span class="line">                overlap[i] += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            startGap += wallWithe;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">through</span> <span class="operator">=</span> wall.size();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; overlap.length; i++) &#123;</span><br><span class="line">        through = Math.min(through, overlap[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> through;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>那么问题来了，有这样的一个测试用例。</p>
 <blockquote>
 <p>[[100000000],[100000000],[100000000]]</p>
@@ -249,7 +247,8 @@
 <p>很显然，如果是计算墙壁的厚度，在这个测试用例上不可避免的会导致内存溢出，我们还是需要想其他的思路。</p>
 <p>既然计算墙壁的厚度会导致内存溢出，那么我们可不可以计算空隙的数量，然后用总厚度减去最大的间隙？</p>
 <p>显然是可以的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> </span>&#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; gapMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="keyword">int</span> rightEdge = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWidth : wallLine) &#123;</span><br><span class="line">            rightEdge += wallWidth;</span><br><span class="line">            Integer gapCount = gapMap.getOrDefault(rightEdge, <span class="number">0</span>);</span><br><span class="line">            gapMap.put(rightEdge, gapCount + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不计算两侧的空隙</span></span><br><span class="line">        gapMap.remove(rightEdge);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> maxGapCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer gapCount : gapMap.values()) &#123;</span><br><span class="line">        maxGapCount = Math.max(gapCount, maxGapCount);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> wall.size() - maxGapCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">leastBricks</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; wall)</span> &#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; gapMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (List&lt;Integer&gt; wallLine : wall) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">rightEdge</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer wallWidth : wallLine) &#123;</span><br><span class="line">            rightEdge += wallWidth;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">gapCount</span> <span class="operator">=</span> gapMap.getOrDefault(rightEdge, <span class="number">0</span>);</span><br><span class="line">            gapMap.put(rightEdge, gapCount + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 不计算两侧的空隙</span></span><br><span class="line">        gapMap.remove(rightEdge);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="variable">maxGapCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer gapCount : gapMap.values()) &#123;</span><br><span class="line">        maxGapCount = Math.max(gapCount, maxGapCount);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> wall.size() - maxGapCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -260,7 +259,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/leetcode/" rel="tag"># leetcode</a>
-              <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+              <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag"># 哈希表</a>
           </div>
 
         
@@ -347,7 +346,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -367,10 +366,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/shepherd-xie" title="GitHub → https://github.com/shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/shepherd-xie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://blog.orkva.com/blog-book" title="GitBook → https://blog.orkva.com/blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
+        <a href="https://blog.orkva.com/blog-book" title="GitBook → https:&#x2F;&#x2F;blog.orkva.com&#x2F;blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:shepherd.xie@gmail.com" title="E-Mail → mailto:shepherd.xie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
@@ -394,7 +393,7 @@
         
 
         
-  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
   </div>
 
 <div class="copyright">
@@ -406,7 +405,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Shepherd Xie</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -426,9 +425,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 

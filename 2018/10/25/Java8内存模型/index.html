@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 7.0.0-rc2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -23,19 +23,19 @@
   <meta name="description" content="Java8内存模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java8内存模型">
-<meta property="og:url" content="https://shepherd-xie.github.io/2018/10/25/Java8内存模型/index.html">
+<meta property="og:url" content="https://shepherd-xie.github.io/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
 <meta property="og:description" content="Java8内存模型">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg">
 <meta property="og:image" content="https://images.orkva.com/images/2023/01/09/Cookbook_JVMArguments_2_MemoryModel.png">
-<meta property="og:updated_time" content="2023-07-12T06:35:18.611Z">
+<meta property="article:published_time" content="2018-10-25T06:31:00.000Z">
+<meta property="article:modified_time" content="2023-07-13T03:18:46.905Z">
+<meta property="article:author" content="Shepherd Xie">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java8内存模型">
-<meta name="twitter:description" content="Java8内存模型">
 <meta name="twitter:image" content="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg">
 
-<link rel="canonical" href="https://shepherd-xie.github.io/2018/10/25/Java8内存模型/">
+<link rel="canonical" href="https://shepherd-xie.github.io/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -168,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/10/25/Java8内存模型/">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -216,48 +216,47 @@
       
         <p>Java8内存模型</p>
 <p><img src="https://images.orkva.com/images/2023/01/09/java_runtime_data_areas.jpg" alt="Java8内存模型"></p>
-<a id="more"></a>
+<span id="more"></span>
+
 <p><img src="https://images.orkva.com/images/2023/01/09/Cookbook_JVMArguments_2_MemoryModel.png" alt="区域的内存大小"></p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">控制参数</th>
-<th style="text-align:center">使用说明</th>
+<th align="center">控制参数</th>
+<th align="center">使用说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">-Xms</td>
-<td style="text-align:center">设置堆的最小空间大小</td>
+<tbody><tr>
+<td align="center">-Xms</td>
+<td align="center">设置堆的最小空间大小</td>
 </tr>
 <tr>
-<td style="text-align:center">-Xmx</td>
-<td style="text-align:center">设置堆的最大空间大小</td>
+<td align="center">-Xmx</td>
+<td align="center">设置堆的最大空间大小</td>
 </tr>
 <tr>
-<td style="text-align:center">-XX:NewSize</td>
-<td style="text-align:center">设置新生代最小空间大小</td>
+<td align="center">-XX:NewSize</td>
+<td align="center">设置新生代最小空间大小</td>
 </tr>
 <tr>
-<td style="text-align:center">-XX:MaxNewSize</td>
-<td style="text-align:center">设置新生代最大空间大小</td>
+<td align="center">-XX:MaxNewSize</td>
+<td align="center">设置新生代最大空间大小</td>
 </tr>
 <tr>
-<td style="text-align:center">-XX:PermSize</td>
-<td style="text-align:center">设置永久代最小空间大小</td>
+<td align="center">-XX:PermSize</td>
+<td align="center">设置永久代最小空间大小</td>
 </tr>
 <tr>
-<td style="text-align:center">-XX:MaxPermSize</td>
-<td style="text-align:center">设置永久代最大空间大小</td>
+<td align="center">-XX:MaxPermSize</td>
+<td align="center">设置永久代最大空间大小</td>
 </tr>
 <tr>
-<td style="text-align:center">-Xss</td>
-<td style="text-align:center">设置每个线程的堆栈大小</td>
+<td align="center">-Xss</td>
+<td align="center">设置每个线程的堆栈大小</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ol>
-<li>HEAP：<br>堆内存由JVM在程序启动时创建，用于存储对象。堆内存可以被任何线程访问，进一步分为三代<code>Young Generation</code>，<code>Old</code>＆<code>PermGen</code>（永久生成）。当对象被创建时，它首先进入Young代（尤其是Eden空间），当对象变老时，它会移动到Old / tenured Generation。在PermGen空间中，存储所有静态和实例变量名称 - 值对（对象的名称引用）。</li>
+<li>HEAP：<br>堆内存由JVM在程序启动时创建，用于存储对象。堆内存可以被任何线程访问，进一步分为三代<code>Young Generation</code>，<code>Old</code>＆<code>PermGen</code>（永久生成）。当对象被创建时，它首先进入Young代（尤其是Eden空间），当对象变老时，它会移动到Old &#x2F; tenured Generation。在PermGen空间中，存储所有静态和实例变量名称 - 值对（对象的名称引用）。</li>
 <li>Stack：<br>使用程序创建的每个线程生成堆栈。它由线程关联。每个线程都有自己的堆栈。所有局部变量和函数调用都存储在堆栈中。它的生命取决于线程的生命，因为线程将存在，它也将存在，反之亦然。它也可以手动增加</li>
 <li>PC寄存器：<br>它也与其线程相关联。它基本上是正在执行的当前指令的地址。由于每个线程将要执行的一些方法集取决于PC寄存器。它对每个指令都有一些值，对于本机方法是未定义的。通常用于跟踪指令。</li>
 <li>Method Area：<br>它是像Heap这样的所有线程共享的内存。它是在Java Virtual Machine启动时创建的。它包含代码实际上是编译的代码，方法及其数据和字段。运行时常量池也是方法区域的一部分。它的内存默认由JVM分配，如果需要可以增加。运行时常量池是常量表的每个类表示。它包含在编译时定义的所有文字和将在运行时解决的引用。</li>
@@ -278,11 +277,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/07/17/SQL_NOTIN与IN中NULL值问题/" rel="prev" title="SQL_NOTIN与IN中NULL值问题">
+    <a href="/2018/07/17/SQL_NOTIN%E4%B8%8EIN%E4%B8%ADNULL%E5%80%BC%E9%97%AE%E9%A2%98/" rel="prev" title="SQL_NOTIN与IN中NULL值问题">
       <i class="fa fa-chevron-left"></i> SQL_NOTIN与IN中NULL值问题
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/10/25/Java内省/" rel="next" title="Java内省机制">
+    <a href="/2018/10/25/Java%E5%86%85%E7%9C%81/" rel="next" title="Java内省机制">
       Java内省机制 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -356,7 +355,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -376,10 +375,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/shepherd-xie" title="GitHub → https://github.com/shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/shepherd-xie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://blog.orkva.com/blog-book" title="GitBook → https://blog.orkva.com/blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
+        <a href="https://blog.orkva.com/blog-book" title="GitBook → https:&#x2F;&#x2F;blog.orkva.com&#x2F;blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:shepherd.xie@gmail.com" title="E-Mail → mailto:shepherd.xie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
@@ -403,7 +402,7 @@
         
 
         
-  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
   </div>
 
 <div class="copyright">
@@ -415,7 +414,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Shepherd Xie</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -435,9 +434,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 

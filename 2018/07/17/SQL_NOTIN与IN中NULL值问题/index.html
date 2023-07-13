@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 7.0.0-rc2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -23,16 +23,16 @@
   <meta name="description" content="工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。 To state it simply, why does query A return a result but B doesn’t?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL_NOTIN与IN中NULL值问题">
-<meta property="og:url" content="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN与IN中NULL值问题/index.html">
+<meta property="og:url" content="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN%E4%B8%8EIN%E4%B8%ADNULL%E5%80%BC%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Shepherd&#39;s Blog">
 <meta property="og:description" content="工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。 To state it simply, why does query A return a result but B doesn’t?">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-07-12T06:35:18.611Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-07-17T08:45:00.000Z">
+<meta property="article:modified_time" content="2023-07-13T03:18:46.905Z">
+<meta property="article:author" content="Shepherd Xie">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL_NOTIN与IN中NULL值问题">
-<meta name="twitter:description" content="工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。 To state it simply, why does query A return a result but B doesn’t?">
 
-<link rel="canonical" href="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN与IN中NULL值问题/">
+<link rel="canonical" href="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN%E4%B8%8EIN%E4%B8%ADNULL%E5%80%BC%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN与IN中NULL值问题/">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/07/17/SQL_NOTIN%E4%B8%8EIN%E4%B8%ADNULL%E5%80%BC%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -204,13 +204,16 @@
       
         <p>工作中发现的一个小问题简单记录一下，在 NOT IN 与 IN 中传入 NULL 值对于系统的不同影响。</p>
 <p>To state it simply, why does query A return a result but B doesn’t?</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A: select &apos;true&apos; where 3 in (1, 2, 3, null)</span><br><span class="line">B: select &apos;true&apos; where 3 not in (1, 2, null)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A: select &#x27;true&#x27; where 3 in (1, 2, 3, null)</span><br><span class="line">B: select &#x27;true&#x27; where 3 not in (1, 2, null)</span><br></pre></td></tr></table></figure>
 <p>This was on SQL Server 2005. I also found that calling set ansi_nulls off causes B to return a result.</p>
 <hr>
-<p>Query A is the same as:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">'true'</span> <span class="keyword">where</span> <span class="number">3</span> = <span class="number">1</span> <span class="keyword">or</span> <span class="number">3</span> = <span class="number">2</span> <span class="keyword">or</span> <span class="number">3</span> = <span class="number">3</span> <span class="keyword">or</span> <span class="number">3</span> = <span class="literal">null</span></span><br></pre></td></tr></table></figure></p>
+<p>Query A is the same as:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">&#x27;true&#x27;</span> <span class="keyword">where</span> <span class="number">3</span> <span class="operator">=</span> <span class="number">1</span> <span class="keyword">or</span> <span class="number">3</span> <span class="operator">=</span> <span class="number">2</span> <span class="keyword">or</span> <span class="number">3</span> <span class="operator">=</span> <span class="number">3</span> <span class="keyword">or</span> <span class="number">3</span> <span class="operator">=</span> <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
 <p>Since <code>3 = 3</code> is true, you get a result.</p>
-<p>Query B is the same as:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">'true'</span> <span class="keyword">where</span> <span class="number">3</span> &lt;&gt; <span class="number">1</span> <span class="keyword">and</span> <span class="number">3</span> &lt;&gt; <span class="number">2</span> <span class="keyword">and</span> <span class="number">3</span> &lt;&gt; <span class="literal">null</span></span><br></pre></td></tr></table></figure></p>
+<p>Query B is the same as:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="string">&#x27;true&#x27;</span> <span class="keyword">where</span> <span class="number">3</span> <span class="operator">&lt;&gt;</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">3</span> <span class="operator">&lt;&gt;</span> <span class="number">2</span> <span class="keyword">and</span> <span class="number">3</span> <span class="operator">&lt;&gt;</span> <span class="keyword">null</span></span><br></pre></td></tr></table></figure>
 <p>When <code>ansi_nulls</code> is on, <code>3 &lt;&gt; null</code> is UNKNOWN, so the predicate evaluates to UNKNOWN, and you don’t get any rows.</p>
 <p>When <code>ansi_nulls</code> is off, <code>3 &lt;&gt; null</code> is true, so the predicate evaluates to true, and you get a row.</p>
 
@@ -228,11 +231,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/07/10/单例设计模式优化/" rel="prev" title="单例设计模式优化">
+    <a href="/2018/07/10/%E5%8D%95%E4%BE%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BC%98%E5%8C%96/" rel="prev" title="单例设计模式优化">
       <i class="fa fa-chevron-left"></i> 单例设计模式优化
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/10/25/Java8内存模型/" rel="next" title="Java8内存模型">
+    <a href="/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="next" title="Java8内存模型">
       Java8内存模型 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -306,7 +309,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -326,10 +329,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/shepherd-xie" title="GitHub → https://github.com/shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/shepherd-xie" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shepherd-xie" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://blog.orkva.com/blog-book" title="GitBook → https://blog.orkva.com/blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
+        <a href="https://blog.orkva.com/blog-book" title="GitBook → https:&#x2F;&#x2F;blog.orkva.com&#x2F;blog-book" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>GitBook</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:shepherd.xie@gmail.com" title="E-Mail → mailto:shepherd.xie@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
@@ -353,7 +356,7 @@
         
 
         
-  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">陕ICP备20000154号-1 </a>
   </div>
 
 <div class="copyright">
@@ -365,7 +368,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Shepherd Xie</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -385,9 +388,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
