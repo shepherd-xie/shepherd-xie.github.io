@@ -162,6 +162,223 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/19/leetcode-318/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/19/leetcode-318/" class="post-title-link" itemprop="url">leetcode-318 最大单词长度乘积</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-19 15:35:24" itemprop="dateCreated datePublished" datetime="2023-06-19T15:35:24+08:00">2023-06-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><a href="https://leetcode.cn/problems/maximum-product-of-word-lengths/">318. 最大单词长度乘积</a></p>
+<ul>
+<li><p>给你一个字符串数组 <code>words</code> ，找出并返回 <code>length(words[i]) * length(words[j])</code> 的最大值，并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 <code>0</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：words = [&quot;abcw&quot;,&quot;baz&quot;,&quot;foo&quot;,&quot;bar&quot;,&quot;xtfn&quot;,&quot;abcdef&quot;]</span><br><span class="line"> 输出：16 </span><br><span class="line">解释：这两个单词为 &quot;abcw&quot;, &quot;xtfn&quot;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：words = [&quot;a&quot;,&quot;ab&quot;,&quot;abc&quot;,&quot;d&quot;,&quot;cd&quot;,&quot;bcd&quot;,&quot;abcd&quot;]</span><br><span class="line">输出：4 </span><br><span class="line">解释：这两个单词为 &quot;ab&quot;, &quot;cd&quot;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：words = [&quot;a&quot;,&quot;aa&quot;,&quot;aaa&quot;,&quot;aaaa&quot;]</span><br><span class="line"> 输出：0 </span><br><span class="line">解释：不存在这样的两个单词。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p> <strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= words.length &lt;= 1000</code></li>
+<li><code>1 &lt;= words[i].length &lt;= 1000</code></li>
+<li><code>words[i]</code> 仅包含小写字母</li>
+</ul>
+</blockquote>
+<p>由题目和提示信息可以归纳出两点：</p>
+<ul>
+<li>第一，本题难点在于判断两个单词中是否含有公共字母</li>
+<li>第二，<code>words[i]</code> 仅包含小写字母，那便意味着 <code>words[i].length() = 26</code> 是一个有限的集合</li>
+</ul>
+<p>既然是一个有限的集合那么我们就可以利用第二的特点来解决第一个问题。</p>
+<p>我们可以定义一个长度为 26 的数组来代表字符串</p>
+<blockquote>
+<p>例如：abcw &#x3D; [</p>
+<p>​	“1”,”1”,”1”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,</p>
+<p>​	“0”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,”0”,</p>
+<p>​	“0”,”0”,”1”,”0”,”0”,”0”</p>
+<p>]</p>
+</blockquote>
+<p>这样在进行比较的时候只要按位比较数组上的相同的位置是都存在值即可。</p>
+<p>但是已经走到了这一步为什么不用 <em>位符号</em> 来表示字母。</p>
+<blockquote>
+<p>例如：abcw &#x3D; 11100000000000000000001000</p>
+</blockquote>
+<p>在进行比较时直接进行 &amp; 运算即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProduct</span><span class="params">(String[] words)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] bitWords = <span class="keyword">new</span> <span class="title class_">int</span>[words.length];</span><br><span class="line">    <span class="comment">// 对 words 中的数据做位转换处理</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">        <span class="type">char</span>[] chars = words[i].toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> aChar : chars) &#123;</span><br><span class="line">            bitWords[i] |= <span class="number">1</span> &lt;&lt; (aChar - <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">answer</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; words.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((bitWords[i] &amp; bitWords[j]) == <span class="number">0</span>) &#123;</span><br><span class="line">                answer = Math.max(answer, words[i].length() * words[j].length());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/16/leetcode-851/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/16/leetcode-851/" class="post-title-link" itemprop="url">leetcode-851 喧闹和富有</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-16 14:40:35" itemprop="dateCreated datePublished" datetime="2023-06-16T14:40:35+08:00">2023-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><a href="https://leetcode.cn/problems/loud-and-rich/">851. 喧闹和富有</a></p>
+<p>有一组 <code>n</code> 个人作为实验对象，从 <code>0</code> 到 <code>n - 1</code> 编号，其中每个人都有不同数目的钱，以及不同程度的安静值（quietness）。为了方便起见，我们将编号为 <code>x</code> 的人简称为 “person <code>x</code> “。</p>
+<p>给你一个数组 <code>richer</code> ，其中 <code>richer[i] = [ai, bi]</code> 表示 person <code>ai</code> 比 person <code>bi</code> 更有钱。另给你一个整数数组 <code>quiet</code> ，其中 <code>quiet[i]</code> 是 person <code>i</code> 的安静值。<code>richer</code> 中所给出的数据 <strong>逻辑自洽</strong>（也就是说，在 person <code>x</code> 比 person <code>y</code> 更有钱的同时，不会出现 person <code>y</code> 比 person <code>x</code> 更有钱的情况 ）。</p>
+<p>现在，返回一个整数数组 <code>answer</code> 作为答案，其中 <code>answer[x] = y</code> 的前提是，在所有拥有的钱肯定不少于 person <code>x</code> 的人中，person <code>y</code> 是最安静的人（也就是安静值 <code>quiet[y]</code> 最小的人）。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：richer = [[1,0],[2,1],[3,1],[3,7],[4,3],[5,3],[6,3]], quiet = [3,2,5,4,6,1,7,0]</span><br><span class="line">输出：[5,5,2,5,4,5,6,7]</span><br><span class="line">解释： </span><br><span class="line">answer[0] = 5，</span><br><span class="line">person 5 比 person 3 有更多的钱，person 3 比 person 1 有更多的钱，person 1 比 person 0 有更多的钱。</span><br><span class="line">唯一较为安静（有较低的安静值 quiet[x]）的人是 person 7，</span><br><span class="line">但是目前还不清楚他是否比 person 0 更有钱。</span><br><span class="line">answer[7] = 7，</span><br><span class="line">在所有拥有的钱肯定不少于 person 7 的人中（这可能包括 person 3，4，5，6 以及 7），</span><br><span class="line">最安静（有较低安静值 quiet[x]）的人是 person 7。</span><br><span class="line">其他的答案也可以用类似的推理来解释。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：richer = [], quiet = [0]</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>n == quiet.length</code></li>
+<li><code>1 &lt;= n &lt;= 500</code></li>
+<li><code>0 &lt;= quiet[i] &lt; n</code></li>
+<li><code>quiet</code> 的所有值 <strong>互不相同</strong></li>
+<li><code>0 &lt;= richer.length &lt;= n * (n - 1) / 2</code></li>
+<li><code>0 &lt;= ai, bi &lt; n</code></li>
+<li><code>ai != bi</code></li>
+<li><code>richer</code> 中的所有数对 <strong>互不相同</strong></li>
+<li>对 <code>richer</code> 的观察在逻辑上是一致的</li>
+</ul>
+</blockquote>
+<p>由题目信息可以将示例 1 描述信息转化为一张如下的有向图：</p>
+<p><img src="https://images.orkva.com/images/2023/06/16/loud-and-rich.png" alt="loud-and-rich"></p>
+<p>此时可以将题目的解答过程转化为对有向图的遍历与检索。</p>
+<p>首先定义有向图的节点类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Node</span> &#123;</span><br><span class="line">    <span class="type">int</span> person;</span><br><span class="line">    <span class="type">int</span> quiet;</span><br><span class="line">    <span class="type">Node</span> <span class="variable">quietestRicher</span> <span class="operator">=</span> <span class="built_in">this</span>;</span><br><span class="line">    List&lt;Node&gt; poorer = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    List&lt;Node&gt; richer = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Node</span><span class="params">(<span class="type">int</span> person, <span class="type">int</span> quiet)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.person = person;</span><br><span class="line">        <span class="built_in">this</span>.quiet = quiet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Node <span class="title function_">findQuietestRicher</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Node item : <span class="built_in">this</span>.richer) &#123;</span><br><span class="line">            item.findQuietestRicher();</span><br><span class="line">            <span class="keyword">if</span> (item.quietestRicher.quiet &lt; <span class="built_in">this</span>.quietestRicher.quiet) &#123;</span><br><span class="line">                <span class="built_in">this</span>.quietestRicher = item.quietestRicher;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.quietestRicher;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么接下来要做的就是遍历数组将其转化为有向图，然后对每个节点做检索。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] loudAndRich(<span class="type">int</span>[][] richer, <span class="type">int</span>[] quiet) &#123;</span><br><span class="line">    Map&lt;Integer, Node&gt; nodeMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; quiet.length; i++) &#123;</span><br><span class="line">        nodeMap.put(i, <span class="keyword">new</span> <span class="title class_">Node</span>(i, quiet[i]));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span>[] ints : richer) &#123;</span><br><span class="line">        <span class="type">Node</span> <span class="variable">rich</span> <span class="operator">=</span> nodeMap.get(ints[<span class="number">0</span>]);</span><br><span class="line">        <span class="type">Node</span> <span class="variable">poor</span> <span class="operator">=</span> nodeMap.get(ints[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">        rich.poorer.add(poor);</span><br><span class="line">        poor.richer.add(rich);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span>[] answer = <span class="keyword">new</span> <span class="title class_">int</span>[quiet.length];</span><br><span class="line">    <span class="keyword">for</span> (Node node : nodeMap.values()) &#123;</span><br><span class="line">        answer[node.person] = node.findQuietestRicher().person;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">运行成功:</span><br><span class="line">	测试用例:[[1,0],[2,1],[3,1],[3,7],[4,3],[5,3],[6,3]]</span><br><span class="line">			[3,2,5,4,6,1,7,0]</span><br><span class="line">	测试结果:[5,5,2,5,4,5,6,7]</span><br><span class="line">	期望结果:[5,5,2,5,4,5,6,7]</span><br></pre></td></tr></table></figure>
+
+<p>期望结果正确，提交解答，显然不会这么简单的 AC。</p>
+<p>出错的是这样的一组参数</p>
+<blockquote>
+<p>[[0,2],[0,3],[0,5],[0,9],[0,10],[0,11],[0,13],[0,20],[0,22],[0,24],[0,25],[0,26],[0,32],[0,34],[0,35],[0,41],[0,43],[0,46],[0,48],[1,3],[1,5],[1,10],[1,11],[1,15],[1,21],[1,22],[1,25],[1,27],[1,30],[1,31],[1,33],[1,34],[1,36],[1,39],[1,40],[1,47],[1,48],[1,49],[2,3],[2,5],[2,6],[2,12],[2,15],[2,16],[2,18],[2,19],[2,20],[2,24],[2,25],[2,26],[2,29],[2,33],[2,37],[2,38],[2,39],[2,44],[2,47],[2,48],[2,49],[3,8],[3,9],[3,11],[3,12],[3,13],[3,16],[3,18],[3,20],[3,28],[3,30],[3,31],[3,32],[3,33],[3,34],[3,45],[3,46],[3,48],[4,6],[4,7],[4,9],[4,12],[4,13],[4,14],[4,15],[4,20],[4,21],[4,22],[4,26],[4,27],[4,29],[4,35],[4,36],[4,37],[4,38],[4,44],[4,45],[4,46],[5,6],[5,9],[5,11],[5,16],[5,17],[5,19],[5,23],[5,24],[5,25],[5,26],[5,27],[5,28],[5,29],[5,30],[5,35],[5,37],[5,40],[5,42],[5,43],[5,44],[5,45],[5,46],[5,47],[5,48],[6,7],[6,8],[6,9],[6,10],[6,11],[6,12],[6,13],[6,15],[6,16],[6,18],[6,21],[6,24],[6,25],[6,29],[6,30],[6,31],[6,37],[6,38],[6,40],[6,41],[6,42],[6,45],[6,46],[6,48],[6,49],[7,10],[7,11],[7,12],[7,13],[7,15],[7,17],[7,18],[7,19],[7,20],[7,21],[7,26],[7,31],[7,33],[7,36],[7,39],[8,10],[8,16],[8,19],[8,20],[8,22],[8,23],[8,24],[8,25],[8,26],[8,27],[8,29],[8,31],[8,33],[8,36],[8,41],[8,44],[8,45],[8,46],[8,48],[9,11],[9,13],[9,14],[9,15],[9,16],[9,17],[9,18],[9,19],[9,22],[9,28],[9,31],[9,34],[9,35],[9,39],[9,40],[9,42],[9,44],[9,49],[10,11],[10,14],[10,15],[10,16],[10,18],[10,19],[10,21],[10,26],[10,29],[10,33],[10,39],[10,44],[10,47],[10,48],[10,49],[11,13],[11,16],[11,18],[11,19],[11,20],[11,23],[11,25],[11,27],[11,29],[11,31],[11,32],[11,33],[11,35],[11,38],[11,39],[11,40],[11,43],[11,45],[11,47],[12,13],[12,17],[12,18],[12,19],[12,20],[12,21],[12,22],[12,23],[12,24],[12,29],[12,35],[12,36],[12,39],[12,40],[12,43],[12,46],[12,47],[12,49],[13,14],[13,15],[13,16],[13,18],[13,21],[13,22],[13,23],[13,28],[13,30],[13,32],[13,34],[13,36],[13,39],[13,43],[13,45],[13,46],[13,47],[13,48],[14,15],[14,16],[14,17],[14,18],[14,19],[14,20],[14,22],[14,25],[14,27],[14,28],[14,30],[14,32],[14,33],[14,34],[14,39],[14,40],[14,41],[14,42],[14,46],[14,47],[14,49],[15,17],[15,21],[15,22],[15,27],[15,28],[15,29],[15,30],[15,37],[15,38],[15,39],[15,40],[15,41],[15,42],[15,44],[15,45],[15,47],[16,17],[16,18],[16,20],[16,27],[16,29],[16,31],[16,36],[16,37],[16,38],[16,39],[16,40],[16,41],[16,42],[16,45],[16,46],[17,19],[17,23],[17,24],[17,25],[17,26],[17,28],[17,29],[17,31],[17,33],[17,34],[17,35],[17,38],[17,39],[17,41],[17,46],[17,47],[17,48],[17,49],[18,22],[18,23],[18,25],[18,27],[18,28],[18,29],[18,31],[18,36],[18,37],[18,39],[18,40],[18,41],[18,42],[18,43],[18,48],[19,20],[19,21],[19,22],[19,23],[19,24],[19,27],[19,28],[19,30],[19,31],[19,33],[19,35],[19,39],[19,40],[19,44],[19,47],[19,48],[20,25],[20,27],[20,28],[20,29],[20,32],[20,34],[20,37],[20,38],[20,41],[20,43],[20,44],[20,45],[20,46],[20,47],[20,49],[21,22],[21,24],[21,26],[21,27],[21,28],[21,29],[21,32],[21,36],[21,37],[21,43],[21,45],[21,47],[21,48],[22,23],[22,25],[22,28],[22,30],[22,32],[22,37],[22,41],[22,42],[22,44],[22,45],[22,47],[22,48],[22,49],[23,25],[23,26],[23,28],[23,29],[23,30],[23,31],[23,32],[23,33],[23,34],[23,35],[23,38],[23,39],[23,40],[23,42],[23,43],[23,46],[23,48],[23,49],[24,26],[24,27],[24,28],[24,30],[24,31],[24,33],[24,35],[24,37],[24,39],[24,40],[24,42],[24,43],[24,47],[24,48],[24,49],[25,28],[25,30],[25,31],[25,32],[25,35],[25,36],[25,39],[25,40],[25,43],[25,44],[25,45],[25,46],[26,28],[26,30],[26,31],[26,33],[26,36],[26,38],[26,40],[26,41],[26,42],[26,44],[26,45],[26,47],[26,48],[26,49],[27,28],[27,30],[27,34],[27,35],[27,36],[27,39],[27,40],[27,44],[27,45],[27,48],[28,30],[28,31],[28,32],[28,33],[28,34],[28,35],[28,36],[28,37],[28,41],[28,45],[28,46],[28,47],[29,30],[29,31],[29,33],[29,35],[29,36],[29,39],[29,40],[29,45],[29,46],[29,47],[30,31],[30,33],[30,37],[30,38],[30,39],[30,41],[30,43],[30,45],[30,46],[30,49],[31,34],[31,35],[31,36],[31,38],[31,40],[31,41],[31,43],[31,45],[31,49],[32,43],[32,44],[32,46],[32,47],[32,48],[33,35],[33,41],[33,43],[33,45],[33,46],[33,47],[34,36],[34,38],[34,39],[34,40],[34,41],[34,42],[34,44],[34,46],[34,48],[35,37],[35,43],[35,45],[36,37],[36,40],[36,43],[36,45],[36,46],[36,48],[37,38],[37,40],[37,42],[37,46],[37,47],[38,39],[38,40],[38,42],[38,46],[38,47],[38,49],[39,43],[39,45],[39,46],[39,47],[39,48],[39,49],[40,41],[40,42],[40,43],[40,45],[40,46],[40,47],[40,48],[41,45],[41,47],[41,48],[41,49],[42,44],[42,46],[42,47],[42,49],[43,44],[43,47],[43,48],[44,45],[44,46],[44,48],[44,49],[45,46],[45,47],[45,49],[46,47],[46,48],[46,49],[47,48],[48,49]]<br>            [17,33,29,39,41,10,1,19,5,8,18,15,7,25,45,48,35,28,34,22,31,36,27,47,42,43,14,49,20,9,16,40,44,32,13,24,4,21,30,11,0,46,38,2,12,6,37,23,3,26]</p>
+</blockquote>
+<p>显然是因为超时，毕竟是算法题，对每一个 person 创建节点再遍历的操作过于耗时，但是这个思路应该没问题。</p>
+<p>我们可以只记录比 person 更富有的 person 即可，然后对每个 person 做如上遍历操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] loudAndRich(<span class="type">int</span>[][] richer, <span class="type">int</span>[] quiet) &#123;</span><br><span class="line">    List&lt;Integer&gt;[] grids = <span class="keyword">new</span> <span class="title class_">List</span>[quiet.length];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; grids.length; i++) &#123;</span><br><span class="line">        grids[i] = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span>[] rich : richer) &#123;</span><br><span class="line">        grids[rich[<span class="number">1</span>]].add(rich[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] answer = <span class="keyword">new</span> <span class="title class_">int</span>[quiet.length];</span><br><span class="line">    Arrays.fill(answer, -<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; quiet.length; i ++) &#123;</span><br><span class="line">        dfs(i, quiet, grids, answer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(<span class="type">int</span> person, <span class="type">int</span>[] quiet, List&lt;Integer&gt;[] grids, <span class="type">int</span>[] answer)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (answer[person] != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    answer[person] = person;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> richer : grids[person]) &#123;</span><br><span class="line">        dfs(richer, quiet, grids, answer);</span><br><span class="line">        <span class="keyword">if</span> (quiet[answer[richer]] &lt; quiet[answer[person]]) &#123;</span><br><span class="line">            answer[person] = answer[richer];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/10/debian%E7%AC%94%E8%AE%B0%E6%9C%AC%E9%97%AD%E5%B1%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -689,146 +906,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2019/08/30/Spring-Cloud-Contract-%E5%AE%9E%E8%B7%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/30/Spring-Cloud-Contract-%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">Spring Cloud Contract 实践</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-08-30 16:18:00" itemprop="dateCreated datePublished" datetime="2019-08-30T16:18:00+08:00">2019-08-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index"><span itemprop="name">Spring Cloud</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-Cloud-Contract-实践"><a href="#Spring-Cloud-Contract-实践" class="headerlink" title="Spring Cloud Contract 实践"></a>Spring Cloud Contract 实践</h1><p>由于工作需要，第一次接触 Spring Cloud Contract 这个组件。中文翻译为 契约 ，它是一个用于微服务测试组件。在正常的微服务开发过程中，我们要进行测试时，通常情况下要启动全部的微服务项目，这个组件可以使我们在不启动其他微服务时完成测试。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/30/Spring-Cloud-Contract-%E5%AE%9E%E8%B7%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2018/11/14/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/14/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">动态代理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-14 14:36:00" itemprop="dateCreated datePublished" datetime="2018-11-14T14:36:00+08:00">2018-11-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>所谓动态代理，即通过代理类：Proxy的代理，接口和实现类之间可以不直接发生联系，而可以在运行期（Runtime）实现动态关联。</p>
-<p>java动态代理主要是使用 <code>java.lang.reflect</code> 包中的两个类。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/14/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -898,7 +975,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -911,7 +988,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
