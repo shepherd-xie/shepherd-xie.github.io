@@ -1,3 +1,5 @@
+https://shepherd-xie.github.io/categories/index.html
+https://shepherd-xie.github.io/tags/index.html
 https://shepherd-xie.github.io/2018/11/13/Dropzone%20%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6/
 https://shepherd-xie.github.io/2018/10/25/Java8%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/
 https://shepherd-xie.github.io/2018/10/25/Java%E5%86%85%E7%9C%81/
@@ -16,6 +18,7 @@ https://shepherd-xie.github.io/2023/07/12/leetcode-1704/
 https://shepherd-xie.github.io/2023/07/11/leetcode-1899/
 https://shepherd-xie.github.io/2023/07/10/leetcode-1920/
 https://shepherd-xie.github.io/2023/07/12/leetcode-24/
+https://shepherd-xie.github.io/2023/07/12/leetcode-2411/
 https://shepherd-xie.github.io/2023/06/27/leetcode-2595/
 https://shepherd-xie.github.io/2023/06/19/leetcode-318/
 https://shepherd-xie.github.io/2023/06/29/leetcode-380/
@@ -39,8 +42,6 @@ https://shepherd-xie.github.io/2018/07/10/%E5%8D%95%E4%BE%8B%E8%AE%BE%E8%AE%A1%E
 https://shepherd-xie.github.io/2018/11/13/%E5%B8%B8%E8%A7%81%E7%9A%84Content-Type/
 https://shepherd-xie.github.io/2018/10/25/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/
 https://shepherd-xie.github.io/about/index.html
-https://shepherd-xie.github.io/categories/index.html
-https://shepherd-xie.github.io/tags/index.html
 https://shepherd-xie.github.io/
 https://shepherd-xie.github.io/tags/Spring-Cloud/
 https://shepherd-xie.github.io/tags/Test/
