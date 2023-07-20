@@ -1248,6 +1248,50 @@
       </tags>
   </entry>
   <entry>
+    <title>316. 去除重复字母</title>
+    <url>/2023/07/20/leetcode-316/</url>
+    <content><![CDATA[<p><a href="https://leetcode.cn/problems/remove-duplicate-letters/description/">https://leetcode.cn/problems/remove-duplicate-letters/description/</a></p>
+<span id="more"></span>
+
+<blockquote>
+<p>给你一个字符串 <code>s</code> ，请你去除字符串中重复的字母，使得每个字母只出现一次。需保证 <strong>返回结果的字典序最小</strong>（要求不能打乱其他字符的相对位置）。</p>
+<p> <strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;输入：s = &quot;bcabc&quot;</span><br><span class="line">输出：&quot;abc&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;cbacdcbc&quot;</span><br><span class="line">&gt;输出：&quot;acdb&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 104</code></li>
+<li><code>s</code> 由小写英文字母组成</li>
+</ul>
+</blockquote>
+<p>通常意义上说的，字越少，事越大，就是在说这道题。看上去题目很短，给的信息也不多，比较关键的几个点 <code>去重</code> <code>字典序</code> <code>由小写字母组成</code> 。</p>
+<ul>
+<li>首先我们准备一个栈，然后遍历字符串</li>
+<li>如果这个字符在栈中出现过，那么跳过本次操作进行下一次遍历</li>
+<li>当前字符没有在栈中出现过，那么判断当前字符与栈顶元素的关系<ul>
+<li>如果栈顶元素字典序大于当前元素，且栈顶元素在后面还会出现，则弹出栈顶</li>
+<li>再次判断，直到栈顶元素字典序小于当前元素，或栈顶元素不会再出现，或栈空</li>
+</ul>
+</li>
+<li>压入当前元素</li>
+<li>最后输出栈内元素即可</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">removeDuplicateLetters</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] hash = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="comment">// 记录每个元素最后一次出现的位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            hash[s.charAt(i) - <span class="string">&#x27;a&#x27;</span>] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;Character&gt; stack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (stack.contains(s.charAt(i))) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; stack.peek() &gt; s.charAt(i) &amp;&amp; hash[stack.peek() - <span class="string">&#x27;a&#x27;</span>] &gt; i) &#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            stack.push(s.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        <span class="keyword">for</span> (Character c : stack) &#123;</span><br><span class="line">            sb.append(c);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>medium</tag>
+        <tag>leetcode</tag>
+        <tag>单调栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leetcode-318 最大单词长度乘积</title>
     <url>/2023/06/19/leetcode-318/</url>
     <content><![CDATA[<blockquote>
