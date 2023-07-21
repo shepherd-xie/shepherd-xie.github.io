@@ -162,6 +162,80 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/07/10/leetcode-1920/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shepherd Xie">
+      <meta itemprop="description" content="苦逼程序员的无聊日常">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shepherd's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/10/leetcode-1920/" class="post-title-link" itemprop="url">1920. 基于排列构建数组</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-10 16:49:32" itemprop="dateCreated datePublished" datetime="2023-07-10T16:49:32+08:00">2023-07-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://leetcode.cn/problems/build-array-from-permutation/">https://leetcode.cn/problems/build-array-from-permutation/</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/10/leetcode-1920/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/07/10/leetcode-961/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -980,97 +1054,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://shepherd-xie.github.io/2023/06/29/leetcode-1375/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Shepherd Xie">
-      <meta itemprop="description" content="苦逼程序员的无聊日常">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shepherd's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/29/leetcode-1375/" class="post-title-link" itemprop="url">1375. 二进制字符串前缀一致的次数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-29 13:00:02" itemprop="dateCreated datePublished" datetime="2023-06-29T13:00:02+08:00">2023-06-29</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p><a href="https://leetcode.cn/problems/number-of-times-binary-string-is-prefix-aligned/">1375. 二进制字符串前缀一致的次数</a></p>
-<p>给你一个长度为 <code>n</code> 、下标从 <strong>1</strong> 开始的二进制字符串，所有位最开始都是 <code>0</code> 。我们会按步翻转该二进制字符串的所有位（即，将 <code>0</code> 变为 <code>1</code>）。</p>
-<p>给你一个下标从 <strong>1</strong> 开始的整数数组 <code>flips</code> ，其中 <code>flips[i]</code> 表示对应下标 <code>i</code> 的位将会在第 <code>i</code> 步翻转。</p>
-<p>二进制字符串 <strong>前缀一致</strong> 需满足：在第 <code>i</code> 步之后，在 <strong>闭</strong> 区间 <code>[1, i]</code> 内的所有位都是 1 ，而其他位都是 0 。</p>
-<p>返回二进制字符串在翻转过程中 <strong>前缀一致</strong> 的次数。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：flips = [3,2,4,1,5]</span><br><span class="line">输出：2</span><br><span class="line">解释：二进制字符串最开始是 &quot;00000&quot; 。</span><br><span class="line">执行第 1 步：字符串变为 &quot;00100&quot; ，不属于前缀一致的情况。</span><br><span class="line">执行第 2 步：字符串变为 &quot;01100&quot; ，不属于前缀一致的情况。</span><br><span class="line">执行第 3 步：字符串变为 &quot;01110&quot; ，不属于前缀一致的情况。</span><br><span class="line">执行第 4 步：字符串变为 &quot;11110&quot; ，属于前缀一致的情况。</span><br><span class="line">执行第 5 步：字符串变为 &quot;11111&quot; ，属于前缀一致的情况。</span><br><span class="line">在翻转过程中，前缀一致的次数为 2 ，所以返回 2 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：flips = [4,1,2,3]</span><br><span class="line">输出：1</span><br><span class="line">解释：二进制字符串最开始是 &quot;0000&quot; 。</span><br><span class="line">执行第 1 步：字符串变为 &quot;0001&quot; ，不属于前缀一致的情况。</span><br><span class="line">执行第 2 步：字符串变为 &quot;1001&quot; ，不属于前缀一致的情况。</span><br><span class="line">执行第 3 步：字符串变为 &quot;1101&quot; ，不属于前缀一致的情况。</span><br><span class="line">执行第 4 步：字符串变为 &quot;1111&quot; ，属于前缀一致的情况。</span><br><span class="line">在翻转过程中，前缀一致的次数为 1 ，所以返回 1 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>n == flips.length</code></li>
-<li><code>1 &lt;= n &lt;= 5 * 104</code></li>
-<li><code>flips</code> 是范围 <code>[1, n]</code> 中所有整数构成的一个排列</li>
-</ul>
-</blockquote>
-<h2 id="方法一：前-n-项和"><a href="#方法一：前-n-项和" class="headerlink" title="方法一：前 n 项和"></a>方法一：前 n 项和</h2><p>既然要求前缀一致，那么当第 n 项满足前缀一致时，一定有 1…n 项均以反转，所以我们可以不用关心反转的顺序，只要在第 n 项反转时保证前 n 项的和等于以 n 为末项、步长为 1 的等差数列和即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numTimesAllBlue</span><span class="params">(<span class="type">int</span>[] flips)</span> &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">// 极大值时 sum 可能超过 int 范围</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> flip : flips) &#123;</span><br><span class="line">            sum += flip;</span><br><span class="line">            <span class="keyword">if</span> (sum == ((<span class="number">1</span> + i) * i) / <span class="number">2</span>) &#123;</span><br><span class="line">                result ++;</span><br><span class="line">            &#125;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="方法二：记录翻转位置的最大值"><a href="#方法二：记录翻转位置的最大值" class="headerlink" title="方法二：记录翻转位置的最大值"></a>方法二：记录翻转位置的最大值</h2><p>当第 n 项翻转过后满足前缀一致，那么一定存在前 n 次翻转过程中，翻转的最大值为 n。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numTimesAllBlue</span><span class="params">(<span class="type">int</span>[] flips)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">curmax</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; flips.length; i++) &#123;</span><br><span class="line">            curmax = Math.max(flips[i], curmax);</span><br><span class="line">            <span class="keyword">if</span> (curmax == i + <span class="number">1</span>) &#123;</span><br><span class="line">                result ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1140,7 +1123,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1153,7 +1136,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
